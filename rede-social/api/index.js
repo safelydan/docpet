@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(cors())
+app.use(cors());
 
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
