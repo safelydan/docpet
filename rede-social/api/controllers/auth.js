@@ -62,7 +62,7 @@ export const login = (req, res)=>{
                 const checkPassword = await bcrypt.compare(password, user.password);
 
                 if(!checkPassword){
-                    return res.status(422).json({msg: 'usuario nao encontrado'})
+                    return res.status(422).json({msg: 'senha incorreta'})
                 }
                 try{
                     const refreshToken = jwt.sign({
