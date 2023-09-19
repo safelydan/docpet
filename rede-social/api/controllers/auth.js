@@ -79,7 +79,9 @@ export const login = (req, res)=>{
                     process.env.TOKEN, 
                     {algorithm: "HS256"} 
                     )
-                    return res.status(200).json({msg: 'usuario logado com sucesso', token, refreshToken})
+                    return res.status(200).json({msg: 'usuario logado com sucesso', 
+                    // quando fizer o login recebe o user completo e os tokens, serve pra salvar e usar depois dentro da aplicação
+                    data: { user, token: {token, refreshToken}}})
                 }
                 catch(error){
                     console.log(error)
