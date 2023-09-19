@@ -1,9 +1,10 @@
 "use client"
-import AuthPage from "../components/AuthPage"
-import AuthInput from "../components/AuthInput"
+
+import AuthInput from "../../components/AuthInput"
 import {useState } from "react"
 import Link from "next/link"
 import axios from "axios"
+import { makeRequest } from "../../../../axios"
 
 
 
@@ -20,7 +21,7 @@ function Register(){
 
     const handleRegister = (e:any)=>{
         e.preventDefault()
-        axios.post("http://localhost:8001/api/auth/register", {username, email, password, confirmPassword}).then((res)=>{
+        makeRequest.post("auth/register", {username, email, password, confirmPassword}).then((res)=>{
             console.log(res.data)
             setSucess(res.data.msg)
             setError('')
@@ -32,7 +33,7 @@ function Register(){
     }
 
     return(
-        <AuthPage>
+        <>
         <h1 className="font-bold text-2xl">Registrar</h1>
         <AuthInput label="nome" newState={setUserName}/>
         <AuthInput label="email" newState={setEmail}/>
@@ -43,7 +44,7 @@ function Register(){
         <button className="bg-blue-400 py-3 font-bold text-white rounded-lg hover:bg-blue-600" 
                 onClick={(e)=>handleRegister(e)}>cadastrar</button>
                 <Link href='/login' className="text-center underline">logar</Link>
-        </AuthPage>
+        </>
         )
     }
 
