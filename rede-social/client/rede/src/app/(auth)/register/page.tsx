@@ -34,7 +34,7 @@ function Register(){
 
     return(
         <>
-        <h1 className="font-bold text-2xl">Registrar</h1>
+        <h1 className="font-bold text-2xl">registrar</h1>
         <AuthInput label="nome" newState={setUserName}/>
         <AuthInput label="email" newState={setEmail}/>
         <AuthInput label="senha" newState={setPassword} isPassword/>
