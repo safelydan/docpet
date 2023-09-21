@@ -6,7 +6,8 @@ interface IPost{
     post_desc: string,
     img: string,
     username: string,
-    userImg: string
+    userImg: string,
+    created_at: string
 }
 
 interface IUser{
@@ -42,7 +43,7 @@ function Post(props:{post: IPost}) {
                     alt="imagem do usuario q fez o post"/>
                     <div className="flex flex-col">
                         <span className="font-semibold">{username}</span>
-                        <span className="text-xs">26/08/1212</span>
+                        <span className="text-xs">{}</span>
                     </div>
                     </header>
 

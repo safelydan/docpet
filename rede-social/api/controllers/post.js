@@ -23,7 +23,7 @@ export const getPost = (req, res)=>{
             return res.status(500).json({msg: 'erro no servidor'})
         }else if(data){
             console.log(data)
-            return res.status(200).json(data)
+            return res.status(200).json({data})
 
         }
     })

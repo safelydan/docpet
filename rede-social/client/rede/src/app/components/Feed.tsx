@@ -1,28 +1,34 @@
 
+import { useEffect, useState } from "react";
 import Post from "./Post";
+import { makeRequest } from "../../../axios";
 
-const posts = [{
-    id:1,
-    post_desc: "teste1",
-    img: "",
-    username: "user",
-    userImg: "",
-},
-{
-    id:1,
-    post_desc: "teste2",
-    img: "https://1.bp.blogspot.com/-_reBqPK3Krk/YSnUhQmqj8I/AAAAAAAAEys/-SYPSF6lM04JqrUGYbGMr5yMFhRISYI-ACLcBGAsYHQ/s16000/bjork-20-anos-de-vespertine-1.jpg",
-    username: "user",
-    userImg: "",
+
+interface IPost{
+    id: number,
+    post_desc: string,
+    img: string,
+    username: string,
+    userImg: string,
+    created_at: string
 }
 
-];
 
 function Feed() {
+
+
+    const [posts, setPost] = useState<IPost [] | undefined>(undefined)
+    useEffect(()=>{
+        makeRequest.get('post/').then((res)=>[
+            setPost(res.data.data)
+        ]).catch((err)=>{
+            console.log(err)
+        })
+    }, [])
     return (
     
-    <div className="flex flex-col items-center gap-5">
-        {posts.map((post, id)=>{
+    <div className="flex flex-col items-center gap-5 w-full">
+        {posts?.map((post, id)=>{
             return(
                 <Post post = {post} key={id}/>
             )
