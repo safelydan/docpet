@@ -1,3 +1,4 @@
+import { create } from "domain";
 import { useEffect, useState } from "react";
 import { FaPaperPlane, FaRegComment, FaThumbsUp } from "react-icons/fa";
 
@@ -18,7 +19,7 @@ interface IUser{
 function Post(props:{post: IPost}) {
 
 
-    const{post_desc, img, username, userImg} = props.post
+    const{post_desc, img, username, userImg, created_at} = props.post
 
     const [user, setUser] = useState<IUser | undefined>()
     
@@ -29,6 +30,10 @@ function Post(props:{post: IPost}) {
             }
         },[])
     
+        let date = new Date(created_at)
+        let formatedDate = date.getDate() + "/" +(date.getMonth() + 1) + '/' + date.getFullYear() 
+
+         
 
     return (
         <div className="w-1/3 bg-white rounded-lg p-4 shadow-md">
@@ -43,7 +48,7 @@ function Post(props:{post: IPost}) {
                     alt="imagem do usuario q fez o post"/>
                     <div className="flex flex-col">
                         <span className="font-semibold">{username}</span>
-                        <span className="text-xs">{}</span>
+                        <span className="text-xs">{formatedDate }</span>
                     </div>
                     </header>
 

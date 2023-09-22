@@ -17,13 +17,12 @@ function Login() {
         e.preventDefault()
         makeRequest.post("http://localhost:8001/api/auth/login", {email, password})
         .then((res)=>{
-            localStorage.setItem('rede: user', JSON.stringify(res.data.data.user))
-            localStorage.setItem('rede: token', JSON.stringify(res.data.data.token))
+            localStorage.setItem('rede: user', JSON.stringify(res.data.user))
             setError('')
             router.push('/')
         }).catch((err)=>{
             console.log(err)
-            setError(err.response.data.msg)
+            setError(err.response.msg)
         })
     }
 
