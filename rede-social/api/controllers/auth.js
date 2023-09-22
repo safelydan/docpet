@@ -64,6 +64,7 @@ export const login = (req, res)=>{
                 if(!checkPassword){
                     return res.status(422).json({msg: 'senha incorreta'})
                 }
+                
                 try{
                     const refreshToken = jwt.sign({
                         exp: Math.floor(Date.now()/1000) + 24 * 60 * 60,
@@ -78,12 +79,13 @@ export const login = (req, res)=>{
                     },
                     process.env.TOKEN, 
                     {algorithm: "HS256"} 
-                    )
+                    );
+
                     delete user.password;
-                    return res.cookie('acessToken', token, {httpOnly: true, })
-                    .cookie('refreshToken', refreshToken, {httpOnly: true, })
-                    .status(200)
-                    .json({msg: 'usuario logado com sucesso', user, })
+
+                    res.cookie("accessToken", token, {httpOnly: true, })
+                    .cookie("refreshToken", refreshToken, {httpOnly: true, })
+                    .status(200).json({msg: 'usuario logado com sucesso', user, })
                     // quando fizer o login recebe o user completo e os tokens, serve pra salvar e usar depois dentro da aplicação
 
                 }
@@ -98,4 +100,51 @@ export const login = (req, res)=>{
 
         }
     )
+}
+
+// função q divide em três os tokens
+
+export const refresh = (req, res) =>{
+    const authHeader = req.headers.cookie?.split(';')[1]
+    const refresh = authHeader && authHeader.split('=')[1]
+    const tokenStruct = refresh.split('.')[1]
+    const payload = atob(tokenStruct) // descripto na base64
+ 
+    
+    try{
+
+            const refreshToken = jwt.sign({
+                exp: Math.floor(Date.now()/1000) + 24 * 60 * 60,
+                id: JSON.parse(payload).id, 
+            },
+            process.env.REFRESH, 
+            {algorithm: "HS256"} 
+            )
+            const token = jwt.sign({
+                exp: Math.floor(Date.now()/1000) + 3600,
+                id: JSON.parse(payload).id,            
+            },
+            process.env.TOKEN, 
+            {algorithm: "HS256"} 
+            );
+
+            res.cookie("accessToken", token, {httpOnly: true, })
+            .cookie("refreshToken", refreshToken, {httpOnly: true, })
+            .status(200).json({msg: 'token atualizado com sucesso', })
+            // quando fizer o login recebe o user completo e os tokens, serve pra salvar e usar depois dentro da aplicação
+
+        }
+        catch(error){
+            console.log(error)
+            return res.send(500).json({msg: 'error'})
+        }
+
+}
+
+
+//faz o logout e limpa os cookies
+export const logout = (req, res) =>{
+    return res.clearCookie('accessToken', {secure: true, sameSite: 'none'})
+    .clearCookie('refreshToken', {secure: true, sameSite: 'none'})
+    .status(200).json({msg: 'logout efetuado com sucesso'});
 }

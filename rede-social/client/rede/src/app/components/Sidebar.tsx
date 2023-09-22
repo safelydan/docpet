@@ -1,5 +1,6 @@
+import UserContext from "@/context/UserContext";
 import Link from "next/link";
-import {useEffect, useState } from "react";
+import {useContext, useEffect, useState } from "react";
 import { FaAlignLeft, FaCalendar, FaFlag, FaHeart, FaPeopleArrows, FaStore, FaUserFriends } from "react-icons/fa";
 import { TbDeviceImac, TbClockHour4 } from 'react-icons/tb'
 
@@ -13,14 +14,7 @@ interface IUser{
 
 function Sidebar() {
     
-    const [user, setUser] = useState<IUser | undefined>()
-
-    useEffect(()=>{
-        let value = localStorage.getItem('rede: user')
-        if(value){
-            setUser(JSON.parse(value))
-        }
-    },[])
+    const {user} = useContext(UserContext);
 
     return(
 

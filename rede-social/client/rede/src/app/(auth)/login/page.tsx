@@ -1,28 +1,31 @@
 "use client"
 
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AuthInput from "../../components/AuthInput";
 import { makeRequest } from "../../../../axios";
 import { useRouter } from "next/navigation";
+import UserContext from "@/context/UserContext";
 
 function Login() {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("teste@gmail.com")
+    const [password, setPassword] = useState("teste")
     const [error, setError] = useState("")
-    
+    const {setUser} =useContext(UserContext)
+     
     const router = useRouter()
     const handleLogin= (e:any)=>{
         e.preventDefault()
-        makeRequest.post("http://localhost:8001/api/auth/login", {email, password})
+        makeRequest.post("auth/login", {email, password})
         .then((res)=>{
-            localStorage.setItem('rede: user', JSON.stringify(res.data.user))
+            localStorage.setItem('rede: user', JSON.stringify(res.data.user));
+            setUser(res.data.user)
             setError('')
             router.push('/')
         }).catch((err)=>{
             console.log(err)
-            setError(err.response.msg)
+            setError(err.response.data.msg)
         })
     }
 

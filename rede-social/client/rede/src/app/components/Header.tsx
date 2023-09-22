@@ -1,30 +1,34 @@
 "use client"
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import {FaSearch, FaBell} from 'react-icons/fa'
 import {TbMessageCircle2Filled} from 'react-icons/tb'
+import { makeRequest } from "../../../axios";
+import { UserContext } from "@/context/UserContext";
 
 
 function Header() {
 
-    const [user, setUser] =useState({username: '', userImg: ''})
+    const {user, setUser} = useContext(UserContext)
     const [showMenu, setShowMenu] = useState(false);
     const router = useRouter();
 
-    useEffect(()=>{
-        let value = localStorage.getItem('rede: user')
-        if(value){
-            setUser(JSON.parse(value))
+    const mutation = useMutation({
+        mutationFn: async () =>{
+            return await makeRequest.post('auth/logout').then((res)=>{
+                res.data;
+            });
+        },
+        onSuccess: ()=>{
+            setUser(undefined)
+            localStorage.removeItem('rede: user');
+            router.push('/login')
         }
-    },[])
+    })
 
-    //apagando o token ele perde qualquer sistema de reload e algumas verificaçoes que te mandam de volta pra pagina de login
-    const logout = (e:any)=>{
-        e.preventDefault();
-        localStorage.removeItem('rede: token')
-        router.push('/login')
-    }
+
 
     return(
         <header className="w-full bg-white flex justify-between py-2 px-4 items-center shadow-md" >
@@ -45,15 +49,15 @@ function Header() {
                 <div className="relative" onMouseLeave={()=>setShowMenu(false)}> 
                     <button className="flex gap-2 items-center " onClick={()=>setShowMenu(!showMenu)}>
                         <img 
-                        src={user.userImg.length > 0? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
+                        src={user? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
                         alt="imagem do perfil" 
                         className="u-8 h-8 rounded-full" />
-                        <span className="font-bold">{user.username}</span>
+                        <span className="font-bold">{user?.username}</span>
                     </button>
                     {showMenu && (
                     <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-35px]">
                         <Link href='' className="border-b">editar perfil</Link>
-                        <Link href='' onClick={(e)=>logout(e)}>logout</Link>
+                        <button onClick={() => mutation.mutate()}>logout</button>
                     </div>
                     )}
                 </div>
