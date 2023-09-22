@@ -24,7 +24,6 @@ export const getPost = (req, res)=>{
         }else if(data){
             console.log(data)
             return res.status(200).json(data)
-
         }
     })
 }
