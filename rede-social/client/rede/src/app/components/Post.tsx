@@ -60,7 +60,7 @@ function Post(props:{post: IPost}) {
                         <span>{post_desc}</span>
                     </div>)}
 
-                    {img && <img className="rounded-lg" src={img} alt="img do post"></img>}
+                    {img && <img className="rounded-lg" src={`./upload/${img}`} alt="img do post"></img>}
                     <div className="flex justify-between py-4 border-b">
                        <div className="flex  gap-1 items-center">
                             <span className="bg-blue-600 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs">
