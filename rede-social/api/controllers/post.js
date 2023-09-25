@@ -17,7 +17,7 @@ export const createPost = (req, res) =>{
     })
 }
 export const getPost = (req, res)=>{
-    db.query('SELECT p.*, u.username, userImg FROM posts as p JOIN user as u ON (u.Id = p.userId)', (error, data)=>{
+    db.query('SELECT p.*, u.username, userImg FROM posts as p JOIN user as u ON (u.Id = p.userId) ORDER BY created_at DESC', (error, data)=>{
         if(error){
             console.log(error)
             return res.status(500).json({msg: 'erro no servidor'})

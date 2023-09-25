@@ -9,7 +9,7 @@ function Share() {
 
     const {user} = useContext(UserContext)
     const [post_desc, setDesc] = useState('')
-    const [postImg, setPostImg] = useState()
+    const [postImg, setPostImg] = useState('')
     const [img, setImg] = useState<File | null>(null)
 
     const queryCliente = useQueryClient()
@@ -19,7 +19,7 @@ function Share() {
             setPostImg(URL.createObjectURL(img))
         }
 
-    }, [img])
+    }, [img]);
 
     const mutation = useMutation({
         mutationFn: async(newPost:{}) =>{
@@ -67,7 +67,7 @@ function Share() {
             className="u-8 h-8 rounded full"  />
         
         <div className="w-full bg-zinc-100 flex items-center text-gray rounded-full">
-            <input placeholder= {`o que voce esta pensando, ${user?.username}?`} 
+            <input placeholder= {`o que esta acontecendo, ${user?.username}?`} 
             value={post_desc}
             type="text" className="bg-zinc-100 w-full focus-visible:outline:none rounded-full" 
             onChange={(e)=> setDesc(e.target.value)}/>
