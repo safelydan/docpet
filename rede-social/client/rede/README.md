@@ -60,6 +60,23 @@ create table `rede_social`. `comments` (
     
 ) auto_increment=1;
 
+create table rede_social. likes (
+ id int not null auto_increment, 
+ likes_user_id int not null, 
+ likes_post_id int not null, 
+ primary key (id), 
+ constraint likes_user_id 
+ foreign key (likes_user_id) 
+ references rede_social.user(id) 
+ on delete cascade 
+ on update cascade, 
+ constraint likes_post_id 
+ foreign key (likes_post_id) 
+ references rede_social.posts(id) 
+ on delete cascade 
+ on update cascade
+
+) auto_increment=1;
 
 para rodar a api crie um arquivo .env com os dados do mysql da sua maquina (os tokens se mantem)
 
