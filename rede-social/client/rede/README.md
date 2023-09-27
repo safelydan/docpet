@@ -1,4 +1,4 @@
-para roda a API
+#para roda a API
 
 Bibliotecas: 
 npm i --save bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql
@@ -88,6 +88,7 @@ REFRESH = HeVg3IIIxPSKLr+viDrvFZ+wyYWLs7MmmiYfWcjkZq6iu7Fsygf4/8kgKY/UAInV95ossT
 TOKEN = eOhy5z55cHsxmxGUeXTRQHlVoEwo/Z+bXqwI06yqDwZ092tWJsepvtMkrZQpHYg+iZazQHUsxinS3+YnLS7068XEjjgzgTds9A1+wkmfcl6kU+bADO2XD7rYKSrjZw/UX60Rb6F2b2mkG4qizdluJalr86a4RiT8eIwV4AmGflvZwnq9RFwmNjEtXiomFMSYTu41SK35axNwuK+rnSdMH4YfrYB3wAJohBWwy51jvJkiLUQII7vhAY/9/AAdQaL//awOC9StE6lPvEASJa9mdj7+uVLfUMdlP2ggUo0i2nCcwJpwwkdyEFSpQacfVGKMhZSsvxSsd+v0H0N8O2sdJg==
 
 e de o comando: npm run start
+#
 
 para rodar o front voce precisa instalar as bibliotecas utilzadas, basta apenas usar esse comando dentro da pasta rede
 
@@ -98,4 +99,27 @@ depois na mesma pasta rode o comando
 npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+#
+#script linux
+'back-api'
+
+yarn add bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql --save
+
+yarn start
+
+
+'front-client'
+yarn add autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment nextjs reactjs --save
+
+yarn dev
+
+::: se der o.b na porta o bag resolve
+
+mostra a porta usada e o pid dela
+sudo lsof -i :8001
+
+mata o pid antigo da porta e faz um novo 
+sudo kill -9 PID 
 
