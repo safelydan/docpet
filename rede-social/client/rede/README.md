@@ -1,11 +1,15 @@
-#para roda a API
+# para roda o projeto 
 
-Bibliotecas: 
-npm i --save bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql
+## lado back-end
 
-Comandos para criar o banco de dados utilizado na aplicação
+#### bibliotecas: 
+`npm i --save bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql`
 
-crie um schema com o nome "rede_social"
+#
+
+:: comandos para criar o banco de dados utilizado na aplicação
+
+### crie um schema com o nome "rede_social"
 
 create database rede_social;
 
@@ -78,7 +82,9 @@ create table rede_social. likes (
 
 ) auto_increment=1;
 
-para rodar a api crie um arquivo .env com os dados do mysql da sua maquina (os tokens se mantem)
+### para rodar a api 
+
+crie um arquivo `.env` com os dados do mysql da sua maquina (os tokens se mantem)
 
 DB_HOST = 
 DB_USER = 
@@ -87,39 +93,45 @@ DB =
 REFRESH = HeVg3IIIxPSKLr+viDrvFZ+wyYWLs7MmmiYfWcjkZq6iu7Fsygf4/8kgKY/UAInV95ossTd2aV8+RMx6lFILcSDId/pulf5/1lbwtMkFTxIacl/bdefyDZMezlNsQxiqF/dgLquG90B1rEekm/s2gbevucNVMAxk9TgFnLftbBdRuTclOIt/pJJZKyZJa/wExqkjyxDBWmtHM8QNdiSuONo+WYzqELKM30HZuCq1CwbvR6oB0vz2D0WJp2jtvC76b9QFDQWCYON7VlOpV30kyCG9aXc476nzo8yB66R3vZGxnE65D5neN+RkaILDjtdm4rQVVcCatFtK3aZbof6pzA== 
 TOKEN = eOhy5z55cHsxmxGUeXTRQHlVoEwo/Z+bXqwI06yqDwZ092tWJsepvtMkrZQpHYg+iZazQHUsxinS3+YnLS7068XEjjgzgTds9A1+wkmfcl6kU+bADO2XD7rYKSrjZw/UX60Rb6F2b2mkG4qizdluJalr86a4RiT8eIwV4AmGflvZwnq9RFwmNjEtXiomFMSYTu41SK35axNwuK+rnSdMH4YfrYB3wAJohBWwy51jvJkiLUQII7vhAY/9/AAdQaL//awOC9StE6lPvEASJa9mdj7+uVLfUMdlP2ggUo0i2nCcwJpwwkdyEFSpQacfVGKMhZSsvxSsd+v0H0N8O2sdJg==
 
-e de o comando: npm run start
+e de o comando: `npm run start`
 #
 
-para rodar o front voce precisa instalar as bibliotecas utilzadas, basta apenas usar esse comando dentro da pasta rede
+## lado back-end
 
-npm i autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment
+você precisa instalar as bibliotecas uutilizadas basta apenas usar esse comando dentro da pasta rede
+
+### bibliotecas:
+
+`npm i autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment`
 
 depois na mesma pasta rode o comando
 
-npm run dev
+`npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
 #
-#script linux
-'back-api'
+# script linux
 
-yarn add bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql --save
+## back-api
 
-yarn start
+`yarn add bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql --save`
+
+`yarn start`
 
 
-'front-client'
-yarn add autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment nextjs reactjs --save
+## front-client
 
-yarn dev
+`yarn add autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment nextjs reactjs --save`
 
-::: se der o.b na porta o bag resolve
+`yarn dev`
+
+#### se der o.b na porta o bag resolve
 
 mostra a porta usada e o pid dela
-sudo lsof -i :8001
+`sudo lsof -i :8001`
 
 mata o pid antigo da porta e faz um novo 
-sudo kill -9 PID 
+`sudo kill -9 PID`
 
