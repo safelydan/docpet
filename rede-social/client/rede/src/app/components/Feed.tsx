@@ -29,7 +29,6 @@ function Feed() {
 
     return (
         <div className="flex flex-col items-center gap-5 w-full">
-            <Share />
             {isLoading ? (<span>carregando</span>) :
                 (
                     <div className="w-full flex flex-col gap-5 items-center">{

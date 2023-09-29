@@ -137,7 +137,7 @@ function Post(props:{post: IPost}) {
     }
     
     return (
-        <div className="w-1/3 bg-white rounded-lg p-4 shadow-md">
+        <div className="w-full bg-white rounded-lg p-4 shadow-md">
             <header className="flex gap-2 pb-4 border-b items-center">
                 <img 
                 className="w-8 h-8 rounded-full" 
