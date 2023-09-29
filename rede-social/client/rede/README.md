@@ -130,8 +130,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 #### se der o.b na porta o bag resolve
 
 mostra a porta usada e o pid dela
+
 `sudo lsof -i :8001`
 
 mata o pid antigo da porta e faz um novo 
+
 `sudo kill -9 PID`
 
