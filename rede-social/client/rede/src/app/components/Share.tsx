@@ -1,3 +1,5 @@
+"use client"
+
 import UserContext from "@/context/UserContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext, useState, useEffect } from "react";

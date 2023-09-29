@@ -1,3 +1,5 @@
+"use client"
+
 import { create } from "domain";
 import { useContext, useEffect, useState } from "react";
 import { FaPaperPlane, FaRegComment, FaThumbsUp } from "react-icons/fa";
