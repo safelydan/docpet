@@ -24,6 +24,7 @@ create table `rede_social`. `user` (
     primary key (`id`)
 ) auto_increment=1;
 
+alter table user add bgImg varchar(300)
 
 update `user`
 set userImg = 'https://upload.wikimedia.org/wikipedia/pt/d/d7/Cassiano.jpg'
