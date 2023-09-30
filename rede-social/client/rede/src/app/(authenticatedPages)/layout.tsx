@@ -2,15 +2,13 @@
 import Header from '../components/Header'
 import { useRouter } from 'next/navigation'
 import Sidebar from '../components/Sidebar'
-import { ReactNode } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { makeRequest } from '../../../axios'
+import { ReactNode } from 'react'
 
 
 
-
-
-export default function MainHome({children}:{children:ReactNode}) {
+export default function MainHome({children}:{children: ReactNode}) {
 
   const router = useRouter()
 

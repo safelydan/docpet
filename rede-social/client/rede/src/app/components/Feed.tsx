@@ -1,5 +1,8 @@
 "use client"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e950f74e2d9ab084fe66bcfb389ab11478b7f65
 import { useEffect, useState } from "react";
 import Post from "./Post";
 import { makeRequest } from "../../../axios";

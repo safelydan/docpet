@@ -1,6 +1,10 @@
 "use client"
 
+<<<<<<< HEAD
  import { create } from "domain";
+=======
+import { create } from "domain";
+>>>>>>> 0e950f74e2d9ab084fe66bcfb389ab11478b7f65
 import { useContext, useEffect, useState } from "react";
 import { FaPaperPlane, FaRegComment, FaThumbsUp } from "react-icons/fa";
 import moment from 'moment';
