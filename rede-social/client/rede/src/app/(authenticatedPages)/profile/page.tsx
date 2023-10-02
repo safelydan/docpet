@@ -30,7 +30,7 @@ function Profile({searchParams}:{searchParams:{id:string}})
 
     const postQuery = useQuery<IPost[] | undefined>({
         queryKey: ['posts'],
-        queryFn: () => makeRequest.get('post/?id=')
+        queryFn: () => makeRequest.get('post/?id=' + searchParams.id)
             .then((res) => {
                 return res.data.data;
             })
