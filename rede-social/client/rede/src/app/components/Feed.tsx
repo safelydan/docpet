@@ -1,9 +1,7 @@
 "use client"
-import { useEffect, useState } from "react";
+
 import Post from "./Post";
-import { makeRequest } from "../../../axios";
-import Share from "./Share";
-import { useQuery } from "@tanstack/react-query";
+
 
 interface IPost {
     id: number;
@@ -14,29 +12,18 @@ interface IPost {
     created_at: string;
 }
 
-function Feed() {
-    const { data, isLoading, error } = useQuery<IPost[] | undefined>({
-        queryKey: ['posts'],
-        queryFn: () => makeRequest.get('post/')
-            .then((res) => {
-                return res.data.data;
-            })
-    });
+function Feed(props:{post:IPost[]|undefined}) {
 
-    if (error) {
-        console.log(error);
-    }
 
     return (
         <div className="flex flex-col items-center gap-5 w-full">
-            {isLoading ? (<span>carregando</span>) :
                 (
                     <div className="w-full flex flex-col gap-5 items-center">{
-                        data?.map((post, id) => {
+                        props.post?.map((post, id) => {
                             return <Post post={post} key={id} />;
                         })
                     }</div>
-                )}
+                )
         </div>
     );
 }
