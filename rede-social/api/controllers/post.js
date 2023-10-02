@@ -29,7 +29,8 @@ export const getPost = (req, res)=>{
     
             }
         })
-    }else{
+    }
+    else{
         db.query('SELECT p.*, u.username, userImg FROM posts as p JOIN user as u ON (u.Id = p.userId) ORDER BY created_at DESC', (error, data)=>{
             if(error){
                 console.log(error)
