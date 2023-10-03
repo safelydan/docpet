@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar'
 import { useQuery } from '@tanstack/react-query'
 import { makeRequest } from '../../../axios'
 import { ReactNode } from 'react'
+import Friendshiptable from '../components/FriendshipTable'
 
 
 export default function MainHome({children}:{children: ReactNode}) {
@@ -32,11 +33,12 @@ export default function MainHome({children}:{children: ReactNode}) {
   return (
     <main className="flex min-h-screen flex-col items-center bg-zinc-100">
         <Header/>
-        <div className='w-full flex justify-start pt-10'>
-        <Sidebar/>
+        <div className=' w-full flex justify-start pt-20'>
+        <Sidebar />
         <div className='w-full flex justify-center'>
         {children}
         </div>
+        <Friendshiptable/>
         </div>
     </main>
   )

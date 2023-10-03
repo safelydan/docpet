@@ -82,6 +82,25 @@ create table rede_social. likes (
 
 ) auto_increment=1;
 
+
+create table `rede_social`. `friendship` (
+	`id` int not null auto_increment,
+    `follower_id` int not null,
+    `followed_id` int not null,
+    primary key (`id`),
+    constraint `follower_id`
+    foreign key (`follower_id`)
+    references `rede_social`.`user`(`id`)
+    on delete cascade
+    on update cascade,
+	constraint `followed_id`
+    foreign key (`followed_id`)
+    references `rede_social`.`user`(`id`)
+    on delete cascade
+    on update cascade
+    
+) auto_increment=1;
+
 ### para rodar a api 
 
 crie um arquivo `.env` com os dados do mysql da sua maquina (os tokens se mantem)

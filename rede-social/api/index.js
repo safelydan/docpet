@@ -5,6 +5,7 @@ import postRouter from './routes/post.js';
 import likesRouter from './routes/likes.js';
 import commentRouter from './routes/comment.js';
 import uploadRouter from './routes/upload.js'
+import friendshipRouter from './routes/friendship.js'
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
@@ -34,8 +35,9 @@ app.use('/api/users/', userRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/post/', postRouter);
 app.use('/api/upload/', uploadRouter);
-app.use('/api/comment', commentRouter)
-app.use('/api/likes', likesRouter)
+app.use('/api/comment/', commentRouter)
+app.use('/api/likes/', likesRouter)
+app.use('/api/friendship/', friendshipRouter)
 
 app.listen(8001, () =>{
     console.log('servidor rodando na porta 8001')

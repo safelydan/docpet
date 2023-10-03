@@ -19,8 +19,8 @@ function Sidebar() {
     return(
 
         //tag mto utilizada pra side bar
-        <aside className="pl-4">
-            <nav className="flex flex-col gap-6 text-gray-600 font-semibold">
+        <aside className="fixed pl-4">
+            <nav className=" flex flex-col gap-6 text-gray-600 font-semibold">
                 <Link href={'/profile?id='+ user?.id }  className="flex-gap-2 pb-6 items-center">
                     <img 
                         src={user?.userImg? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
