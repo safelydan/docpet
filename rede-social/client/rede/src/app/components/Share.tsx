@@ -19,9 +19,7 @@ function Share() {
     useEffect(()=>{
         if(img){
             setPostImg(URL.createObjectURL(img))
-        }
-
-    }, [img]);
+        }}, [img]);
 
     const mutation = useMutation({
         mutationFn: async(newPost:{}) =>{

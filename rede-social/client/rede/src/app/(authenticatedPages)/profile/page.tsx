@@ -11,6 +11,7 @@ interface IPost {
     username: string;
     userImg: string;
     created_at: string;
+    userId: number;
 }
 
 
@@ -24,7 +25,7 @@ interface IPost {
 }
 
 
-function Profile({searchParams}:{searchParams:{id:string}})
+function Profile({searchParams}:{searchParams: {id:string} })
 {
 
 
@@ -32,7 +33,7 @@ function Profile({searchParams}:{searchParams:{id:string}})
         queryKey:['profile', searchParams.id],
         queryFn:()=> makeRequest.get('users/get-user?id=' + searchParams.id).then((res)=>{
             return res.data[0]
-        })
+        }),
 })
 
     if(profileQuery.error){
@@ -43,7 +44,7 @@ function Profile({searchParams}:{searchParams:{id:string}})
         queryFn: () => makeRequest.get('post/?id=' + searchParams.id)
             .then((res) => {
                 return res.data.data;
-            })
+            }),
     });
 
     if (postQuery.error) {
@@ -70,4 +71,4 @@ function Profile({searchParams}:{searchParams:{id:string}})
 }
 
 
-export default Profile
+export default Profile;

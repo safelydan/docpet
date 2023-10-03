@@ -9,6 +9,7 @@ import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/rea
 import { makeRequest } from "../../../axios";
 import UserContext from "@/context/UserContext";
 import Comment from "./Comment";
+import Link from "next/link";
 
 interface IPost{
     id: number;
@@ -17,6 +18,7 @@ interface IPost{
     username: string;
     userImg: string;
     created_at: string;
+    userId:number;
 }
 
 interface IUser{
@@ -45,7 +47,7 @@ interface ILikes{
 function Post(props:{post: IPost}) {
 
 
-    const{post_desc, img, username, userImg, created_at, id} = props.post
+    const{post_desc, img, username, userImg, created_at, id, userId} = props.post
 
     const {user} = useContext(UserContext)
     const [comment_desc, setComment_desc] = useState('')
@@ -139,6 +141,7 @@ function Post(props:{post: IPost}) {
     return (
         <div className="w-full bg-white rounded-lg p-4 shadow-md">
             <header className="flex gap-2 pb-4 border-b items-center">
+                <Link href={'/profile?id=' + userId}>
                 <img 
                 className="w-8 h-8 rounded-full" 
                 src={
@@ -151,6 +154,7 @@ function Post(props:{post: IPost}) {
                         <span className="font-semibold">{username}</span>
                         <span className="text-xs">{moment(created_at).fromNow()}</span>
                     </div>
+                    </Link>
                     </header>
 
 

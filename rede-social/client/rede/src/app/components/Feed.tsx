@@ -10,6 +10,7 @@ interface IPost {
     username: string;
     userImg: string;
     created_at: string;
+    userId: number;
 }
 
 function Feed(props:{post:IPost[]|undefined}) {
