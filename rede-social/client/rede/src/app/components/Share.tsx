@@ -80,8 +80,8 @@ function Share() {
         <div className="flex justify-around py-4 text-gray-600 border-y">
             <input className="hidden" type='file' id='img' onChange={(e)=> e.target.files && setImg(e.target.files[0])} />
             <label htmlFor="img" className="flex">
-            <TbPhoto classname= 'text-2xl'/>imagem</label>
-            <button className="flex items-center gap-1"><FaUserFriends classname= 'text-2xl'/>marcar amigo</button>   
+            <TbPhoto className= 'text-2xl'/>imagem</label>
+            <button className="flex items-center gap-1"><FaUserFriends className= 'text-2xl'/>marcar amigo</button>   
         </div>
 
 
