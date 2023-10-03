@@ -1,10 +1,6 @@
 "use client"
 
-<<<<<<< HEAD
- import { create } from "domain";
-=======
 import { create } from "domain";
->>>>>>> 0e950f74e2d9ab084fe66bcfb389ab11478b7f65
 import { useContext, useEffect, useState } from "react";
 import { FaPaperPlane, FaRegComment, FaThumbsUp } from "react-icons/fa";
 import moment from 'moment';
@@ -141,7 +137,7 @@ function Post(props:{post: IPost}) {
     }
     
     return (
-        <div className="w-1/3 bg-white rounded-lg p-4 shadow-md">
+        <div className="w-full bg-white rounded-lg p-4 shadow-md">
             <header className="flex gap-2 pb-4 border-b items-center">
                 <img 
                 className="w-8 h-8 rounded-full" 

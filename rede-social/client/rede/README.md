@@ -41,7 +41,7 @@ create table `rede_social`. `posts` (
     references `rede_social`.`user`(`id`)
     on delete cascade
     on update cascade
-) auto_increment=1;user
+) auto_increment=1;
 
 alter table posts add created_at timestamp default current_timestamp
 

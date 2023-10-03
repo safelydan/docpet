@@ -16,15 +16,34 @@ export const createPost = (req, res) =>{
         }
     })
 }
-export const getPost = (req, res)=>{
-    db.query('SELECT p.*, u.username, userImg FROM posts as p JOIN user as u ON (u.Id = p.userId) ORDER BY created_at DESC', (error, data)=>{
-        if(error){
-            console.log(error)
-            return res.status(500).json({msg: 'erro no servidor'})
-        }else if(data){
-            console.log(data)
-            return res.status(200).json({data})
 
+
+
+export const getPost = (req, res)=>{
+
+    if(req.query.id){
+        db.query('SELECT p.*, u.username, userImg FROM posts as p JOIN user as u ON (u.Id = p.userId) WHERE u.id = 1 ORDER BY created_at DESC', [req.query.id], (error, data)=>{
+            if(error){
+                console.log(error)
+                return res.status(500).json({msg: 'erro no servidor'})
+            }else if(data){
+                console.log(data)
+                return res.status(200).json({data})
+            }
         }
-    })
+    )
+}
+    else{
+        db.query('SELECT p.*, u.username, userImg FROM posts as p JOIN user as u ON (u.Id = p.userId) ORDER BY created_at DESC', (error, data)=>{
+            if(error){
+                console.log(error)
+                return res.status(500).json({msg: 'erro no servidor'})
+            }else if(data){
+                console.log(data)
+                return res.status(200).json({data})
+    
+            }
+        })
+    }
+
 }

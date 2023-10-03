@@ -35,7 +35,9 @@ export default function MainHome({children}:{children: ReactNode}) {
         <Header/>
         <div className='w-full flex justify-start pt-10'>
         <Sidebar/>
+        <div className='w-full flex justify-center'>
         {children}
+        </div>
         </div>
     </main>
   )
