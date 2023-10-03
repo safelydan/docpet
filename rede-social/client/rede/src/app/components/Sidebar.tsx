@@ -19,7 +19,7 @@ function Sidebar() {
     return(
 
         //tag mto utilizada pra side bar
-        <aside className="fixed pl-4">
+        <aside className="w-1/6 pl-4">
             <nav className=" flex flex-col gap-6 text-gray-600 font-semibold">
                 <Link href={'/profile?id='+ user?.id }  className="flex-gap-2 pb-6 items-center">
                     <img 

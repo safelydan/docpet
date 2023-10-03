@@ -2,7 +2,7 @@
 import Header from '../components/Header'
 import { useRouter } from 'next/navigation'
 import Sidebar from '../components/Sidebar'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { makeRequest } from '../../../axios'
 import { ReactNode } from 'react'
 import Friendshiptable from '../components/FriendshipTable'
@@ -11,6 +11,8 @@ import Friendshiptable from '../components/FriendshipTable'
 export default function MainHome({children}:{children: ReactNode}) {
 
   const router = useRouter()
+
+  const queryClient = useQueryClient
 
   // a cada 50 minutos a função aqui escrita serve para renovar o token
   const {data, error, isSuccess, isError} = useQuery({
@@ -30,12 +32,15 @@ export default function MainHome({children}:{children: ReactNode}) {
     router.push('/login')
   }
 
+
+
+
   return (
     <main className="flex min-h-screen flex-col items-center bg-zinc-100">
         <Header/>
         <div className=' w-full flex justify-start pt-20'>
         <Sidebar />
-        <div className='w-full flex justify-center'>
+        <div className='w-4/6 flex justify-center'>
         {children}
         </div>
         <Friendshiptable/>
