@@ -7,7 +7,6 @@ import { makeRequest } from '../../../axios'
 import { ReactNode } from 'react'
 
 
-
 export default function MainHome({children}:{children: ReactNode}) {
 
   const router = useRouter()
