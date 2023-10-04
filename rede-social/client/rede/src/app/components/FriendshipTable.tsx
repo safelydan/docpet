@@ -21,7 +21,7 @@ function Friendshiptable() {
     const queryClient = useQueryClient()
 
     const {data, error} = useQuery({
-        queryKey:['friendship'], 
+        queryKey:[`friendship-${user?.id}`], 
         queryFn:()=> makeRequest.get('friendship/?follower_id=' + user?.id).then((res)=>{
             return res.data.data;
         })
