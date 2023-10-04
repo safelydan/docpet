@@ -24,7 +24,7 @@ create table `rede_social`. `user` (
     primary key (`id`)
 ) auto_increment=1;
 
-alter table user add bgImg varchar(300)
+alter table user add bgImg varchar(300);
 
 update `user`
 set userImg = 'https://upload.wikimedia.org/wikipedia/pt/d/d7/Cassiano.jpg'
@@ -43,7 +43,7 @@ create table `rede_social`. `posts` (
     on update cascade
 ) auto_increment=1;
 
-alter table posts add created_at timestamp default current_timestamp
+alter table posts add created_at timestamp default current_timestamp;
 
 create table `rede_social`. `comments` (
 	`id` int not null auto_increment,
