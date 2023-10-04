@@ -158,8 +158,6 @@ function Post(props:{post: IPost}) {
                     </header>
 
 
-
-
                     {post_desc && (
                     <div  className="py-4 w-full">
                         <span>{post_desc}</span>
