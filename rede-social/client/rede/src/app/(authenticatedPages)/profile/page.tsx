@@ -3,6 +3,8 @@
 import { useQuery } from "@tanstack/react-query"
 import { makeRequest } from "../../../../axios"
 import Feed from "@/app/components/Feed"
+import { useContext } from "react";
+import UserContext from "@/context/UserContext";
 
 interface IPost {
     id: number;
@@ -27,6 +29,9 @@ interface IPost {
 
 function Profile({searchParams}:{searchParams: {id:string} })
 {
+
+
+    const {user} = useContext(UserContext)
 
 
     const profileQuery = useQuery({
@@ -64,7 +69,13 @@ function Profile({searchParams}:{searchParams: {id:string} })
                 <span className="text-2m font-bold pl-2">{profileQuery.data?.username}</span>
             </div>
         </div>
-        <div className="pt-36 w-3/5" >
+        <div className="pt-36 w-3/5" >{
+            
+            user?.id != + searchParams.id &&(
+            <button className="px-2 py-1 bg-zinc-300 font-semibold rounded-md hover:text-black" >deixar de seguir</button>
+            )
+        }
+
             <Feed post={postQuery.data}/>
         </div>
     </div>
