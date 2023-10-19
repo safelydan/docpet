@@ -56,7 +56,10 @@ function Friendshiptable() {
                         className="u-8 h-8 rounded-full" />
                         <span className="font-bold">{friendship.username}</span>
                         </Link>
-                        <button onClick={()=>user && mutation.mutate({followed_id: friendship.followed_id, follower_id:user?.id})} className="px-2 py-1 bg-zinc-300 font-semibold rounded-md hover:text-black" >deixar de seguir</button>
+                        <button onClick={()=>user && mutation.mutate({followed_id: friendship.followed_id, follower_id:user?.id})} className="px-2 py-1 bg-zinc-300 font-semibold rounded-md hover:text-black" >
+        
+                            
+                            deixar de seguir</button>
                     </div>
                 )
             })}

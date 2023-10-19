@@ -24,17 +24,13 @@ create table `rede_social`. `user` (
     primary key (`id`)
 ) auto_increment=1;
 
-alter table user add bgImg varchar(300);
-
-update `user`
-set userImg = 'https://upload.wikimedia.org/wikipedia/pt/d/d7/Cassiano.jpg'
-where `id` = 1;
 
 create table `rede_social`. `posts` (
 	`id` int not null auto_increment,
     `post_desc` varchar(200) null,
     `img` varchar(300) null,
     `userId` int not null,
+    `created_at` timestamp default current_timestamp,
     primary key (`id`),
     constraint `userId`
     foreign key (`userId`)
@@ -43,7 +39,7 @@ create table `rede_social`. `posts` (
     on update cascade
 ) auto_increment=1;
 
-alter table posts add created_at timestamp default current_timestamp;
+alter table posts add ;
 
 create table `rede_social`. `comments` (
 	`id` int not null auto_increment,
