@@ -6,24 +6,8 @@ import Feed from "@/app/components/Feed"
 import { useContext, useState } from "react";
 import UserContext from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import {IFriendship, IPost} from '@/interfaces'
 
-interface IPost {
-    id: number;
-    post_desc: string;
-    img: string;
-    username: string;
-    userImg: string;
-    created_at: string;
-    userId: number;
-}
-
-interface IFriendship{
-    id: number,
-    follower_id: number
-    followed_id: number
-    username: string
-    userImg: string
-}
 
 
 function Profile({searchParams}:{searchParams: {id:string} })
@@ -56,7 +40,7 @@ function Profile({searchParams}:{searchParams: {id:string} })
     }
 
     const friendshipQuery = useQuery({
-        queryKey:[`friendship-${user?.id}`], 
+        queryKey:[`friendship`], 
         queryFn:()=> makeRequest.get('friendship/?follower_id=' + user?.id).then((res)=>{
             res.data.data.find((e: IFriendship)=>{
                 if(e.followed_id === + searchParams.id)
