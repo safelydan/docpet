@@ -3,7 +3,7 @@
 ## lado back-end
 
 #### bibliotecas: 
-`npm i --save bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql`
+`npm i --save bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer mysql`
 
 #
 
@@ -110,7 +110,7 @@ TOKEN = eOhy5z55cHsxmxGUeXTRQHlVoEwo/Z+bXqwI06yqDwZ092tWJsepvtMkrZQpHYg+iZazQHUs
 e de o comando: `npm run start`
 #
 
-## lado back-end
+## lado front-end
 
 você precisa instalar as bibliotecas uutilizadas basta apenas usar esse comando dentro da pasta rede
 
