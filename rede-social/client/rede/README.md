@@ -39,8 +39,6 @@ create table `rede_social`. `posts` (
     on update cascade
 ) auto_increment=1;
 
-alter table posts add ;
-
 create table `rede_social`. `comments` (
 	`id` int not null auto_increment,
     `comment_desc` varchar(200) not null,
@@ -124,10 +122,7 @@ depois na mesma pasta rode o comando
 
 `npm run dev`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-
-#
 # script linux
 
 ## back-api
