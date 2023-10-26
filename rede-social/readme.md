@@ -1,9 +1,9 @@
-# para roda o projeto 
+# para rodar o projeto 
 
 ## lado back-end
 
 #### bibliotecas: 
-`npm i --save bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer mysql`
+`npm install`
 
 #
 
@@ -21,6 +21,7 @@ create table `rede_social`. `user` (
     `email` varchar(100) not null,
     `password` varchar(200) null,
     `userImg` varchar(300) null,
+    `bgImg` varchar(300) null,
     primary key (`id`)
 ) auto_increment=1;
 
@@ -116,7 +117,7 @@ você precisa instalar as bibliotecas uutilizadas basta apenas usar esse comando
 
 ### bibliotecas:
 
-`npm i autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment`
+`npm install`
 
 depois na mesma pasta rode o comando
 
