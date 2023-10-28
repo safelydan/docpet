@@ -17,7 +17,8 @@ function FriendshipTable() {
         queryKey:[`friendship`], 
         queryFn:()=> makeRequest.get('friendship/?follower_id=' + user?.id).then((res)=>{
             return res.data.data;
-        })
+        }),
+        enabled: !!user
     })
 
     
@@ -40,7 +41,7 @@ function FriendshipTable() {
 
 
     return (    
-            <div className="w-1/6 mr-4 text-gray-600 flex flex-col gap-4">
+            <div className="fixed right-0 w-1/6 mr-4 text-gray-600 flex flex-col gap-4">
                 <span className="font-bol border-b">seguindo</span>
                 {data?.map((friendship: IFriendship)=>{
                     return (

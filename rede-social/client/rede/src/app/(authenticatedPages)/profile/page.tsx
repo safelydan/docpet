@@ -77,9 +77,6 @@ function Profile({searchParams}:{searchParams: {id:string} })
       });
       
 
-
- 
-
     return(
         <div className="w-3/5 flex flex-col items-center">
             <div className="relative">
