@@ -18,7 +18,7 @@ function Profile({searchParams}:{searchParams: {id:string} })
     const [followed, setFollowed] = useState(false)
 
     const profileQuery = useQuery({
-        queryKey:['profile', searchParams.id],
+        queryKey:['profile'],
         queryFn:()=> makeRequest.get('users/get-user?id=' + searchParams.id).then((res)=>{
             return res.data[0]
         }),
