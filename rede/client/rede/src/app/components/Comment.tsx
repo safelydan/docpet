@@ -27,4 +27,7 @@ function Comment(props: {comment: IComments}) {
     );
 }
 
+
+
+
 export default Comment;

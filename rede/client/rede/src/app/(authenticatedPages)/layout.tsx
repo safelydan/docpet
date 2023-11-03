@@ -2,7 +2,7 @@
 import Header from '../components/Header'
 import { useRouter } from 'next/navigation'
 import Sidebar from '../components/Sidebar'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {useQuery, useQueryClient } from '@tanstack/react-query'
 import { makeRequest } from '../../../axios'
 import { ReactNode } from 'react'
 import Friendshiptable from '../components/FriendshipTable'
