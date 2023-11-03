@@ -24,9 +24,9 @@ function Profile({searchParams}:{searchParams: {id:string} })
     const [editProfile, setEditProfile] = useState(false)
 
     const profileQuery = useQuery({
-        queryKey:['profile'],
-        queryFn:()=> makeRequest.get('users/get-user?id=' + searchParams.id).then((res)=>{
-            console.log(res.data[0])
+        queryKey:['profile', searchParams.id],
+        queryFn:()=> 
+        makeRequest.get('users/get-user?id=' + searchParams.id).then((res)=>{
             setUserName(res.data[0].username)
             setUserImg(res.data[0].userImg)
             setBgImg(res.data[0].bgImg)
