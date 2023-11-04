@@ -45,3 +45,25 @@ export const getPost = (req, res)=>{
     }
 
 }
+
+
+export const deletePost = (req, res) => {
+  const postId = req.query.id;
+
+  if (!postId) {
+    return res.status(422).json({ msg: 'é preciso o id da postagem a ser excluída' });
+  }
+
+  db.query('DELETE FROM posts WHERE id = ?', [postId], (error, data) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ msg: 'erro no servidor' });
+    } else {
+      if (data.affectedRows > 0) {
+        return res.status(200).json('postagem excluída com sucesso');
+      } else {
+        return res.status(404).json({ msg: 'postagem não encontrada' });
+      }
+    }
+  });
+};
