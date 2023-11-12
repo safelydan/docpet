@@ -34,6 +34,7 @@ function Register(){
 
     return(
         <>
+        <title>cadastre-se</title>
         <h1 className="font-bold text-2xl">registrar</h1>
         <AuthInput label="nome" newState={setUserName}/>
         <AuthInput label="email" newState={setEmail}/>

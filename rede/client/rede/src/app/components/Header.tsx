@@ -95,9 +95,9 @@ function Header() {
                         <span className="font-bold">{user?.username}</span>
                     </button>
                     {showMenu && (
-                    <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-35px]">
-                        <Link href='' className="border-b">editar perfil</Link>
-                        <button onClick={() => mutation.mutate()}>logout</button>
+                    <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-10px]">
+                        {/* <Link href='' className="border-b">editar perfil</Link> */}
+                        <button onClick={() => mutation.mutate()}>sair</button>
                     </div>
                     )}
                 </div>

@@ -35,6 +35,9 @@ function Search({searchParams}: {searchParams: {params: string}}) {
     
     
     return (
+        <>
+        
+        <title>buscar</title>
         <div className="w-[60%] flex gap-6">
             <div className="flex flex-col gap-8 w-1/3 border-r p-4 items-center">
                 <span className="font-semibold text-lg" >usuários</span>
@@ -63,6 +66,7 @@ function Search({searchParams}: {searchParams: {params: string}}) {
                 })}
             </div>
         </div>
+        </>
     )
 }
 

@@ -32,6 +32,7 @@ function Login() {
 
     return (
         <> 
+            <title>login</title>
                 <h1 className="font-bold text-2lx">login</h1>
                 <AuthInput label="email: " newState={setEmail}/>
                 <AuthInput label="senha: " newState={setPassword} isPassword/>
