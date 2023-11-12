@@ -55,7 +55,7 @@ function Header() {
 
                 <input type="text" placeholder='pesquisar' className="bg-zinc-100 focus-visible:outline-none" onChange={(e)=> setSearch(e.target.value)} value={search ? search : ''}/>
             
-                <FaSearch/>
+                <Link href={'/search?params=' + search}> <FaSearch onClick={()=>{setSearch(null), setSearchResults(false)}} /> </Link>
                 {search && searchResults && (
                 <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-0 left-0 top-[100%]">
                     {data?.map((users: IUser, id:number)=>{
