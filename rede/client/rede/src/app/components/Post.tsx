@@ -178,11 +178,13 @@ function Post(props:{post: IPost}) {
                         return <Comment comment = {comment} key={id}/>
                     })}
                     <div className="flex gap-4 pt-6">
+                    
+                    <Link href={'/profile?id=' + user?.id}>
                     <img 
                         src={user?.userImg? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
                         alt="imagem do perfil" 
                         className="u-8 h-8 rounded-full"  />
-                    
+                    </Link>
 
                     <div className="w-full bg-zinc-100 flex items-center text-gray rounded-b">
                         <input 
