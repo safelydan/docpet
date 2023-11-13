@@ -8,8 +8,6 @@ export default function Home() {
   router.push('/main')
 
   return (
-    <div>
-      
-    </div>
+    <p></p>
   )
 }
