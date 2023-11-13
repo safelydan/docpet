@@ -18,6 +18,7 @@ export const getUser = (req, res) =>{
         }
     })
 }
+
 export const updateUser = (req, res) =>{
 
     const {username, userImg, bgImg, id} = req.body

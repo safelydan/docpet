@@ -34,10 +34,14 @@ function Main() {
 
 
     return (
+    <>
+    <title>pagina inicial</title>
     <div className="w-2/6 flex flex-col gap-5">
         <Share />
         <Feed post={postQuery.data}/>
-    </div>)
+    </div>
+    </>
+    )
 }
 
 export default Main;

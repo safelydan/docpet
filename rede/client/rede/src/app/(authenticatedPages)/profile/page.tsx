@@ -119,6 +119,8 @@ function Profile({searchParams}:{searchParams: {id:string} })
 
 
     return(
+        <>
+        <title>{`perfil de `+ profileQuery.data?.username}</title>
         <div className="w-3/5 flex flex-col items-center">
             <div className="relative">
                 <img className="rounded-xl" src={profileQuery.data?.bgImg? profileQuery.data.bgImg: 
@@ -180,6 +182,7 @@ function Profile({searchParams}:{searchParams: {id:string} })
             <Feed post={postQuery.data}/>
         </div>
     </div>
+    </>
     )
 }
 

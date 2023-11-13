@@ -55,7 +55,7 @@ function Header() {
 
                 <input type="text" placeholder='pesquisar' className="bg-zinc-100 focus-visible:outline-none" onChange={(e)=> setSearch(e.target.value)} value={search ? search : ''}/>
             
-                <FaSearch/>
+                <Link href={'/search?params=' + search} > <FaSearch onClick={()=>{setSearch(null), setSearchResults(false)}} /> </Link>
                 {search && searchResults && (
                 <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-0 left-0 top-[100%]">
                     {data?.map((users: IUser, id:number)=>{
@@ -86,18 +86,19 @@ function Header() {
                         <FaBell/>
                     </button>
                 </div>
-                <div className="relative" onMouseLeave={()=>setShowMenu(false)}> 
+                <div className="relative" onMouseLeave={()=>setShowMenu(false)} onMouseEnter={()=>setShowMenu(true)}> 
                     <button className="flex gap-2 items-center " onClick={()=>setShowMenu(!showMenu)}>
+                    <Link href={'/profile?id=' + user?.id}>
                         <img 
                         src={user? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
                         alt="imagem do perfil" 
-                        className="u-8 h-8 rounded-full" />
-                        <span className="font-bold">{user?.username}</span>
+                        className="u-8 h-8 rounded-full" /> 
+                        <span className="font-bold">{user?.username}</span> </Link>
                     </button>
                     {showMenu && (
-                    <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-35px]">
-                        <Link href='' className="border-b">editar perfil</Link>
-                        <button onClick={() => mutation.mutate()}>logout</button>
+                    <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-10px]">
+                        {/* <Link href='' className="border-b">editar perfil</Link> */}
+                        <button onClick={() => mutation.mutate()}>sair</button>
                     </div>
                     )}
                 </div>
