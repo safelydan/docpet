@@ -1,20 +1,19 @@
 "use client"
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/router'; // Use 'next/router' em vez de 'next/navigation'
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    // Realiza a navegação quando o componente é montado
+    // executa a navegação quando o componente é montado
     router.push('/main');
-  }, [router]); // Inclua 'router' no array de dependências para corrigir quaisquer avisos de dependência ausente
+  }, [router]); //inclui 'router' no array de dependências para corrigir possíveis avisos de dependência ausente
 
   return (
     <>
-      <p>Redirecionando...</p>
-      {/* Você pode incluir outros conteúdos aqui */}
+      <p>redirecionando</p>
     </>
   );
 }
