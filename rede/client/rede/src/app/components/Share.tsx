@@ -6,6 +6,7 @@ import { useContext, useState, useEffect } from "react";
 import {FaPaperPlane, FaUserFriends } from "react-icons/fa";
 import { TbPhoto } from "react-icons/tb";
 import { makeRequest } from "../../../axios";
+import Link from "next/link";
 
 function Share() {
 
@@ -61,11 +62,13 @@ function Share() {
         }
         <div>                    
             <div className="flex gap-4 pt-6">
+
+        <Link href={'/profile?id=' + user?.id}>
         <img 
             src={user?.userImg? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
             alt="imagem do perfil" 
             className="u-8 h-8 rounded-full"  />
-        
+        </Link>
         <div className="w-full bg-zinc-100 flex items-center text-gray rounded-full">
             <input placeholder= {`o que esta acontecendo, ${user?.username}?`} 
             value={post_desc}
@@ -80,8 +83,7 @@ function Share() {
         <div className="flex justify-around py-4 text-gray-600 border-y">
             <input className="hidden" type='file' id='img' onChange={(e)=> e.target.files && setImg(e.target.files[0])} />
             <label htmlFor="img" className="flex">
-            <TbPhoto className= 'text-2xl'/>imagem</label>
-            <button className="flex items-center gap-1"><FaUserFriends className= 'text-2xl'/>marcar amigo</button>   
+            <TbPhoto className= 'text-2xl'/>adicionar imagem</label>
         </div>
 
 
