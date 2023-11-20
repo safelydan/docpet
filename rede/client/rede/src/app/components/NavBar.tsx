@@ -1,5 +1,7 @@
 import React from 'react';
-import { FaHome } from 'react-icons/fa'; // Importe o ícone desejado
+import { FaHome } from 'react-icons/fa'; 
+
+// Importe o ícone desejado
 
 function NavBar() {
   return (
@@ -7,7 +9,7 @@ function NavBar() {
       <div className="icone" style={{ marginLeft: '30px' }}>
         <ul className="mr-4"> 
           <li className="ml-4">
-            <a aria-label="link do icone de inicio" href="/login">
+            <a aria-label="link do icone de inicio" href="/init">
               <FaHome size={45} />
             </a>
           </li>
