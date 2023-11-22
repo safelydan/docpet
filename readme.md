@@ -11,7 +11,7 @@ crie um arquivo `.env` com os dados do mysql da sua maquina
 existe um documento chamado ".env.example nos moldes do que vc deve adicionar nos campos" (os tokens se mantem)
 
 
-e de o comando: `npm run start`
+e rode o comando: `npm run start`
 
 
 ## lado front-end
