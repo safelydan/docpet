@@ -9,8 +9,8 @@ import UserContext from "@/context/UserContext";
 
 function Login() {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("teste@gmail.com")
+    const [password, setPassword] = useState("teste")
     const [error, setError] = useState("")
     const {setUser} =useContext(UserContext)
      
@@ -32,48 +32,19 @@ function Login() {
 
     return (
         <>
-          <h1 className="text-center" style={{ color: "#21344d", fontSize: "50px", fontWeight: "bold",  alignItems: 'center', fontFamily: 'Inter', }}>Login</h1>
-      
-          <h1 className="text-center" style={{ color: "#21344d", fontSize: "24px", fontWeight: "bold", fontFamily: 'Inter', textAlign: 'left' }}>Email</h1>  
-          <AuthInput label=" " newState={setEmail} />
-          <h1 className="text-center" style={{ color: "#21344d", fontSize: "24px", fontWeight: "bold", fontFamily: 'Inter', textAlign: 'left' }}>Senha</h1>
-          <AuthInput label=" " newState={setPassword} isPassword />
-
+          <h1 className="font-bold text-2xl">Login</h1>
+          <AuthInput label="Email: " newState={setEmail} />
+          <AuthInput label="Senha: " newState={setPassword} isPassword />
           {error.length > 0 && <span className="text-red-600">* {error}</span>}
-
-          <button 
-         style={{
-        backgroundColor: '#1457ae',
-        fontSize: '20px',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        color: '#ffffff',
-        paddingLeft: '10px',
-        fontFamily: 'Inter',
-       
-      }}
-      className="py-3 font-bold text-white rounded-lg hover:092948" 
-      onClick={(e) => handleLogin(e)}
-    > Entrar
-    </button>
-
-          <Link href='/register' 
-            style={{
-            fontSize: '20px',
-            fontWeight: 'italic',
-            color: "#53566e",
-            fontFamily: 'Inter',
-            }}
-          className="text-center" >
-            Ainda não possui uma conta?
-            <br/>
-            <strong className="text-center underline color:#0000" style={{fontFamily: 'Inter',}} >crie uma conta!</strong>
-            </Link>
+          <button className="bg-blue-400 py-3 font-bold text-white rounded-lg hover:bg-blue-600" onClick={(e) => handleLogin(e)}>
+            Entrar
+          </button>
+          <Link href="/register" className="text-center underline">
+            Criar uma conta
+          </Link>
         </>
-       
-            
-        )
-        }
-      
+
+    )
+}
 
 export default Login;
