@@ -108,17 +108,13 @@ function Post(props:{post: IPost}) {
     }
     
     return (
-<div className="w-full bg-white rounded-lg p-4 shadow-md">
+<div className="w-full bg-white rounded-lg p-4 shadow-md min-h-[300px]">
   <header className="flex gap-2 pb-4 border-b items-center">
     <Link href={'/profile?id=' + userId}>
       <img
         className="w-8 h-8 rounded-full"
-        src={
-          userImg ?
-            userImg :
-            "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"
-        }
-        alt="imagem do usuario q fez o post"
+        src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+        alt="imagem do usuário que fez o post"
       />
       <div className="flex flex-col">
         <span className="font-semibold">{username}</span>
@@ -157,9 +153,9 @@ function Post(props:{post: IPost}) {
           </div>
           {showLikes && (
             <div className="absolute bg-white border flex flex-col p-2 rounded-md top-6">
-              {likesQuery.data.map((like) => {
-                return <span key={like.id}>{like.username}</span>;
-              })}
+              {likesQuery.data.map((like) => (
+                <span key={like.id}>{like.username}</span>
+              ))}
             </div>
           )}
         </>
@@ -176,12 +172,11 @@ function Post(props:{post: IPost}) {
     <button className="flex items-center gap-1" onClick={() => document.getElementById('comment' + id)?.focus}><FaRegComment />comentar</button>
   </div>
 
-  {showComments && commentQuery.data?.map((comment, id) => {
-    return <Comment comment={comment} key={id} />;
-  })}
+  {showComments && commentQuery.data?.map((comment, id) => (
+    <Comment comment={comment} key={id} />
+  ))}
 
   <div className="flex gap-4 pt-6">
-
     <Link href={'/profile?id=' + user?.id}>
       <img
         src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
@@ -191,19 +186,22 @@ function Post(props:{post: IPost}) {
     </Link>
 
     <div className="w-full bg-zinc-100 flex items-center text-gray rounded-b">
-    <input
-  id={"comment" + id}
-  type="text"
-  className="bg-zinc-100 w-full focus-visible:outline:none rounded-full px-4" // Adicionei padding à esquerda e à direita
-  value={comment_desc}
-  onChange={(e) => setComment_desc(e.target.value)}
-  placeholder="Faça um comentário"
-/>
+      <input
+        id={"comment" + id}
+        type="text"
+        className="bg-zinc-100 w-full focus-visible:outline:none rounded-full px-4"
+        value={comment_desc}
+        onChange={(e) => setComment_desc(e.target.value)}
+        placeholder="Faça um comentário"
+      />
 
-      <button onClick={() => shareComment()}> <FaPaperPlane /></button>
-
+      <button
+        onClick={() => shareComment()}
+        className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none"
+      >
+        <FaPaperPlane />
+      </button>
     </div>
-
   </div>
 </div>
 

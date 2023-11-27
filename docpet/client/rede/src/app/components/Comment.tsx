@@ -12,9 +12,9 @@ function Comment(props: {comment: IComments}) {
 <div className="mt-6 flex flex-col sm:flex-row gap-2 items-start">
     <Link href={'/profile?id=' + comment_user_id}>
         <img
-            className="w-8 h-8 rounded-full"
+            className="w-8 h-8 rounded-full mb-2" 
             src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
-            alt="imagem do usuario que fez o comentario"
+            alt="Imagem do usuário que fez o comentário"
         />
     </Link>
 
@@ -30,6 +30,7 @@ function Comment(props: {comment: IComments}) {
         </span>
     </div>
 </div>
+
 
 
     );
