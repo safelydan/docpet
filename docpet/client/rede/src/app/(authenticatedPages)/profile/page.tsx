@@ -151,7 +151,7 @@ function Profile({searchParams}:{searchParams: {id:string} })
         <div className="fixed top-0 bottom-0 right-0 left-0 bg-[#00000094] z-10 flex items-center justify-center">
           <div className="bg-white w-2/3 rounded-xl flex flex-col items-center">
             <header className="w-full border-b font-semibold text-lg text-zinc-600 flex justify-between items-center p-2">
-              editar perfil
+              Editar Perfil
               <button onClick={() => setEditProfile(false)}>
                 <FaTimesCircle className='text-red-600 text-3xl' />
               </button>

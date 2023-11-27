@@ -39,8 +39,9 @@ function Login() {
           <button className="bg-blue-400 py-3 font-bold text-white rounded-lg hover:bg-blue-600" onClick={(e) => handleLogin(e)}>
             Entrar
           </button>
-          <Link href="/register" className="text-center underline">
-            Criar uma conta
+          <Link href="/register" className="text-center">
+          <p className="text-center color:#0000">Ainda não possui uma conta?</p>
+           <strong>Criar uma conta</strong> 
           </Link>
         </>
 
