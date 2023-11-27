@@ -32,11 +32,11 @@ function Login() {
 
     return (
         <>
-          <h1 className="font-bold text-2xl">Login</h1>
+          <h1 className="font-bold text-2xl text-center">Login</h1>
           <AuthInput label="Email: " newState={setEmail} />
           <AuthInput label="Senha: " newState={setPassword} isPassword />
           {error.length > 0 && <span className="text-red-600">* {error}</span>}
-          <button className="bg-blue-400 py-3 font-bold text-white rounded-lg hover:bg-blue-600" onClick={(e) => handleLogin(e)}>
+          <button className="bg-blue-800 py-3 font-bold text-white rounded-lg hover:bg-blue-600" onClick={(e) => handleLogin(e)}>
             Entrar
           </button>
           <Link href="/register" className="text-center">

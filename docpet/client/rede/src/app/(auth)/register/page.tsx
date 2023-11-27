@@ -35,14 +35,14 @@ function Register(){
     return(
         
             <>
-            <h1 className="font-bold text-2xl">Registrar</h1>
+            <h1 className="font-bold text-2xl text-center">Cadastre-se</h1>
             <AuthInput label="Nome" newState={setUserName} />
             <AuthInput label="Email" newState={setEmail} />
             <AuthInput label="Senha" newState={setPassword} isPassword />
             <AuthInput label="Confirme sua senha" newState={setConfirmPassword} isPassword />
             {error.length > 0 && <span className="text-red-600">* {error}</span>}
             {success.length > 0 && <span className="text-green-600">* {success}</span>}
-            <button className="bg-blue-400 py-3 font-bold text-white rounded-lg hover:bg-blue-600" onClick={(e) => handleRegister(e)}>
+            <button className="bg-blue-800 py-3 font-bold text-white rounded-lg hover:bg-blue-600" onClick={(e) => handleRegister(e)}>
                 Cadastrar
             </button>
             <Link href="/login" className="text-center underline">
