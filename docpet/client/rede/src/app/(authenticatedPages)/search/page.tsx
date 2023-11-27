@@ -37,10 +37,10 @@ function Search({searchParams}: {searchParams: {params: string}}) {
     return (
         <>
         
-        <title>buscar</title>
+        <title>Buscar</title>
         <div className="w-[60%] flex gap-6">
             <div className="flex flex-col gap-8 w-1/3 border-r p-4 items-center">
-                <span className="font-semibold text-lg" >usuários</span>
+                <span className="font-semibold text-lg" >Usuários</span>
                 {users.data?.map((user:IUser, id:number)=>{
                     return  (
                         <div className="w-full bg-white rounded-lg p-4 shadow-md" key={id}>
@@ -58,7 +58,7 @@ function Search({searchParams}: {searchParams: {params: string}}) {
                 })}
             </div>
             <div className="flex flex-col gap-8 w-1/2 p-4 items-center">
-                <span className="font-semibold text-lg" >posts</span>
+                <span className="font-semibold text-lg" >Posts</span>
                 {posts.data?.map((post:IPost, id:number)=>{
                     return(
                         <Post post = {post} key={id} />

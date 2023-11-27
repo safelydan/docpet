@@ -56,40 +56,42 @@ function Share() {
 
 
     return(
-    <div className="w-full bg-white rounded-lg p-4 shadow-md flex flex-col gap-3">
-        {
-            img && <img src={postImg} alt="img do post"></img> //imagem do post
-        }
-        <div>                    
-            <div className="flex gap-4 pt-6">
+<div className="w-full bg-white rounded-lg p-4 shadow-md flex flex-col gap-3">
+  {img && <img src={postImg} alt="img do post" className="w-full rounded-lg" />} {/* imagem do post */}
+  <div>
+    <div className="flex gap-4 pt-6">
 
-        <Link href={'/profile?id=' + user?.id}>
-        <img 
-            src={user?.userImg? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
-            alt="imagem do perfil" 
-            className="u-8 h-8 rounded-full"  />
-        </Link>
-        <div className="w-full bg-zinc-100 flex items-center text-gray rounded-full">
-            <input placeholder= {`o que esta acontecendo, ${user?.username}?`} 
-            value={post_desc}
-            type="text" className="bg-zinc-100 w-full focus-visible:outline:none rounded-full" 
-            onChange={(e)=> setDesc(e.target.value)}/>
-            <button onClick={()=> sharePost()}>
-            <FaPaperPlane/>
-            </button>
-        </div>
+      <Link href={'/profile?id=' + user?.id}>
+        <img
+          src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+          alt="imagem do perfil"
+          className="u-8 h-8 rounded-full"
+        />
+      </Link>
+
+      <div className="w-full bg-zinc-100 flex items-center text-gray rounded-full">
+        <input
+          placeholder={`o que está acontecendo, ${user?.username}?`}
+          value={post_desc}
+          type="text"
+          className="bg-zinc-100 w-full focus-visible:outline-none rounded-full"
+          onChange={(e) => setDesc(e.target.value)}
+        />
+        <button onClick={() => sharePost()}>
+          <FaPaperPlane />
+        </button>
+      </div>
     </div>
 
-        <div className="flex justify-around py-4 text-gray-600 border-y">
-            <input className="hidden" type='file' id='img' onChange={(e)=> e.target.files && setImg(e.target.files[0])} />
-            <label htmlFor="img" className="flex">
-            <TbPhoto className= 'text-2xl'/>adicionar imagem</label>
-        </div>
-
-
-
-        </div>
+    <div className="flex justify-around py-4 text-gray-600 border-y">
+      <input className="hidden" type='file' id='img' onChange={(e) => e.target.files && setImg(e.target.files[0])} />
+      <label htmlFor="img" className="flex">
+        <TbPhoto className='text-2xl' />adicionar imagem
+      </label>
     </div>
+  </div>
+</div>
+
 )
 }
 

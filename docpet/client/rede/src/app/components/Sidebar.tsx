@@ -26,7 +26,7 @@ function Sidebar() {
                         </Link>
                 
 
-                <Link href='/main' className="flex gap-3"> <FaHome className='w-6 h-6'/>pagina inicial</Link>
+                <Link href='/main' className="flex gap-3"> <FaHome className='w-6 h-6'/>Página Inicial</Link>
                 {/* <Link href='' className="flex gap-3"> <FaUserFriends className='w-6 h-6'/>seguindo</Link>
                 <Link href='' className="flex gap-3"> <FaStore className='w-6 h-6' />store</Link>
                 <Link href='' className="flex gap-3" > <FaHeart className='w-6 h-6' />favoritos</Link> 

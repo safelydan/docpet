@@ -42,7 +42,7 @@ function FriendshipTable() {
 
     return (    
             <div className="fixed right-0 w-1/6 mr-4 text-gray-600 flex flex-col gap-4">
-                <span className="font-bol border-b">seguindo</span>
+                <span className="font-bol border-b">Seguindo</span>
                 {data?.map((friendship: IFriendship)=>{
                     return (
                         <div key={friendship.id} className="flex gap-2 items-center justify-between">
@@ -55,7 +55,7 @@ function FriendshipTable() {
                             className="w-8 h-8 rounded-full" />
                             <span className="font-bold">{friendship.username}</span></Link> 
                             <button onClick={()=> user && 
-                                mutation.mutate({followed_id: friendship.followed_id, follower_id: user?.id, })} className="px-2 py-1 bg-zinc-200 font-semibold rounded-md hover:text-black">unfollow</button>
+                                mutation.mutate({followed_id: friendship.followed_id, follower_id: user?.id, })} className="px-2 py-1 bg-zinc-200 font-semibold rounded-md hover:text-black">Unfollow</button>
                         </div>
                     )
                 })}

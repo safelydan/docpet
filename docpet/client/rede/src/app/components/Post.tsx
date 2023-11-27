@@ -108,100 +108,104 @@ function Post(props:{post: IPost}) {
     }
     
     return (
-        <div className="w-full bg-white rounded-lg p-4 shadow-md">
-            <header className="flex gap-2 pb-4 border-b items-center">
-                <Link href={'/profile?id=' + userId}>
-                <img 
-                className="w-8 h-8 rounded-full" 
-                src={
-                    userImg?
-                    userImg:
-                    "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+<div className="w-full bg-white rounded-lg p-4 shadow-md">
+  <header className="flex gap-2 pb-4 border-b items-center">
+    <Link href={'/profile?id=' + userId}>
+      <img
+        className="w-8 h-8 rounded-full"
+        src={
+          userImg ?
+            userImg :
+            "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"
+        }
+        alt="imagem do usuario q fez o post"
+      />
+      <div className="flex flex-col">
+        <span className="font-semibold">{username}</span>
+        <span className="text-xs">{moment(created_at).fromNow()}</span>
+      </div>
+    </Link>
+  </header>
 
-                    alt="imagem do usuario q fez o post"/>
-                    <div className="flex flex-col">
-                        <span className="font-semibold">{username}</span>
-                        <span className="text-xs">{moment(created_at).fromNow()}</span>
-                    </div>
-                    </Link>
-                    </header>
+  {post_desc && (
+    <div className="py-4 w-full">
+      <span>{post_desc}</span>
+    </div>
+  )}
 
+  {img && (
+    <img
+      className="rounded-lg w-full"
+      src={`./upload/${img}`}
+      alt="img do post"
+    />
+  )}
 
-                    {post_desc && (
-                    <div  className="py-4 w-full">
-                        <span>{post_desc}</span>
-                    </div>)}
+  <div className="flex justify-between py-4 border-b">
+    <div
+      className="relative"
+      onMouseEnter={() => setShowLikes(true)}
+      onMouseLeave={() => setShowLikes(false)}
+    >
+      {likesQuery.data && likesQuery.data.length > 0 && (
+        <>
+          <div className="flex gap-1 items-center">
+            <span className="bg-blue-600 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs">
+              <FaThumbsUp />
+            </span>
+            <span>{likesQuery.data.length}</span>
+          </div>
+          {showLikes && (
+            <div className="absolute bg-white border flex flex-col p-2 rounded-md top-6">
+              {likesQuery.data.map((like) => {
+                return <span key={like.id}>{like.username}</span>;
+              })}
+            </div>
+          )}
+        </>
+      )}
+    </div>
 
-                    {img && (<img 
-                    className="rounded-lg" 
-                    src={`./upload/${img}`} 
-                    alt="img do post"/>)}
+    <button onClick={() => setShowComments(!showComments)}>
+      {commentQuery.data && commentQuery.data.length > 0 && `${commentQuery.data.length} comentários`}
+    </button>
+  </div>
 
-                    <div className="flex justify-between py-4 border-b">
-                        <div 
-                        className="relative"
-                        onMouseEnter={()=> setShowLikes(true)} 
-                        onMouseLeave={()=> setShowLikes(false)}
-                        >
-                        {likesQuery.data && likesQuery.data.length>0 &&(
-                            <>
-                            <div className="flex  gap-1 items-center">
-                            <span className="bg-blue-600 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs">
-                                <FaThumbsUp/>
-                            </span>
-                            <span>{likesQuery.data.length}</span>
+  <div className="flex justify-around py-4 text-gray-600 border-b">
+    <button className={`flex items-center gap-1 ${liked ? "text-blue-600" : ""}`} onClick={() => shareLikes()}><FaThumbsUp />curtir</button>
+    <button className="flex items-center gap-1" onClick={() => document.getElementById('comment' + id)?.focus}><FaRegComment />comentar</button>
+  </div>
 
-                    </div>
-                    {showLikes && (
-                        <div className="absolute bg-white border flex flex-col p-2 rounded-md top-6">
-                            {likesQuery.data.map((like)=>{
-                                return <span key={like.id}>{like.username}</span>
-                            })}
-                        </div>
-                    )}
-                    </>
-                       
-                    )}
-                    </div>
+  {showComments && commentQuery.data?.map((comment, id) => {
+    return <Comment comment={comment} key={id} />;
+  })}
 
-                        <button onClick={()=> setShowComments(!showComments)}> {commentQuery.data && 
-                        commentQuery.data.length > 0 && 
-                        `${commentQuery.data.length} comentarios`}</button>
-                    </div>
+  <div className="flex gap-4 pt-6">
 
+    <Link href={'/profile?id=' + user?.id}>
+      <img
+        src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+        alt="imagem do perfil"
+        className="u-8 h-8 rounded-full"
+      />
+    </Link>
 
-                    <div className="flex justify-around py-4 text-gray-600 border-b">
-                            <button className={`flex items-center gap-1 ${liked? "text-blue-600" : ""}`} onClick={()=> shareLikes()} ><FaThumbsUp/>curtir</button>
-                            <button className="flex items-center gap-1" onClick={()=> document.getElementById('comment' + id)?.focus}><FaRegComment/>comentar</button>
-                    </div>
-                    {showComments && commentQuery.data?.map((comment, id)=>{
-                        return <Comment comment = {comment} key={id}/>
-                    })}
-                    <div className="flex gap-4 pt-6">
-                    
-                    <Link href={'/profile?id=' + user?.id}>
-                    <img 
-                        src={user?.userImg? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
-                        alt="imagem do perfil" 
-                        className="u-8 h-8 rounded-full"  />
-                    </Link>
+    <div className="w-full bg-zinc-100 flex items-center text-gray rounded-b">
+    <input
+  id={"comment" + id}
+  type="text"
+  className="bg-zinc-100 w-full focus-visible:outline:none rounded-full px-4" // Adicionei padding à esquerda e à direita
+  value={comment_desc}
+  onChange={(e) => setComment_desc(e.target.value)}
+  placeholder="Faça um comentário"
+/>
 
-                    <div className="w-full bg-zinc-100 flex items-center text-gray rounded-b">
-                        <input 
-                        id={"comment" + id}
-                        type="text" className="bg-zinc-100 w-full focus-visible:outline:none rounded-full" 
-                        value={comment_desc}
-                        onChange={(e)=> setComment_desc(e.target.value)} 
-                        placeholder="comente"
-                        />
-                        <button onClick={()=> shareComment()}> <FaPaperPlane/></button>
-                       
-                    </div>
-                   
-                </div>
-                 
-                    
-        </div>
+      <button onClick={() => shareComment()}> <FaPaperPlane /></button>
+
+    </div>
+
+  </div>
+</div>
 
 
     )
