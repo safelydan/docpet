@@ -2,7 +2,7 @@
 
 import { create } from "domain";
 import { useContext, useEffect, useState } from "react";
-import { FaPaperPlane, FaRegComment, FaThumbsUp } from "react-icons/fa";
+import { FaHeart, FaPaperPlane, FaRegComment, FaThumbsUp } from "react-icons/fa";
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -146,8 +146,8 @@ function Post(props:{post: IPost}) {
       {likesQuery.data && likesQuery.data.length > 0 && (
         <>
           <div className="flex gap-1 items-center">
-            <span className="bg-blue-600 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs">
-              <FaThumbsUp />
+            <span className={`bg-red-500 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs ${liked ? "animate-like" : ""}`}>
+              <FaHeart />
             </span>
             <span>{likesQuery.data.length}</span>
           </div>
@@ -168,8 +168,7 @@ function Post(props:{post: IPost}) {
   </div>
 
   <div className="flex justify-around py-4 text-gray-600 border-b">
-    <button className={`flex items-center gap-1 ${liked ? "text-blue-600" : ""}`} onClick={() => shareLikes()}><FaThumbsUp />curtir</button>
-    <button className="flex items-center gap-1" onClick={() => document.getElementById('comment' + id)?.focus}><FaRegComment />comentar</button>
+    <button className={`flex items-center gap-1 ${liked ? "text-red-500" : ""}`} onClick={() => shareLikes()}><FaHeart />Curtir</button>
   </div>
 
   {showComments && commentQuery.data?.map((comment, id) => (
@@ -181,7 +180,7 @@ function Post(props:{post: IPost}) {
       <img
         src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
         alt="imagem do perfil"
-        className="u-8 h-8 rounded-full"
+        className="w-8 h-8 rounded-full"
       />
     </Link>
 
@@ -204,6 +203,7 @@ function Post(props:{post: IPost}) {
     </div>
   </div>
 </div>
+
 
 
     )

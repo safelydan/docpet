@@ -120,66 +120,97 @@ function Profile({searchParams}:{searchParams: {id:string} })
 
     return(
 <>
-  <title>{`Perfil de ` + profileQuery.data?.username}</title>
-  <div className="w-3/5 flex flex-col items-center">
-    <div className="relative">
-      <img className="rounded-xl w-full h-auto" src={profileQuery.data?.bgImg ? profileQuery.data.bgImg : 'https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?w=740&t=st=1696028331~exp=1696028931~hmac=ff6d78a9446b39ef04877dee2de00952857aa4f088936de0c5b8778ce72ad8c6'} alt="capa" />
+      <title>{`Perfil de ` + profileQuery.data?.username}</title>
+      <div className="w-3/5 flex flex-col items-center">
+        <div className="relative">
+          <img
+            className="rounded-xl w-full h-auto"
+            src={
+              profileQuery.data?.bgImg
+                ? profileQuery.data.bgImg
+                : "https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?w=740&t=st=1696028331~exp=1696028931~hmac=ff6d78a9446b39ef04877dee2de00952857aa4f088936de0c5b8778ce72ad8c6"
+            }
+            alt="capa"
+          />
+    
+          <div className="flex absolute bottom-[-110px] left-10 items-center flex-col">
+            <img
+              className="w-40 h-40 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 rounded-full border-zinc-100 border-4"
+              src={
+                profileQuery.data?.userImg
+                  ? profileQuery.data.userImg
+                  : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"
+              }
+              alt="imagem do perfil"
+            />
+            <span className="text-2m font-bold mt-2">
+              {profileQuery.data?.username}
+            </span>
 
-      <div className="flex absolute bottom-[-110px] left-10 items-center">
-        <img className="w-40 h-40 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 rounded-full border-zinc-100 border-4" src={profileQuery.data?.userImg ? profileQuery.data.userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"} alt="imagem do perfil" />
-      </div>
-
-      <span className="text-2m font-bold absolute bottom-[-150px] left-10">
-        {profileQuery.data?.username}
-      </span>
-    </div>
-
-    <div className="pt-36 w-3/5 flex flex-col items-center gap-3">
-      {user?.id !== +searchParams.id ? (
-        <button onClick={() => user && mutation.mutate(
-          { followed, followed_id: +searchParams.id, follower_id: user.id })}
-          className={`w-1/2 rounded-md py-2 font-semibold ${followed ?
-            `bg-zinc-300  hover:text-black` : `bg-blue-600 text-white hover:bg-blue-700`}`} >
-          {followed ? "Deixar de seguir" : "Seguir"}</button>
-      ) : (
-        <button className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black`}
-          onClick={() => setEditProfile(true)} >
-          Editar perfil
-        </button>
-      )}
-      {editProfile &&
-        <div className="fixed top-0 bottom-0 right-0 left-0 bg-[#00000094] z-10 flex items-center justify-center">
-          <div className="bg-white w-2/3 rounded-xl flex flex-col items-center">
-            <header className="w-full border-b font-semibold text-lg text-zinc-600 flex justify-between items-center p-2">
-              Editar Perfil
-              <button onClick={() => setEditProfile(false)}>
-                <FaTimesCircle className='text-red-600 text-3xl' />
-              </button>
-            </header>
-            <form className="w-2/3 py-8 flex flex-col gap-8">
-              <AuthInput label="Nome: " newState={setUserName} />
-              <AuthInput label="Imagem do perfil: " newState={setUserImg} />
-              <AuthInput label="Imagem de capa: " newState={setBgImg} />
-              <button
-                className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black self-center`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  editProfileMutation.mutate({ username, userImg, bgImg, id: +searchParams.id })
-                }}>
-                Editar perfil
-              </button>
-            </form>
           </div>
         </div>
-      }
-      <Feed post={postQuery.data} />
-    </div>
-  </div>
-</>
 
-
-    )
+        <div className="pt-36 w-3/5 flex flex-col items-center gap-3">
+          {user?.id !== +searchParams.id ? (
+            <button
+              onClick={() =>
+                user &&
+                mutation.mutate({ followed, followed_id: +searchParams.id, follower_id: user.id })
+              }
+              className={`w-1/2 rounded-md py-2 font-semibold ${
+                followed
+                  ? `bg-zinc-300  hover:text-black`
+                  : `bg-blue-600 text-white hover:bg-blue-700`
+              }`}
+            >
+              {followed ? "Deixar de seguir" : "Seguir"}
+            </button>
+          ) : (
+            <button
+              className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black`}
+              onClick={() => setEditProfile(true)}
+            >
+              Editar perfil
+            </button>
+          )}
+          {editProfile && (
+            <div className="fixed top-0 bottom-0 right-0 left-0 bg-[#00000094] z-10 flex items-center justify-center">
+              <div className="bg-white w-2/3 rounded-xl flex flex-col items-center">
+                <header className="w-full border-b font-semibold text-lg text-zinc-600 flex justify-between items-center p-2">
+                  Editar Perfil
+                  <button onClick={() => setEditProfile(false)}>
+                    <FaTimesCircle className="text-red-600 text-3xl" />
+                  </button>
+                </header>
+                <form className="w-2/3 py-8 flex flex-col gap-8">
+                  <AuthInput label="Nome: " newState={setUserName} />
+                  <AuthInput label="Imagem do perfil: " newState={setUserImg} />
+                  <AuthInput label="Imagem de capa: " newState={setBgImg} />
+                  <button
+                    className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black self-center`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      editProfileMutation.mutate({
+                        username,
+                        userImg,
+                        bgImg,
+                        id: +searchParams.id,
+                      });
+                    }}
+                  >
+                    Editar perfil
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+          <Feed post={postQuery.data} />
+        </div>
+      </div>
+    </>
+  );
 }
+
 
 
 export default Profile;

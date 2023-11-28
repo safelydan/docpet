@@ -115,7 +115,6 @@ function Header() {
   {/* User profile section */}
   <div className="flex gap-2 items-center text-gray-600">
     <div className="flex gap-3">
-      {/* Add elements as needed */}
     </div>
     <div className="relative" onMouseLeave={() => setShowMenu(false)} onMouseEnter={() => setShowMenu(true)}>
       <button className="flex gap-2 items-center focus:outline-none" onClick={() => setShowMenu(!showMenu)}>
