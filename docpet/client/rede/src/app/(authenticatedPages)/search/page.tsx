@@ -35,38 +35,36 @@ function Search({searchParams}: {searchParams: {params: string}}) {
     
     
     return (
-        <>
-        
-        <title>Buscar</title>
-        <div className="w-[60%] flex gap-6">
-            <div className="flex flex-col gap-8 w-1/3 border-r p-4 items-center">
-                <span className="font-semibold text-lg" >Usuários</span>
-                {users.data?.map((user:IUser, id:number)=>{
-                    return  (
-                        <div className="w-full bg-white rounded-lg p-4 shadow-md" key={id}>
-                            
-                            
-                            <Link href={'/profile?id=' + user.id} key={id} className="flex items-center gap-2">
-                        
-                                <img src={users? user.userImg: 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'} 
-                                alt="imagem do perfil" 
-                                className="u-8 h-8 rounded-full" />
-                                    <span className="font-bold">{user.username}</span>  
-                            </Link>
-                        </div>
-                    )
-                })}
-            </div>
-            <div className="flex flex-col gap-8 w-1/2 p-4 items-center">
-                <span className="font-semibold text-lg" >Posts</span>
-                {posts.data?.map((post:IPost, id:number)=>{
-                    return(
-                        <Post post = {post} key={id} />
-                    )
-                })}
-            </div>
-        </div>
-        </>
+<>
+  <title>Buscar</title>
+  <div className="w-full md:w-[60%] flex flex-col md:flex-row gap-6">
+    <div className="flex flex-col gap-8 w-full md:w-1/3 border-r p-4 items-center">
+      <span className="font-semibold text-lg">Usuários</span>
+      {users.data?.map((user: IUser, id: number) => {
+        return (
+          <div className="w-full bg-white rounded-lg p-4 shadow-md" key={id}>
+            <Link href={'/profile?id=' + user.id} key={id} className="flex items-center gap-2">
+              <img
+                src={user && user.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+                alt="imagem do perfil"
+                className="u-8 h-8 rounded-full"
+              />
+              <span className="font-bold">{user.username}</span>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+    <div className="flex flex-col gap-8 w-full md:w-1/2 p-4 items-center">
+      <span className="font-semibold text-lg">Posts</span>
+      {posts.data?.map((post: IPost, id: number) => {
+        return <Post post={post} key={id} />;
+      })}
+    </div>
+  </div>
+</>
+
+
     )
 }
 

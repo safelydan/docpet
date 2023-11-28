@@ -1,65 +1,60 @@
-import {db} from '../connect.js'
+import { db } from '../connect.js';
 
-export const getUser = (req, res) =>{
+export const getUser = (req, res) => {
+  const id = req.query.id;
 
-    const id = req.query.id
+  if (!id) {
+    return res.status(422).json({ msg: 'É preciso o ID' });
+  }
 
-    if(!id){
-        return res.status(422).json({msg: 'é preciso o id'})
+  db.query('SELECT username, userImg, bgImg FROM user WHERE id = ?', [id], (error, data) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ msg: 'Erro no servidor' });
+    } else {
+      return res.status(200).json(data);
     }
+  });
+};
 
-    db.query('SELECT username, userImg, bgImg FROM user WHERE id = ?', [id], (error, data)=>{
-        if (error){
-            console.log(error)
-            res.status(500).json({msg: 'erro no servidor'})
-        }
-        else{
-            return res.status(200).json(data)
-        }
-    })
-}
+export const updateUser = (req, res) => {
+  const { username, userImg, bgImg, id } = req.body;
 
-export const updateUser = (req, res) =>{
+  if (!username || !userImg || !bgImg) {
+    // Se todas forem negativas
+    return res.status(422).json({ msg: 'Sem alterações para serem feitas' });
+  }
 
-    const {username, userImg, bgImg, id} = req.body
+  db.query('UPDATE user SET username = ?, userImg = ?, bgImg = ? WHERE id = ?', [username, userImg, bgImg, id], (error, data) => {
+    // Cada ponto de interrogação desse será atendido por uma dessas variáveis
 
-    if(!username || !userImg || !bgImg) //se todas forem negativas
-    { 
-        return res.status(422).json({msg: 'sem alteraçoes pra serem feitas'})
+    if (error) {
+      console.log(error);
+      res.status(500).json({ msg: 'Erro no servidor' });
     }
-
-    db.query('UPDATE user SET username = ?, userImg = ?, bgImg = ? WHERE id = ?', [username, userImg, bgImg, id], (error, data)=>{
-    // cada ponto de interrogação desse vai ser atendida por uma dessas variaveis    
-        
-        if (error){
-            console.log(error)
-            res.status(500).json({msg: 'erro no servidor',})
-        }
-        if(data.affectedRows > 0)
-        {
-            return res.status(200).json('atualizado com sucesso')
-        }
-    })
-}
-
+    if (data.affectedRows > 0) {
+      return res.status(200).json('Atualizado com sucesso');
+    }
+  });
+};
 
 export const deleteUser = (req, res) => {
-    const id = req.query.id;
-  
-    if (!id) {
-      return res.status(422).json({ msg: 'é preciso o id' });
-    }
-  
-    db.query('DELETE FROM user WHERE id = ?', [id], (error, data) => {
-      if (error) {
-        console.log(error);
-        res.status(500).json({ msg: 'erro no servidor' });
+  const id = req.query.id;
+
+  if (!id) {
+    return res.status(422).json({ msg: 'É preciso o ID' });
+  }
+
+  db.query('DELETE FROM user WHERE id = ?', [id], (error, data) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ msg: 'Erro no servidor' });
+    } else {
+      if (data.affectedRows > 0) {
+        return res.status(200).json('Usuário excluído com sucesso');
       } else {
-        if (data.affectedRows > 0) {
-          return res.status(200).json('usuário excluído com sucesso');
-        } else {
-          return res.status(404).json({ msg: 'usuário não encontrado' });
-        }
+        return res.status(404).json({ msg: 'Usuário não encontrado' });
       }
-    });
-  };
+    }
+  });
+};
