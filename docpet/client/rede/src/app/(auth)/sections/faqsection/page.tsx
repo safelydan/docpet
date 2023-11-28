@@ -9,45 +9,43 @@ const faqStyle = {
 
   function Section() {
     return (
-      <div>
-        <title>perguntas frequentes</title>
-        <details aria-expanded={true} className="faq_panel" open>
-          <summary className="faq_label"><strong>Proposta do Sistema</strong></summary>
-          <div className="faq_panel-body">
-          <p className="faq_panel-answer">
-              Pensando em facilitar a localização de animais perdidos e ajudar na divulgação de adoção dos mesmos.
-              <br /> 
-              O projeto se propõe a ser uma central onde serão cadastrados os animais perdidos informações de seus respectivos donos e demais dados para possibilitar a devolução/adoção dos mesmos.
-            </p>
-          </div>
-        </details>
+<>
+  <title>Conheça o Sistema CodPet</title>
 
-        <br />
-  
-        <div className="faq_body">
-          <details aria-expanded={true} className="faq_panel" open>
-            <summary className="faq_label"><strong>Uso</strong></summary>
-            <div className="faq_panel-body">
-              <p className="faq_panel-answer">
-                O projeto é uma iniciativa e totalmente independente com fins acadêmicos, o mesmo é totalmente gratuito e pode ser utilizado por qualquer pessoa.
-              </p>
-            </div>
-          </details>
-        </div>
-  
-        <br />
-
-        <div className="faq_body">
-          <details aria-expanded={true} className="faq_panel" open>
-            <summary className="faq_label"><strong>Termos de uso</strong></summary>
-            <div className="faq_panel-body">
-              <p className="faq_panel-answer">
-                Ao se cadastrar você estará concordando e aceitando os termos de uso dos seus dados no nosso sistema, tendo em vista que manteremos a sua privacidade seguindo à risca a política de privacidade existente.
-              </p>
-            </div>
-          </details>
-        </div>
+  <div className="space-y-4">
+    <details className="faq_panel bg-gray-100 p-4 rounded" open>
+      <summary className="faq_label font-bold cursor-pointer">Proposta do Sistema</summary>
+      <div className="faq_panel-body mt-2">
+        <p className="faq_panel-answer text-gray-700">
+          O CodPet nasceu da ideia de tornar mais fácil a localização de animais perdidos e promover a adoção responsável. A proposta é criar uma central onde informações sobre animais perdidos, seus donos e outros detalhes sejam cadastrados, facilitando a devolução ou adoção dos mesmos.
+        </p>
       </div>
+    </details>
+
+    <div className="faq_body">
+      <details className="faq_panel bg-gray-100 p-4 rounded" open>
+        <summary className="faq_label font-bold cursor-pointer">Uso</summary>
+        <div className="faq_panel-body mt-2">
+          <p className="faq_panel-answer text-gray-700">
+            O CodPet é um projeto independente com propósitos acadêmicos. Totalmente gratuito, ele está disponível para ser utilizado por qualquer pessoa interessada em contribuir para a causa da localização de animais perdidos e promoção da adoção responsável.
+          </p>
+        </div>
+      </details>
+    </div>
+
+    <div className="faq_body">
+      <details className="faq_panel bg-gray-100 p-4 rounded" open>
+        <summary className="faq_label font-bold cursor-pointer">Termos de Uso</summary>
+        <div className="faq_panel-body mt-2">
+          <p className="faq_panel-answer text-gray-700">
+            Ao se cadastrar no CodPet, você concorda e aceita os termos de uso dos seus dados no nosso sistema. Garantimos a total privacidade e seguimos rigorosamente a política de privacidade existente para proteger suas informações.
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+</>
+
     );
   }
   
