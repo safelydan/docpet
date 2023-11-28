@@ -168,7 +168,14 @@ function Post(props:{post: IPost}) {
   </div>
 
   <div className="flex justify-around py-4 text-gray-600 border-b">
-    <button className={`flex items-center gap-1 ${liked ? "text-red-500" : ""}`} onClick={() => shareLikes()}><FaHeart />Curtir</button>
+      <button
+          className={`flex items-center gap-1 ${liked ? "text-red-500" : ""} transition-all duration-300 hover:text-red-500`}
+          onClick={() => shareLikes()}
+        >
+          <FaHeart className={`text-red-500 ${liked ? "animate-like" : ""}`} />
+          Curtir
+    </button>
+
   </div>
 
   {showComments && commentQuery.data?.map((comment, id) => (
