@@ -10,16 +10,17 @@ function Comment(props: {comment: IComments}) {
     return (
         
 <div className="mt-6 flex flex-col sm:flex-row gap-2 items-start">
-    <Link href={'/profile?id=' + comment_user_id}>
+
+
+    <div className="text-zinc-600 w-full">
+        <div className="flex flex-col bg-zinc-100 p-4 rounded-md">
+        <Link href={'/profile?id=' + comment_user_id}>
         <img
             className="w-8 h-8 rounded-full mb-2" 
             src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
             alt="Imagem do usuário que fez o comentário"
         />
     </Link>
-
-    <div className="text-zinc-600 w-full">
-        <div className="flex flex-col bg-zinc-100 p-4 rounded-md">
             <Link href={'/profile?id=' + comment_user_id}>
                 <span className="font-bold">{username}</span>
             </Link>

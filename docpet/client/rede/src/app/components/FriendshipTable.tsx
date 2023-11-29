@@ -45,18 +45,23 @@ function FriendshipTable() {
                 <span className="font-bol border-b">Seguindo</span>
                 {data?.map((friendship: IFriendship)=>{
                     return (
-                        <div key={friendship.id} className="flex gap-2 items-center justify-between">
-                        <Link href={`profile?id=${friendship.followed_id}`} className="flex gap-2 items-center" >   
-                            <img src={friendship.userImg ? 
-                            friendship.userImg: 
-                            'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'
-                        } 
-                            alt="imagem do perfil" 
-                            className="w-8 h-8 rounded-full" />
-                            <span className="font-bold">{friendship.username}</span></Link> 
-                            <button onClick={()=> user && 
+                        <><div key={friendship.id} className="flex gap-2 items-center justify-between">
+                            <Link href={`profile?id=${friendship.followed_id}`} className="flex gap-2 items-center">
+                                <img src={friendship.userImg ?
+                                    friendship.userImg :
+                                    'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+                                    alt="imagem do perfil"
+                                    className="w-8 h-8 rounded-full" /></Link>
+                        </div>
+                        <div>  
+                        <div>
+                            <span className="font-bold">{friendship.username}</span>
+                            </div>
+                        <button onClick={()=> user && 
                                 mutation.mutate({followed_id: friendship.followed_id, follower_id: user?.id, })} className="px-2 py-1 bg-zinc-200 font-semibold rounded-md hover:text-black">Unfollow</button>
                         </div>
+                            
+                        </>
                     )
                 })}
             </div>
