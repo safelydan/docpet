@@ -90,27 +90,28 @@ function Header() {
 
   {/* User profile section */}
   <div className="flex gap-2 items-center text-gray-600">
-    <div className="flex gap-3">
-    </div>
-    <div className="relative" onMouseLeave={() => setShowMenu(false)} onMouseEnter={() => setShowMenu(true)}>
-      <button className="flex gap-2 items-center focus:outline-none" onClick={() => setShowMenu(!showMenu)}>
-        <Link href={'/profile?id=' + user?.id}>
+  <div className="flex gap-3"></div>
+  <div className="relative" onMouseLeave={() => setShowMenu(false)} onMouseEnter={() => setShowMenu(true)}>
+    <button className="flex flex-col items-center focus:outline-none" onClick={() => setShowMenu(!showMenu)}>
+      <Link href={'/profile?id=' + user?.id}>
+        <div className="flex flex-col items-center">
           <img
             src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
             alt="imagem do perfil"
             className="w-6 h-6 md:w-8 md:h-8 rounded-full"
           />
           <span className="font-bold">{user?.username}</span>
-        </Link>
-      </button>
-      {showMenu && (
-        <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-10px]">
-          {/* Add menu links as needed */}
-          <button onClick={() => mutation.mutate()} className="cursor-pointer">Sair</button>
         </div>
-      )}
-    </div>
+      </Link>
+    </button>
+    {showMenu && (
+      <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-10px]">
+        <button onClick={() => mutation.mutate()} className="cursor-pointer">Sair</button>
+      </div>
+    )}
   </div>
+</div>
+
 </header>
 
 

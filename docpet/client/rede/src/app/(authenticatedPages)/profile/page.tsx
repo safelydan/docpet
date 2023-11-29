@@ -12,31 +12,31 @@ import AuthInput from "@/app/components/AuthInput";
 
 
 
-function Profile({searchParams}:{searchParams: {id:string} })
-{
-    const {user, setUser} = useContext(UserContext)
-    const queryClient = useQueryClient();
+function Profile({ searchParams }: { searchParams: { id: string } }) {
+  const { user, setUser } = useContext(UserContext);
+  const queryClient = useQueryClient();
 
-    const [followed, setFollowed] = useState(false)
-    const [username, setUserName] = useState('')
-    const [userImg, setUserImg] = useState('')
-    const [bgImg, setBgImg] = useState('')
-    const [editProfile, setEditProfile] = useState(false)
+  const [followed, setFollowed] = useState(false);
+  const [username, setUserName] = useState('');
+  const [userImg, setUserImg] = useState('');
+  const [bgImg, setBgImg] = useState('');
+  const [editProfile, setEditProfile] = useState(false);
 
-    const profileQuery = useQuery({
-        queryKey:['profile', searchParams.id],
-        queryFn:()=> 
-        makeRequest.get('users/get-user?id=' + searchParams.id).then((res)=>{
-            setUserName(res.data[0].username)
-            setUserImg(res.data[0].userImg)
-            setBgImg(res.data[0].bgImg)
-            return res.data[0]
-        }),
-})
+  const profileQuery = useQuery({
+    queryKey: ['profile', searchParams.id],
+    queryFn: () =>
+      makeRequest.get(`users/get-user?id=${searchParams.id}`).then((res) => {
+        const userData = res.data[0] || {};
+        setUserName(userData.username);
+        setUserImg(userData.userImg);
+        setBgImg(userData.bgImg);
+        return userData;
+      }),
+  });
 
-    if(profileQuery.error){
-        console.log(profileQuery.error)}
-
+  if (profileQuery.error) {
+    console.error('Profile query error:', profileQuery.error);
+  }
     const postQuery = useQuery<IPost[] | undefined>({
         queryKey: ['posts'],
         queryFn: () => makeRequest.get('post/?id=' + searchParams.id)

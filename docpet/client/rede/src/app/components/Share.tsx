@@ -85,7 +85,9 @@ function Share() {
             onChange={(e) => e.target.files && setImg(e.target.files[0])}
           />
           <label htmlFor="img" className="cursor-pointer">
+            
             <TbPhoto className='text-2xl text-gray-500 hover:text-blue-500' />
+
           </label>
         </div>
         <button
