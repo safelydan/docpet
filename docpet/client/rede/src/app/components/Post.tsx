@@ -110,14 +110,14 @@ function Post(props:{post: IPost}) {
     return (
 <div className="w-full bg-white rounded-lg p-4 shadow-md min-h-[300px]">
   <header className="flex gap-2 pb-4 border-b items-center">
-    <Link href={'/profile?id=' + user?.id}>
+    <Link href={'/profile?id=' + userId}>
       <img
         className="w-8 h-8 rounded-full"
-        src={user?.userImg ? user.userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+        src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
         alt="imagem do usuário que fez o post"
       />
       <div className="flex flex-col">
-        <span className="font-semibold">{user?.username}</span>
+        <span className="font-semibold">{username}</span>
         <span className="text-xs">{moment(created_at).fromNow()}</span>
       </div>
     </Link>
@@ -172,7 +172,7 @@ function Post(props:{post: IPost}) {
           className={`flex items-center gap-1 ${liked ? "text-red-500" : ""} transition-all duration-300 hover:text-red-500`}
           onClick={() => shareLikes()}
         >
-          <FaHeart className={`${liked ? "animate-like" : ""}`} />
+          <FaHeart className={` ${liked ? "animate-like" : ""}`} />
           Curtir
     </button>
 
@@ -182,33 +182,33 @@ function Post(props:{post: IPost}) {
     <Comment comment={comment} key={id} />
   ))}
 
-  <div className="flex gap-4 pt-6">
-    <Link href={'/profile?id=' + user?.id}>
-      <img
-        src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
-        alt="imagem do perfil"
-        className="w-8 h-8 rounded-full"
-      />
-    </Link>
+<div className="flex gap-4 pt-6 items-center">
+  <Link href={'/profile?id=' + user?.id}>
+    <img
+      src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+      alt="imagem do perfil"
+      className="w-8 h-8 rounded-full"
+    />
+  </Link>
 
-    <div className="w-full bg-zinc-100 flex items-center text-gray rounded-b">
-      <input
-        id={"comment" + id}
-        type="text"
-        className="bg-zinc-100 w-full focus-visible:outline:none rounded-full px-4"
-        value={comment_desc}
-        onChange={(e) => setComment_desc(e.target.value)}
-        placeholder="Faça um comentário"
-      />
-
-      <button
-        onClick={() => shareComment()}
-        className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none"
-      >
-        <FaPaperPlane />
-      </button>
+    <div className="w-1/4 sm:w-3/4 flex flex-col items-center">
+    <input
+      id={"comment" + id}
+      type="text"
+      className="bg-zinc-100 w-full sm:w-3/4 focus:outline-none rounded-full px-4 py-2 text-black-800 placeholder-black-500 border-none shadow-md" // Estilos adicionados
+      value={comment_desc}
+      onChange={(e) => setComment_desc(e.target.value)}
+      placeholder="Faça um comentário"
+    />
     </div>
-  </div>
+ 
+    <button
+    onClick={() => shareComment()}
+    className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none ml-auto"
+  >
+    <FaPaperPlane />
+  </button>
+</div>
 </div>
 
 

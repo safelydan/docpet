@@ -39,7 +39,7 @@ function FriendshipTable() {
     });
   
     return (
-      <div className={`fixed right-0 w-1/6 md:w-48 mr-4 mt-1 text-gray-600 flex flex-col gap-4 ${isMenuOpen ? 'menu-open' : ''}`}>
+      <div className={`fixed right-0 text-gray-600 flex flex-col gap-4 ${isMenuOpen ? 'menu-open' : ''}`}>
         <span className="font-bold cursor-pointer flex items-center text-lg font-semibold text-blue-500" onClick={() => setMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <FaTimes className="w-6 h-6 mr-2" /> : <FaBars className="w-6 h-6 mr-2" />}
           {isMenuOpen && 'Seguindo'}

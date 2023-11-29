@@ -57,7 +57,7 @@ function Share() {
 
     return(
 
-<div className="w-full bg-white rounded-lg p-4 shadow-md">
+<div className="w-full sm:w-2/4 bg-white rounded-lg p-4 shadow-md flex flex-col">
   {img && <img src={postImg} alt="img do post" className="w-full rounded-lg mb-2" />}
   <div className="flex items-start gap-4">
 

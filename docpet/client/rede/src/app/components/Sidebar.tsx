@@ -13,7 +13,7 @@ function Sidebar() {
   const { user } = useContext(UserContext);
 
   return (
-    <aside className="fixed w-1/6 pl-4 mt-1"> 
+    <aside className="fixed w-1/6 pl-4 mt-5"> 
       <nav className="flex flex-col gap-6 text-gray-600 font-semibold">
         <Link href="/main" className="flex items-center gap-2 hover:text-blue-500">
           <FaHome className="w-6 h-6 md:w-8 md:h-8" />
