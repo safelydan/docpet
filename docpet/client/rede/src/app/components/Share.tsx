@@ -57,7 +57,7 @@ function Share() {
 
     return(
 
-<div className="w-full sm:w-2/4 md:w-3/4 lg:w-1/2 xl:w-2/4 bg-white rounded-lg p-4 shadow-md flex flex-col">
+<div className="w-full sm:w-2/4 md:w-3/4 lg:w-1/2 xl:w-2/4 bg-white rounded-lg p-4 shadow-md flex flex-col gap-4">
   {img && <img src={postImg} alt="img do post" className="w-full rounded-lg mb-2" />}
   <div className="flex flex-col sm:flex-row items-start gap-4">
 
@@ -73,29 +73,30 @@ function Share() {
       <textarea
         placeholder={`O que está acontecendo, ${user?.username}?`}
         value={post_desc}
-        className="w-full bg-zinc-100 focus:outline-none rounded-lg resize-none"
+        className="w-full focus:outline-none rounded-lg resize-none"
         onChange={(e) => setDesc(e.target.value)}
       />
-      <div className="flex justify-between mt-2">
-        <div className="flex items-center">
-          <input
-            type="file"
-            id="img"
-            className="hidden"
-            onChange={(e) => e.target.files && setImg(e.target.files[0])}
-          />
-          <label htmlFor="img" className="cursor-pointer">
-            <TbPhoto className='text-2xl text-gray-500 hover:text-blue-500' />
-          </label>
-        </div>
-        <button
-          onClick={() => sharePost()}
-          className="bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600"
-        >
-          Postar
-        </button>
-      </div>
     </div>
+  </div>
+
+  <div className="flex justify-between items-center">
+    <div className="flex items-center">
+      <input
+        type="file"
+        id="img"
+        className="hidden l-3"
+        onChange={(e) => e.target.files && setImg(e.target.files[0])}
+      />
+      <label htmlFor="img" className="cursor-pointer">
+        <TbPhoto className='text-2xl text-gray-500 hover:text-blue-500' />
+      </label>
+    </div>
+    <button
+      onClick={() => sharePost()}
+      className="bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600"
+    >
+      Postar
+    </button>
   </div>
 </div>
 

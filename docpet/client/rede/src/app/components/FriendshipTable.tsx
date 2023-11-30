@@ -43,7 +43,7 @@ return (
     <div className={`text-gray-600 flex flex-col ${isMenuOpen ? 'bg-white shadow-md' : 'bg-zinc-100'}`}>
       <span
         className={`font-bold cursor-pointer flex items-center text-lg ${
-          isMenuOpen ? 'bg-white py-4 px-4 rounded-md hover:text-blue-500' : 'text-blue-500 hover:bg-blue-100'
+          isMenuOpen ? 'bg-white py-4 px-4 rounded-md hover:text-blue-500' : 'text-gray-600 hover:text-blue-500'
         }`}
         onClick={() => setMenuOpen(!isMenuOpen)}
       >

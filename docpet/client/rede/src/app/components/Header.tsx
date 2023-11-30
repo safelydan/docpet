@@ -56,7 +56,7 @@ function Header() {
     />
   </Link>
 
-  <div className="flex bg-zinc-100 items-center text-gray-600 px-2 py-1 rounded-full relative" 
+  <div className="flex bg-white items-center text-gray-600 px-2 py-1 rounded-full relative" 
     onClick={() => setSearchResults(true)}
     onMouseLeave={() => setSearchResults(false)}
   >
@@ -64,7 +64,7 @@ function Header() {
     <input
       type="text"
       placeholder='Buscar'
-      className="bg-zinc-100 focus-visible:outline-none w-28 sm:w-40" // Adjusted width for small screens
+      className="bg-white focus-visible:outline-none w-28 sm:w-40" // Adjusted width for small screens
       onChange={(e) => setSearch(e.target.value)}
       value={search ? search : ''}
     />
