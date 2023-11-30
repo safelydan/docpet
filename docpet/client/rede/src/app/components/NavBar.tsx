@@ -9,7 +9,7 @@ function NavBar() {
   <div className="icone" style={{ marginLeft: '30px' }}>
     <ul className="mr-4">
       <li className="ml-4 transform hover:scale-110 transition duration-300">
-        <a aria-label="link do icone de inicio" href="/init">
+        <a aria-label="link do icone de inicio" href="/ok/init">
           <FaHome size={45} />
         </a>
       </li>
