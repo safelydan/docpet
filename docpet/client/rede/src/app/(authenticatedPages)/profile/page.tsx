@@ -120,8 +120,9 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
 
     return(
 <>
+      
       <title>{`Perfil de ` + profileQuery.data?.username}</title>
-      <div className="w-3/5 flex flex-col items-center">
+      <div className="w-3/4 md:w-3/5 sm:w-1/4 flex flex-col items-center">
         <div className="relative">
           <img
             className="rounded-xl w-full h-auto"

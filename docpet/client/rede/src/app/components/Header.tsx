@@ -3,7 +3,7 @@ import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
-import {FaSearch, FaBell} from 'react-icons/fa'
+import {FaSearch, FaBell, FaDoorOpen} from 'react-icons/fa'
 import {TbMessageCircle2Filled} from 'react-icons/tb'
 import { makeRequest } from "../../../axios";
 import { UserContext } from "@/context/UserContext";
@@ -92,26 +92,16 @@ function Header() {
   <div className="flex gap-2 items-center text-gray-600">
   <div className="flex gap-3"></div>
   <div className="relative" onMouseLeave={() => setShowMenu(false)} onMouseEnter={() => setShowMenu(true)}>
-    <button className="flex flex-col items-center focus:outline-none" onClick={() => setShowMenu(!showMenu)}>
-      <Link href={'/profile?id=' + user?.id}>
-        <div className="flex flex-col items-center">
-          <img
-            src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
-            alt="imagem do perfil"
-            className="w-6 h-6 md:w-8 md:h-8 rounded-full"
-          />
-          <span className="font-bold">{user?.username}</span>
-        </div>
-      </Link>
-    </button>
-    {showMenu && (
-      <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-[-10px]">
-        <button onClick={() => mutation.mutate()} className="cursor-pointer">Sair</button>
-      </div>
-    )}
+  <button
+          onClick={() => mutation.mutate()}
+          className={`cursor-pointer flex items-center ${showMenu ? 'hover:text-blue-600' : ''}`}
+        >
+          <FaDoorOpen className="w-6 h-6 mr-2" />
+          Sair
+        </button>
   </div>
-</div>
 
+</div>
 </header>
 
 
