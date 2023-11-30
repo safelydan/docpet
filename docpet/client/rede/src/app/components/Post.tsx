@@ -183,33 +183,33 @@ function Post(props:{post: IPost}) {
   ))}
 
 <div className="flex gap-4 pt-6 items-center">
-<Link href={'/profile?id=' + user?.id} className="hidden sm:block"> {/* Adicionei a classe hidden para esconder em telas pequenas */}
+  <Link href={'/profile?id=' + user?.id} className="hidden sm:block">
     <img
       src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
       alt="imagem do perfil"
       className="w-8 h-8 rounded-full"
     />
   </Link>
-  
-  <div className="bg-white w-1/4 sm:w-3/4 md:1/3 flex flex-col items-center">
+
+  <div className="bg-white w-full sm:w-3/4 md:w-1/3 flex flex-col items-center">
     <input
       id={"comment" + id}
       type="text"
-      className="sm:w-full md:w-full focus:outline-none rounded-full px-4 py-2 text-black-800 placeholder-black-500 ml-auto " // Estilos adicionados
+      className="w-full sm:w-full md:w-full focus:outline-none rounded-full px-4 py-2 text-black-800 placeholder-black-500 ml-auto"
       value={comment_desc}
       onChange={(e) => setComment_desc(e.target.value)}
-      
-      placeholder="Faça um comentário"
+      placeholder="Comente..."
     />
-    </div>
- 
-    <button
+  </div>
+
+  <button
     onClick={() => shareComment()}
     className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none ml-auto"
   >
     <FaPaperPlane />
   </button>
 </div>
+
 </div>
 
 

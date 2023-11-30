@@ -57,15 +57,15 @@ function Share() {
 
     return(
 
-<div className="w-full sm:w-2/4 bg-white rounded-lg p-4 shadow-md flex flex-col">
+<div className="w-full sm:w-2/4 md:w-3/4 lg:w-1/2 xl:w-2/4 bg-white rounded-lg p-4 shadow-md flex flex-col">
   {img && <img src={postImg} alt="img do post" className="w-full rounded-lg mb-2" />}
-  <div className="flex items-start gap-4">
+  <div className="flex flex-col sm:flex-row items-start gap-4">
 
     <Link href={'/profile?id=' + user?.id}>
       <img
         src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
         alt="imagem do perfil"
-        className="u-8 h-8 rounded-full"
+        className="u-8 h-8 rounded-full mb-2 sm:mb-0"
       />
     </Link>
 
@@ -85,9 +85,7 @@ function Share() {
             onChange={(e) => e.target.files && setImg(e.target.files[0])}
           />
           <label htmlFor="img" className="cursor-pointer">
-            
             <TbPhoto className='text-2xl text-gray-500 hover:text-blue-500' />
-
           </label>
         </div>
         <button
@@ -100,6 +98,7 @@ function Share() {
     </div>
   </div>
 </div>
+
 
 
 )
