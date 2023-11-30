@@ -52,66 +52,41 @@ function Header() {
     <img
       src="https://github.com/joyzinhw/projeto-integrador/blob/main/assets/img/www.png?raw=true"
       alt="Logo Codpet"
-      className="w-11 h-11 rounded-full" 
+      className="w-8 h-8 rounded-full"
     />
   </Link>
 
-  <div
-  className="flex bg-zinc-100 items-center text-gray-600 px-3 py-1 rounded-full relative"
-  onMouseLeave={() => setSearchResults(false)}
-  onClick={() => {
-    if (search) {
-      setSearchResults(true);
-    }
-  }}
->
-  <input
-    type="text"
-    placeholder='Buscar'
-    className="bg-zinc-100 focus-visible:outline-none"
-    onChange={(e) => {
-      setSearch(e.target.value);
-      setSearchResults(true);
-    }}
-    value={search ? search : ''}
-  />
+  <div className="flex bg-zinc-100 items-center text-gray-600 px-3 py-1 rounded-full relative" 
+                onClick={()=> setSearchResults(true)}
+                onMouseLeave={()=> setSearchResults(false)}>
 
-  <Link href={`/search?params=${search}`}>
-    <FaSearch onClick={() => setSearchResults(false)} />
-  </Link>
+                <input type="text" placeholder='pesquisar' className="bg-zinc-100 focus-visible:outline-none" onChange={(e)=> setSearch(e.target.value)} value={search ? search : ''}/>
+            
+                <Link href={'/search?params=' + search} > <FaSearch onClick={()=>{setSearch(null), setSearchResults(false)}} /> </Link>
+                {search && searchResults && (
+                <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-0 left-0 top-[100%]">
+                    {data?.map((users: IUser, id:number)=>{
+                        return (
+                            <Link href={'/profile?id=' + users.id} key={id} className="flex items-center gap-2" 
+                            onClick={()=>{setSearch(null), setSearchResults(false)}} >
+                            
+                            <img
+                                      src={users?.userImg ? users.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+                                      alt="imagem do perfil"
+                                      className="w-6 h-6 md:w-8 md:h-8 rounded-full"
+                                    />
+                                    <span className="font-bold">{users?.username}</span>  
+                            </Link>
 
-  {search && searchResults && (
-    <div className="absolute flex flex-col bg-white p-4 shadow-md rounded-md gap-2 border-t-3 whitespace-nowrap right-0 left-0 top-[100%]">
-      {data?.map((users: IUser, id: number) => (
-        <Link
-          href={`/profile?id=${users.id}`}
-          key={id}
-          className="flex items-center gap-2"
-          onClick={() => {
-            setSearch(users.username);
-            setSearchResults(false); // Close results when a result is clicked
-          }}
-        >
-          <img
-            src={users?.userImg ? users.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
-            alt="imagem do perfil"
-            className="w-6 h-6 md:w-8 md:h-8 rounded-full"
-          />
-          <span className="font-bold">{users?.username}</span>
-        </Link>
-      ))}
-      <Link
-        href={`/search?params=${search}`}
-        className="font-semibold border-t border-zinc-300 text-center pt-2"
-        onClick={() => setSearchResults(false)}
-      >
-        Ver todos resultados
-      </Link>
-    </div>
-  )}
-</div>
+                        )
+                    })}
+                    <Link href={'/search?params=' + search} className="font-semibold border-t border-zinc-300 text-center pt-2" 
+                    onClick={()=>{setSearch(null), setSearchResults(false)}} 
+                    >Ver todos resultados</Link>
 
 
+                </div>)}
+            </div>
 
   {/* User profile section */}
   <div className="flex gap-2 items-center text-gray-600">
