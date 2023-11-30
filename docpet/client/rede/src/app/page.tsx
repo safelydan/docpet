@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
    
-    router.push('/init');
+    router.push('ok/init');
   }, []); 
 
   return (
