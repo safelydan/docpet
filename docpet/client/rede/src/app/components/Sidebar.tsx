@@ -1,13 +1,7 @@
 import UserContext from "@/context/UserContext";
 import Link from "next/link";
 import { useContext } from "react";
-import {
-  FaAlignLeft,
-  FaHome,
-  FaInfoCircle,
-  FaQuestionCircle,
-} from "react-icons/fa";
-import { IUser } from "@/interfaces";
+import { FaHome, FaInfoCircle, FaQuestionCircle} from "react-icons/fa";
 
 function Sidebar() {
   const { user } = useContext(UserContext);
