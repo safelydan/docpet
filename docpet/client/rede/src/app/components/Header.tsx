@@ -52,7 +52,7 @@ function Header() {
     <img
       src="https://github.com/joyzinhw/projeto-integrador/blob/main/assets/img/www.png?raw=true"
       alt="Logo Codpet"
-      className="w-8 h-8 rounded-full"
+      className="w-10 h-10 rounded-full"
     />
   </Link>
 
