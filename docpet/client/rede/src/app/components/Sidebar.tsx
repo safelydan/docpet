@@ -13,11 +13,11 @@ function Sidebar() {
           <FaHome className="w-6 h-6 md:w-8 md:h-8" />
           <span className="text-lg font-bold hidden md:inline">Início</span>
         </Link>
-        <Link href="/sections/faq" className="flex items-center gap-2 hover:text-blue-500">
+        <Link href="ok/sections/faq" className="flex items-center gap-2 hover:text-blue-500">
           <FaInfoCircle className="w-6 h-6 md:w-8 md:h-8" />
           <span className="text-lg font-bold hidden md:inline">Sobre</span>
         </Link>
-        <Link href="/sections/faqsection" className="flex items-center gap-2 hover:text-blue-500">
+        <Link href="ok/sections/faqsection" className="flex items-center gap-2 hover:text-blue-500">
           <FaQuestionCircle className="w-6 h-6 md:w-8 md:h-8" />
           <span className="text-lg font-bold hidden md:inline">Ajuda</span>
         </Link>
