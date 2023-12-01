@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import {IFriendship, IPost} from '@/interfaces'
 import {FaTimesCircle} from 'react-icons/fa'
 import AuthInput from "@/app/components/AuthInput";
+import FriendshipTable from "@/app/components/FriendshipTable";
 
 
 
@@ -120,7 +121,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
 
     return(
 <>
-      
+      <FriendshipTable/>
       <title>{`Perfil de ` + profileQuery.data?.username}</title>
       <div className="w-3/4 md:w-3/5 sm:w-1/4 flex flex-col items-center">
         <div className="relative">
