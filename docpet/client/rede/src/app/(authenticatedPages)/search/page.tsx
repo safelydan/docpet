@@ -37,8 +37,8 @@ function Search({searchParams}: {searchParams: {params: string}}) {
     return (
 <>
   <title>Buscar</title>
-  <div className="w-full md:w-[60%] flex flex-col md:flex-row gap-6">
-    <div className="flex flex-col gap-8 w-full md:w-1/3 border-r p-4 items-center">
+  <div className="w-full md:w-[60%] flex flex-col md:flex-row flex flex-col items-center">
+    <div className="sm:md-80 gap-6 w-3/4 md:w-1/3 p-4 flex flex-col items-center">
       <span className="font-semibold text-lg">Usuários</span>
       {users.data?.map((user: IUser, id: number) => {
         return (
@@ -55,7 +55,7 @@ function Search({searchParams}: {searchParams: {params: string}}) {
         );
       })}
     </div>
-    <div className="flex flex-col gap-8 w-full md:w-1/2 p-4 items-center">
+    <div className="flex flex-col gap-8 w-3/5 md:w-1/2 p-4 items-center">
       <span className="font-semibold text-lg">Posts</span>
       {posts.data?.map((post: IPost, id: number) => {
         return <Post post={post} key={id} />;

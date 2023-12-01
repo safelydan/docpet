@@ -124,15 +124,16 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
       <title>{`Perfil de ` + profileQuery.data?.username}</title>
       <div className="w-3/5 md:w-3/5 sm:w-4/4 flex flex-col items-center">
         <div className="relative">
-          <img
-            className="rounded-xl w-full h-auto"
-            src={
-              profileQuery.data?.bgImg
-                ? profileQuery.data.bgImg
-                : "https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?w=740&t=st=1696028331~exp=1696028931~hmac=ff6d78a9446b39ef04877dee2de00952857aa4f088936de0c5b8778ce72ad8c6"
-            }
-            alt="capa"
-          />
+        <img
+  className="rounded-xl w-full md:w-96 h-auto"
+  src={
+    profileQuery.data?.bgImg
+      ? profileQuery.data.bgImg
+      : "https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?w=740&t=st=1696028331~exp=1696028931~hmac=ff6d78a9446b39ef04877dee2de00952857aa4f088936de0c5b8778ce72ad8c6"
+  }
+  alt="capa"
+/>
+
     
           <div className="flex absolute bottom-[-110px] left-10 items-center flex-col">
             <img
@@ -150,7 +151,6 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
 
           </div>
         </div>
-        <FriendshipTable/>
         <div className="pt-36 w-3/5 flex flex-col items-center gap-3">
           {user?.id !== +searchParams.id ? (
             <button
