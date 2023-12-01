@@ -125,7 +125,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
       <div className="w-3/5 md:w-3/5 sm:w-4/4 flex flex-col items-center">
         <div className="relative">
         <img
-  className="rounded-xl w-full md:w-96 h-auto"
+  className="rounded-xl w-full md:w-86 h-auto"
   src={
     profileQuery.data?.bgImg
       ? profileQuery.data.bgImg
@@ -135,16 +135,13 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
 />
 
     
-          <div className="flex absolute bottom-[-110px] left-10 items-center flex-col">
-            <img
-              className="w-40 h-40 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 rounded-full border-zinc-100 border-4"
-              src={
-                profileQuery.data?.userImg
-                  ? profileQuery.data.userImg
-                  : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"
-              }
-              alt="imagem do perfil"
-            />
+          <div className="absolute bottom-[-110px] left-10 flex items-center flex-col ">
+          <img
+  className="w-32 h-32 md:w-32 md:h-32 lg:w-48 lg:h-48 xl:w-45 xl:h-45 rounded-full border-zinc-100 border-4"
+  src={profileQuery.data?.userImg || "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+  alt="imagem do perfil"
+/>
+
             <span className="text-2m font-bold mt-2">
               {profileQuery.data?.username}
             </span>
