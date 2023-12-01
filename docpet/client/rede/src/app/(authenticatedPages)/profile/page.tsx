@@ -122,10 +122,10 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
     return(
 <>
       <title>{`Perfil de ` + profileQuery.data?.username}</title>
-      <div className="w-3/5 md:w-3/5 sm:w-4/4 flex flex-col items-center">
+      <div className="w-3/4 md:w-3/5 sm:w-4/4 flex flex-col items-center">
         <div className="relative">
         <img
-  className="rounded-xl w-full md:w-86 h-auto"
+className="rounded-xl w-40 h-30 sm:w-60 sm:h-30 md:w-80 md:h-40 lg:w-80 lg:h-50 xl:w-80 xl:h-40 object-cover"
   src={
     profileQuery.data?.bgImg
       ? profileQuery.data.bgImg
@@ -135,12 +135,15 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
 />
 
     
-          <div className="absolute bottom-[-110px] left-10 flex items-center flex-col ">
-          <img
-  className="w-32 h-32 md:w-32 md:h-32 lg:w-48 lg:h-48 xl:w-45 xl:h-45 rounded-full border-zinc-100 border-4"
-  src={profileQuery.data?.userImg || "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
-  alt="imagem do perfil"
-/>
+<div className="absolute left-1/2 mt-6 transform -translate-x-1/2 -translate-y-1/2 flex items-center flex-col">
+  <img
+    className="w-22 h-22 md:w-32 md:h-32 lg:w-38 lg:h-38 xl:w-45 xl:h-45 rounded-full border-zinc-100 border-2"
+    src={profileQuery.data?.userImg || "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+    alt="imagem do perfil"
+  />
+
+
+
 
             <span className="text-2m font-bold mt-2">
               {profileQuery.data?.username}
