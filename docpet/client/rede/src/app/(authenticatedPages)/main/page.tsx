@@ -37,7 +37,7 @@ function Main() {
     return (
     <>
     <title> Página Inicial</title>
-    <div className="w-3/4 sm:w-full flex flex-col gap-5 p-4 items-center">
+    <div className="w-3/4 sm:w-full md:w-4/5 flex flex-col gap-5 p-4 items-center">
         <Share />
         <Feed post={postQuery.data} />
         <FriendshipTable/>
