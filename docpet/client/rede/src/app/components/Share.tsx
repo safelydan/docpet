@@ -73,7 +73,7 @@ function Share() {
       <textarea
         placeholder={`O que está acontecendo, ${user?.username}?`}
         value={post_desc}
-        className="w-full focus:outline-none rounded-lg resize-none border-b-2 border-gray"
+        className="w-full focus:outline-none resize-none border-b-2 border-gray"
         onChange={(e) => setDesc(e.target.value)}
       />
     </div>

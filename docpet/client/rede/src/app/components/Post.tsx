@@ -167,7 +167,7 @@ function Post(props:{post: IPost}) {
     </button>
   </div>
 
-  <div className="flex justify-around py-4 text-gray-600 border-b">
+  <div className="flex justify-around py-4 text-gray-600 border-b ">
       <button
           className={`flex items-center gap-1 ${liked ? "text-red-500" : ""} transition-all duration-300 hover:text-red-500`}
           onClick={() => shareLikes()}
@@ -191,11 +191,11 @@ function Post(props:{post: IPost}) {
     />
   </Link>
 
-  <div className="bg-white w-full sm:w-3/4 md:w-1/3 flex flex-col items-center">
+  <div className="bg-white w-full sm:w-3/4 md:w-1/3 flex flex-col items-center ">
     <input
       id={"comment" + id}
       type="text"
-      className="w-full sm:w-full md:w-full focus:outline-none rounded-full px-4 py-2 text-black-800 placeholder-black-500 ml-auto border-b-2 border-gray"
+      className="w-full sm:w-full md:w-full focus:outline-none px-4 py-2 text-black-800 placeholder-black-500 ml-auto border-b-2 border-gray"
       value={comment_desc}
       onChange={(e) => setComment_desc(e.target.value)}
       placeholder="Comente..."
@@ -204,7 +204,7 @@ function Post(props:{post: IPost}) {
 
   <button
     onClick={() => shareComment()}
-    className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none ml-auto"
+    className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none ml-auto "
   >
     <FaPaperPlane />
   </button>
