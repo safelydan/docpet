@@ -9,8 +9,8 @@ import UserContext from "@/context/UserContext";
 
 function Login() {
 
-    const [email, setEmail] = useState("dan@gmail.com")
-    const [password, setPassword] = useState("senhateste")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [error, setError] = useState("")
     const {setUser} =useContext(UserContext)
      
