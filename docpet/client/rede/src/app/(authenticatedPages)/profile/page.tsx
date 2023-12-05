@@ -1,30 +1,30 @@
 "use client"
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { makeRequest } from "../../../../axios"
-import Feed from "@/app/components/Feed"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { makeRequest } from "../../../../axios";
+import Feed from "@/app/components/Feed";
 import { useContext, useState } from "react";
 import UserContext from "@/context/UserContext";
 import { useRouter } from "next/navigation";
-import {IFriendship, IPost} from '@/interfaces'
-import {FaTimesCircle} from 'react-icons/fa'
+import { IFriendship, IPost } from "@/interfaces";
+import { FaTimesCircle } from "react-icons/fa";
 import AuthInput from "@/app/components/AuthInput";
 import FriendshipTable from "@/app/components/FriendshipTable";
-
-
 
 function Profile({ searchParams }: { searchParams: { id: string } }) {
   const { user, setUser } = useContext(UserContext);
   const queryClient = useQueryClient();
 
   const [followed, setFollowed] = useState(false);
-  const [username, setUserName] = useState('');
-  const [userImg, setUserImg] = useState('');
-  const [bgImg, setBgImg] = useState('');
+  const [username, setUserName] = useState("");
+  const [userImg, setUserImg] = useState("");
+  const [bgImg, setBgImg] = useState("");
   const [editProfile, setEditProfile] = useState(false);
+  const [editProfileError, setEditProfileError] = useState("");
+  const [editProfileSuccess, setEditProfileSuccess] = useState("");
 
   const profileQuery = useQuery({
-    queryKey: ['profile', searchParams.id],
+    queryKey: ["profile", searchParams.id],
     queryFn: () =>
       makeRequest.get(`users/get-user?id=${searchParams.id}`).then((res) => {
         const userData = res.data[0] || {};
@@ -36,119 +36,137 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
   });
 
   if (profileQuery.error) {
-    console.error('Profile query error:', profileQuery.error);
+    console.error("Profile query error:", profileQuery.error);
   }
-    const postQuery = useQuery<IPost[] | undefined>({
-        queryKey: ['posts'],
-        queryFn: () => makeRequest.get('post/?id=' + searchParams.id)
-            .then((res) => {
-                return res.data.data;
-            }),
-    });
 
-    if (postQuery.error) {
-        console.log(postQuery.error);
-    }
+  const postQuery = useQuery<IPost[] | undefined>({
+    queryKey: ["posts"],
+    queryFn: () =>
+      makeRequest.get("post/?id=" + searchParams.id).then((res) => {
+        return res.data.data;
+      }),
+  });
 
-    const friendshipQuery = useQuery({
-        queryKey:[`friendship`], 
-        queryFn:()=> makeRequest.get('friendship/?follower_id=' + user?.id).then((res)=>{
-            res.data.data.find((e:IFriendship)=> {
-                if(e.followed_id === + searchParams.id){
-                    setFollowed(true)
-                }
-            })
-            return res.data.data;
+  if (postQuery.error) {
+    console.log(postQuery.error);
+  }
+
+  const friendshipQuery = useQuery({
+    queryKey: [`friendship`],
+    queryFn: () =>
+      makeRequest
+        .get("friendship/?follower_id=" + user?.id)
+        .then((res) => {
+          res.data.data.find((e: IFriendship) => {
+            if (e.followed_id === +searchParams.id) {
+              setFollowed(true);
+            }
+          });
+          return res.data.data;
         }),
-    })
+  });
 
-    
-    if(friendshipQuery.error){
-        console.log(friendshipQuery.error)
-    }
+  if (friendshipQuery.error) {
+    console.log(friendshipQuery.error);
+  }
 
-    const mutation = useMutation({
-        mutationFn: async (unfollow: { followed_id: number; 
-            follower_id: number; 
-            followed: boolean }) => {
-          if (followed) {
-            return await makeRequest
-              .delete(
-                `friendship/?follower_id=${unfollow.follower_id}&followed_id=${unfollow.followed_id}`
-              )
-              .then((res) => {
-                setFollowed(false)  
-                res.data});
-              
-          } else {
-            return await makeRequest
-              .post(`friendship/`, { 
-                follower_id: unfollow.follower_id, 
-                followed_id: unfollow.followed_id })
-              .then((res) => {
-                setFollowed(true)
-                res.data});
-          }
-        },
-        onSuccess: () => {
-        setFollowed(false)
-          queryClient.invalidateQueries({ queryKey: ['friendship'] });
-        },
-      });
+  const mutation = useMutation({
+    mutationFn: async (unfollow: {
+      followed_id: number;
+      follower_id: number;
+      followed: boolean;
+    }) => {
+      if (followed) {
+        return await makeRequest
+          .delete(
+            `friendship/?follower_id=${unfollow.follower_id}&followed_id=${unfollow.followed_id}`
+          )
+          .then((res) => {
+            setFollowed(false);
+            res.data;
+          });
+      } else {
+        return await makeRequest
+          .post(`friendship/`, {
+            follower_id: unfollow.follower_id,
+            followed_id: unfollow.followed_id,
+          })
+          .then((res) => {
+            setFollowed(true);
+            res.data;
+          });
+      }
+    },
+    onSuccess: () => {
+      setFollowed(false);
+      queryClient.invalidateQueries({ queryKey: ["friendship"] });
+    },
+  });
 
-      // mutation vai receber uma função async que vai receber os dados do usuario pra atualizar
-      // vai atualizar os dados do usuario na rota oferecida, vai pegar os dados da requisição e se der tudo certo ele retorna o res.data
-      const editProfileMutation = useMutation({
-        mutationFn: async (data:{username: string, userImg: string, bgImg:string, id: number}) => {
-            return makeRequest
-              .put(`users/update-user`, data)
-              .then((res) => {
-                if(user){
-                    const newUser = {username:data.username, userImg: data.userImg,  bgImg: data.bgImg, id: data.id, email: user.email}
-                    setUser(newUser)
-                    return res.data
-                }
-              });
-        },
-        onSuccess: () => {
-            setEditProfile(false)
-          queryClient.invalidateQueries({ queryKey: ['profile', searchParams.id] }); //se for um retorno 200 ele vai ivvalidar a nossa query de profile la de cima
-        },
-      });
-      
+  const editProfileMutation = useMutation({
+    mutationFn: async (data: {
+      username: string;
+      userImg: string;
+      bgImg: string;
+      id: number;
+    }) => {
+      try {
+        const response = await makeRequest.put(`users/update-user`, data);
+        if (user) {
+          const newUser = {
+            username: data.username,
+            userImg: data.userImg,
+            bgImg: data.bgImg,
+            id: data.id,
+            email: user.email,
+          };
+          setUser(newUser);
+        }
+        setEditProfileSuccess(response.data.msg || "Atualizado com sucesso");
+        setEditProfileError("");
+        return response.data;
+      } catch (error: any) {
+        // 'error' agora é do tipo 'any' para permitir acesso a 'response'
+        setEditProfileError(error.response?.data.msg || "Erro desconhecido");
+        setEditProfileSuccess("");
+        throw error.response?.data.msg || "Erro desconhecido";
+      }
+    },
+    onSuccess: () => {
+      setEditProfile(false);
+      queryClient.invalidateQueries({ queryKey: ["profile", searchParams.id] });
+    },
+  });
+  
 
-
-
-    return(
-<>
+  return (
+    <>
       <title>{`Perfil de ` + profileQuery.data?.username}</title>
       <div className="w-3/4 md:w-3/5 sm:w-4/4 flex flex-col items-center">
         <div className="relative">
-        <img
-className="rounded-xl w-40 h-30 sm:w-60 sm:h-30 md:w-80 md:h-40 lg:w-80 lg:h-50 xl:w-80 xl:h-40 object-cover"
-  src={
-    profileQuery.data?.bgImg
-      ? profileQuery.data.bgImg
-      : "https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?w=740&t=st=1696028331~exp=1696028931~hmac=ff6d78a9446b39ef04877dee2de00952857aa4f088936de0c5b8778ce72ad8c6"
-  }
-  alt="capa"
-/>
+          <img
+            className="rounded-xl w-40 h-30 sm:w-60 sm:h-30 md:w-80 md:h-40 lg:w-80 lg:h-50 xl:w-80 xl:h-40 object-cover"
+            src={
+              profileQuery.data?.bgImg
+                ? profileQuery.data.bgImg
+                : "https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?w=740&t=st=1696028331~exp=1696028931~hmac=ff6d78a9446b39ef04877dee2de00952857aa4f088936de0c5b8778ce72ad8c6"
+            }
+            alt="capa"
+          />
 
-    
-<div className="absolute left-1/2 mt-6 transform -translate-x-1/2 -translate-y-1/2 flex items-center flex-col">
-  <img
-    className="w-22 h-22 md:w-32 md:h-32 lg:w-38 lg:h-38 xl:w-45 xl:h-45 rounded-full border-zinc-100 border-2"
-    src={profileQuery.data?.userImg || "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
-    alt="imagem do perfil"
-  />
-
-
-
+          <div className="absolute left-1/2 mt-6 transform -translate-x-1/2 -translate-y-1/2 flex items-center flex-col">
+            <img
+              className="w-22 h-22 md:w-32 md:h-32 lg:w-38 lg:h-38 xl:w-45 xl:h-45 rounded-full border-zinc-100 border-2"
+              src={
+                profileQuery.data?.userImg ||
+                "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"
+              }
+              alt="imagem do perfil"
+            />
 
             <span className="text-2m font-bold mt-2">
               {profileQuery.data?.username}
             </span>
-
           </div>
         </div>
         <div className="pt-36 w-3/5 flex flex-col items-center gap-3">
@@ -156,7 +174,11 @@ className="rounded-xl w-40 h-30 sm:w-60 sm:h-30 md:w-80 md:h-40 lg:w-80 lg:h-50 
             <button
               onClick={() =>
                 user &&
-                mutation.mutate({ followed, followed_id: +searchParams.id, follower_id: user.id })
+                mutation.mutate({
+                  followed,
+                  followed_id: +searchParams.id,
+                  follower_id: user.id,
+                })
               }
               className={`w-1/2 rounded-md py-2 font-semibold ${
                 followed
@@ -187,6 +209,12 @@ className="rounded-xl w-40 h-30 sm:w-60 sm:h-30 md:w-80 md:h-40 lg:w-80 lg:h-50 
                   <AuthInput label="Nome: " newState={setUserName} />
                   <AuthInput label="Imagem do perfil: " newState={setUserImg} />
                   <AuthInput label="Imagem de capa: " newState={setBgImg} />
+                  {editProfileError && (
+                    <span className="text-red-600">* {editProfileError}</span>
+                  )}
+                  {editProfileSuccess && (
+                    <span className="text-green-600">* {editProfileSuccess}</span>
+                  )}
                   <button
                     className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black self-center`}
                     onClick={(e) => {
@@ -212,9 +240,4 @@ className="rounded-xl w-40 h-30 sm:w-60 sm:h-30 md:w-80 md:h-40 lg:w-80 lg:h-50 
   );
 }
 
-
-
 export default Profile;
-
-
- 

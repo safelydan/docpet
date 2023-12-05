@@ -27,6 +27,18 @@ export const updateUser = (req, res) => {
     return res.status(422).json({ msg: 'Sem alterações para serem feitas' });
   }
 
+  if (username && !/^[a-zA-Z0-9_-]{3,16}$/.test(username)) {
+    return res.status(422).json({ msg: 'Username inválido. Use apenas letras, números, "-" e "_", com 3 a 16 caracteres.' });
+  }
+
+  if (userImg && userImg.length > 300) {
+    return res.status(422).json({ msg: 'O link da foto de perfil deve ter no máximo 300 caracteres.' });
+  }
+
+  if (bgImg && bgImg.length > 300) {
+    return res.status(422).json({ msg: 'O link da imagem de capa deve ter no máximo 300 caracteres.' });
+  }
+
   // Monta a parte dinâmica da query baseada nas alterações que estão sendo feitas
   const updateFields = [];
   const values = [];
