@@ -42,7 +42,9 @@ depois na mesma pasta rode o comando
 
 :: comandos para criar o banco de dados utilizado na aplicação
 
-### crie um schema com o nome "rede_social"
+### crie um schema com o nome "codpet"
+
+CREATE SCHEMA codpet;
 
 CREATE DATABASE codpet;
 
