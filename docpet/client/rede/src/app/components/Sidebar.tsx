@@ -1,7 +1,7 @@
 import UserContext from "@/context/UserContext";
 import Link from "next/link";
 import { useContext } from "react";
-import { FaHome, FaInfoCircle, FaQuestionCircle} from "react-icons/fa";
+import { FaBell, FaCog, FaCommentAlt, FaHeart, FaHome, FaInfoCircle, FaQuestionCircle, FaUsers} from "react-icons/fa";
 
 function Sidebar() {
   const { user } = useContext(UserContext);
@@ -13,13 +13,25 @@ function Sidebar() {
           <FaHome className="w-6 h-6 md:w-8 md:h-8" />
           <span className="text-lg font-bold hidden md:inline">Início</span>
         </Link>
-        <Link href="ok/sections/faq" className="flex items-center gap-2 hover:text-blue-500">
-          <FaInfoCircle className="w-6 h-6 md:w-8 md:h-8" />
-          <span className="text-lg font-bold hidden md:inline">Sobre</span>
+        <Link href="" className="flex items-center gap-2 hover:text-blue-500">
+          <FaUsers className="w-6 h-6 md:w-8 md:h-8" />
+          <span className="text-lg font-bold hidden md:inline">Amigos</span>
         </Link>
-        <Link href="ok/sections/faqsection" className="flex items-center gap-2 hover:text-blue-500">
-          <FaQuestionCircle className="w-6 h-6 md:w-8 md:h-8" />
-          <span className="text-lg font-bold hidden md:inline">Ajuda</span>
+        <Link href="" className="flex items-center gap-2 hover:text-blue-500">
+          <FaBell className="w-6 h-6 md:w-8 md:h-8" />
+          <span className="text-lg font-bold hidden md:inline">Notificações</span>
+        </Link>
+        <Link href="" className="flex items-center gap-2 hover:text-blue-500">
+          <FaCommentAlt className="w-6 h-6 md:w-8 md:h-8" />
+          <span className="text-lg font-bold hidden md:inline">Mensagens</span>
+        </Link>
+        <Link href="" className="flex items-center gap-2 hover:text-blue-500">
+          <FaHeart className="w-6 h-6 md:w-8 md:h-8" />
+          <span className="text-lg font-bold hidden md:inline">Favs</span>
+        </Link>
+        <Link href="" className="flex items-center gap-2 mt-auto hover:text-blue-500">
+          <FaCog className="w-6 h-6 md:w-8 md:h-8" />
+          <span className="text-lg font-bold hidden md:inline">Config</span>
         </Link>
         <Link href={'/profile?id=' + user?.id} className="flex items-center gap-2 mt-auto hover:text-blue-500">
           <img

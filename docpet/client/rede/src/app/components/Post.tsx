@@ -114,11 +114,11 @@ function Post(props:{post: IPost}) {
       <Link href={'/profile?id=' + userId}>
         <img
           className="w-8 h-8 rounded-full"
-          src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+          src={user?.userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
           alt="imagem do usuário que fez o post"
         />
         <div className="flex flex-col">
-          <span className="font-semibold">{username}</span>
+          <span className="font-semibold">{user?.username}</span>
           <span className="text-xs">{moment(created_at).fromNow()}</span>
         </div>
       </Link>
@@ -184,10 +184,10 @@ function Post(props:{post: IPost}) {
 
     <div className="flex gap-4 pt-6 items-center">
       <Link href={'/profile?id=' + user?.id} className="hidden sm:block">
-        <img
-          src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
-          alt="imagem do perfil"
+      <img
           className="w-8 h-8 rounded-full"
+          src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+          alt="imagem do usuário que fez o post"
         />
       </Link>
 
