@@ -212,9 +212,6 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
                   {editProfileError && (
                     <span className="text-red-600">* {editProfileError}</span>
                   )}
-                  {editProfileSuccess && (
-                    <span className="text-green-600">* {editProfileSuccess}</span>
-                  )}
                   <button
                     className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black self-center`}
                     onClick={(e) => {
@@ -227,7 +224,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
                       });
                     }}
                   >
-                    Editar perfil
+                    Salvar
                   </button>
                 </form>
               </div>
