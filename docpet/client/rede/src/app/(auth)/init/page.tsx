@@ -18,21 +18,18 @@ const Page = () => {
     <p className="teste" style={{ color: "#21344d", fontSize: "16px", fontStyle: "italic", alignItems: 'center' }}>Sua plataforma online para suporte na divulgação de animais perdidos ou para adoção.</p>
 
     <div className="flex justify-center flex-wrap">
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 px-3 py-1 rounded-md transition duration-300 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-        style={{ fontSize: '1rem', width: '120px', fontFamily: 'Arial' }}>
-        <Link href="/login">Entrar</Link>
-      </button>
+      <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 px-3 py-1 rounded-md transition duration-300 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+        href="/login">
+        Entrar
+      </Link>
 
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 px-3 py-1 rounded-md transition duration-300 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-        style={{ fontSize: '1rem', width: '120px', fontFamily: 'Arial' }}>
-        <Link href="/register">Cadastrar-se</Link>
-      </button>
-    </div>
+      <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 px-3 py-1 rounded-md transition duration-300 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+        href="/register">
+        Cadastrar-se
+      </Link>
+      </div>
   </div>
 </>
-
-
   );
 };
 

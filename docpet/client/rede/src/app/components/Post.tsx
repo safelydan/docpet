@@ -109,108 +109,109 @@ function Post(props:{post: IPost}) {
     
     return (
 <div className="w-full bg-white rounded-lg p-4 shadow-md min-h-[300px]">
-  <header className="flex gap-2 pb-4 border-b items-center">
-    <Link href={'/profile?id=' + userId}>
-      <img
-        className="w-8 h-8 rounded-full"
-        src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
-        alt="imagem do usuário que fez o post"
-      />
-      <div className="flex flex-col">
-        <span className="font-semibold">{username}</span>
-        <span className="text-xs">{moment(created_at).fromNow()}</span>
+  <div className="overflow-hidden"> {/* Adicionado div com overflow-hidden */}
+    <header className="flex gap-2 pb-4 border-b items-center">
+      <Link href={'/profile?id=' + userId}>
+        <img
+          className="w-8 h-8 rounded-full"
+          src={userImg ? userImg : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"}
+          alt="imagem do usuário que fez o post"
+        />
+        <div className="flex flex-col">
+          <span className="font-semibold">{username}</span>
+          <span className="text-xs">{moment(created_at).fromNow()}</span>
+        </div>
+      </Link>
+    </header>
+
+    {post_desc && (
+      <div className="py-4 w-full">
+        <span>{post_desc}</span>
       </div>
-    </Link>
-  </header>
+    )}
 
-  {post_desc && (
-    <div className="py-4 w-full">
-      <span>{post_desc}</span>
-    </div>
-  )}
+    {img && (
+      <img
+        className="rounded-lg w-full"
+        src={`./upload/${img}`}
+        alt="img do post"
+      />
+    )}
 
-  {img && (
-    <img
-      className="rounded-lg w-full"
-      src={`./upload/${img}`}
-      alt="img do post"
-    />
-  )}
-
-  <div className="flex justify-between py-4 border-b">
-    <div
-      className="relative"
-      onMouseEnter={() => setShowLikes(true)}
-      onMouseLeave={() => setShowLikes(false)}
-    >
-      {likesQuery.data && likesQuery.data.length > 0 && (
-        <>
-          <div className="flex gap-1 items-center">
-            <span className={`bg-red-500 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs ${liked ? "animate-like" : ""}`}>
-              <FaHeart />
-            </span>
-            <span>{likesQuery.data.length}</span>
-          </div>
-          {showLikes && (
-            <div className="absolute bg-white border flex flex-col p-2 rounded-md top-6">
-              {likesQuery.data.map((like) => (
-                <span key={like.id}>{like.username}</span>
-              ))}
+    <div className="flex justify-between py-4 border-b">
+      <div
+        className="relative"
+        onMouseEnter={() => setShowLikes(true)}
+        onMouseLeave={() => setShowLikes(false)}
+      >
+        {likesQuery.data && likesQuery.data.length > 0 && (
+          <>
+            <div className="flex gap-1 items-center">
+              <span className={`bg-red-500 w-6 h-6 text-white flex items-center justify-center rounded-full text-xs ${liked ? "animate-like" : ""}`}>
+                <FaHeart />
+              </span>
+              <span>{likesQuery.data.length}</span>
             </div>
-          )}
-        </>
-      )}
+            {showLikes && (
+              <div className="absolute bg-white border flex flex-col p-2 rounded-md top-6">
+                {likesQuery.data.map((like) => (
+                  <span key={like.id}>{like.username}</span>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      <button onClick={() => setShowComments(!showComments)}>
+        {commentQuery.data && commentQuery.data.length > 0 && `${commentQuery.data.length} comentários`}
+      </button>
     </div>
 
-    <button onClick={() => setShowComments(!showComments)}>
-      {commentQuery.data && commentQuery.data.length > 0 && `${commentQuery.data.length} comentários`}
-    </button>
-  </div>
-
-  <div className="flex justify-around py-4 text-gray-600 border-b ">
+    <div className="flex justify-around py-4 text-gray-600 border-b ">
       <button
-          className={`flex items-center gap-1 ${liked ? "text-red-500" : ""} transition-all duration-300 hover:text-red-500`}
-          onClick={() => shareLikes()}
-        >
-          <FaHeart className={` ${liked ? "animate-like" : ""}`} />
-          Curtir
-    </button>
+        className={`flex items-center gap-1 ${liked ? "text-red-500" : ""} transition-all duration-300 hover:text-red-500`}
+        onClick={() => shareLikes()}
+      >
+        <FaHeart className={` ${liked ? "animate-like" : ""}`} />
+        Curtir
+      </button>
+    </div>
 
+    {showComments && commentQuery.data?.map((comment, id) => (
+      <Comment comment={comment} key={id} />
+    ))}
+
+    <div className="flex gap-4 pt-6 items-center">
+      <Link href={'/profile?id=' + user?.id} className="hidden sm:block">
+        <img
+          src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+          alt="imagem do perfil"
+          className="w-8 h-8 rounded-full"
+        />
+      </Link>
+
+      <div className="bg-white w-full sm:w-full md:w-full flex flex-col items-center ">
+        <input
+          id={"comment" + id}
+          type="text"
+          className="w-full sm:w-full md:w-full focus:outline-none px-4 py-2 text-black-800 placeholder-black-500 ml-auto border-b-2 border-gray"
+          value={comment_desc}
+          onChange={(e) => setComment_desc(e.target.value)}
+          placeholder="Comente..."
+        />
+      </div>
+
+      <button
+        onClick={() => shareComment()}
+        className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none ml-auto "
+      >
+        <FaPaperPlane />
+      </button>
+    </div>
   </div>
-
-  {showComments && commentQuery.data?.map((comment, id) => (
-    <Comment comment={comment} key={id} />
-  ))}
-
-<div className="flex gap-4 pt-6 items-center">
-  <Link href={'/profile?id=' + user?.id} className="hidden sm:block">
-    <img
-      src={user?.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
-      alt="imagem do perfil"
-      className="w-8 h-8 rounded-full"
-    />
-  </Link>
-
-  <div className="bg-white w-full sm:w-3/4 md:w-1/3 flex flex-col items-center ">
-    <input
-      id={"comment" + id}
-      type="text"
-      className="w-full sm:w-full md:w-full focus:outline-none px-4 py-2 text-black-800 placeholder-black-500 ml-auto border-b-2 border-gray"
-      value={comment_desc}
-      onChange={(e) => setComment_desc(e.target.value)}
-      placeholder="Comente..."
-    />
-  </div>
-
-  <button
-    onClick={() => shareComment()}
-    className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none ml-auto "
-  >
-    <FaPaperPlane />
-  </button>
 </div>
 
-</div>
 
 
 
