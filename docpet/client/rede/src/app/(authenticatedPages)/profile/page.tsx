@@ -190,7 +190,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
             </button>
           ) : (
             <button
-              className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black`}
+              className={`w-1/2 rounded-md py-2 font-semibold bg-blue-500 hover:bg-blue-700 text-white focus:outline-none focus:shadow-outline-blue active:bg-blue-800`}
               onClick={() => setEditProfile(true)}
             >
               Editar perfil
@@ -213,7 +213,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
                     <span className="text-red-600">* {editProfileError}</span>
                   )}
                   <button
-                    className={`w-1/2 rounded-md py-2 font-semibold bg-blue-300 hover:text-black self-center`}
+                    className={`w-1/2 rounded-md py-2 font-semibold bg-blue-500 hover:bg-blue-700 text-white focus:outline-none focus:shadow-outline-blue active:bg-blue-800 self-center`}
                     onClick={(e) => {
                       e.preventDefault();
                       editProfileMutation.mutate({

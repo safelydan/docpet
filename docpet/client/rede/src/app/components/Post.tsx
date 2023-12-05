@@ -119,7 +119,7 @@ function Post(props:{post: IPost}) {
         />
         <div className="flex flex-col">
           <span className="font-semibold">{user?.username}</span>
-          <span className="text-xs">{moment(created_at).fromNow()}</span>
+          <span className="text-xs">{moment(created_at).fromNow().charAt(0).toUpperCase() + moment(created_at).fromNow().slice(1)}</span>
         </div>
       </Link>
     </header>
