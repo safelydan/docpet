@@ -6,18 +6,23 @@ import jwt from 'jsonwebtoken';
 export const register = (req, res) => {
     const { username, email, password, confirmPassword } = req.body;
 
+    // Verificação do username
     if (!username) {
-        return res.status(422).json({ msg: 'O nome é obrigatório' });
+        return res.status(422).json({ msg: 'O username é obrigatório' });
     }
     if (!/^[a-zA-Z0-9_-]{3,16}$/.test(username)) {
-        return res.status(422).json({ msg: 'Nome de usuário inválido. Use apenas letras, números, "-" e "_", com 3 a 16 caracteres.' });
+        return res.status(422).json({ msg: 'Username inválido. Use apenas letras, números, "-" e "_", com 3 a 16 caracteres.' });
     }
+
+    // Verificação do email
     if (!email) {
         return res.status(422).json({ msg: 'O email é obrigatório' });
     }
     if (!/^\S+@\S+$/.test(email)) {
         return res.status(422).json({ msg: 'Formato de email inválido.' });
     }
+
+    // Verificação da senha
     if (!password) {
         return res.status(422).json({ msg: 'A senha é obrigatória' });
     }
@@ -28,14 +33,29 @@ export const register = (req, res) => {
         return res.status(422).json({ msg: 'As senhas estão diferentes' });
     }
 
-    db.query('SELECT email FROM user WHERE email = ?', [email], async (error, data) => {
+    // Verifica se o email já está registrado
+    db.query('SELECT email FROM user WHERE email = ?', [email], async (error, emailData) => {
         if (error) {
             console.log(error);
-            return res.status(500).json({ msg: 'Não foi possível conectar' });
+            return res.status(500).json({ msg: 'Erro no servidor' });
         }
-        if (data.length > 0) {
-            return res.status(500).json({ msg: 'Este email já está registrado' });
-        } else {
+
+        if (emailData.length > 0) {
+            return res.status(422).json({ msg: 'Este email já está registrado' });
+        }
+
+        // Verifica se o username já está registrado
+        db.query('SELECT username FROM user WHERE username = ?', [username], async (error, usernameData) => {
+            if (error) {
+                console.log(error);
+                return res.status(500).json({ msg: 'Erro no servidor' });
+            }
+
+            if (usernameData.length > 0) {
+                return res.status(422).json({ msg: 'Este username já está em uso' });
+            }
+
+            // Tanto o email quanto o username estão disponíveis, continua com o processo de registro
             const passwordHash = await bcrypt.hash(password, 8);
             db.query(
                 'INSERT INTO user SET ?', { username, email, password: passwordHash },
@@ -48,7 +68,7 @@ export const register = (req, res) => {
                     }
                 }
             );
-        }
+        });
     });
 };
 

@@ -20,23 +20,54 @@ export const getUser = (req, res) => {
 export const updateUser = (req, res) => {
   const { username, userImg, bgImg, id } = req.body;
 
-  if (!username || !userImg || !bgImg) {
-    // Se todas forem negativas
+  // Pode ter outras condições de validação aqui, dependendo dos requisitos do seu sistema
+
+  // Verifica se pelo menos uma alteração está sendo feita
+  if (!username && !userImg && !bgImg) {
     return res.status(422).json({ msg: 'Sem alterações para serem feitas' });
   }
 
-  db.query('UPDATE user SET username = ?, userImg = ?, bgImg = ? WHERE id = ?', [username, userImg, bgImg, id], (error, data) => {
-    // Cada ponto de interrogação desse será atendido por uma dessas variáveis
+  // Monta a parte dinâmica da query baseada nas alterações que estão sendo feitas
+  const updateFields = [];
+  const values = [];
 
-    if (error) {
-      console.log(error);
-      res.status(500).json({ msg: 'Erro no servidor' });
-    }
-    if (data.affectedRows > 0) {
-      return res.status(200).json('Atualizado com sucesso');
-    }
-  });
+  if (username) {
+    updateFields.push('username = ?');
+    values.push(username);
+  }
+
+  if (userImg) {
+    updateFields.push('userImg = ?');
+    values.push(userImg);
+  }
+
+  if (bgImg) {
+    updateFields.push('bgImg = ?');
+    values.push(bgImg);
+  }
+
+  // Executa a query apenas se houver campos para serem atualizados
+  if (updateFields.length > 0) {
+    const updateQuery = `UPDATE user SET ${updateFields.join(', ')} WHERE id = ?`;
+    values.push(id);
+
+    db.query(updateQuery, values, (error, data) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ msg: 'Erro no servidor' });
+      } else {
+        if (data.affectedRows > 0) {
+          return res.status(200).json({ msg: 'Atualizado com sucesso' });
+        } else {
+          return res.status(400).json({ msg: 'Nenhum usuário encontrado para atualizar' });
+        }
+      }
+    });
+  } else {
+    return res.status(422).json({ msg: 'Sem alterações para serem feitas' });
+  }
 };
+
 
 export const deleteUser = (req, res) => {
   const id = req.query.id;
