@@ -46,8 +46,6 @@ depois na mesma pasta rode o comando
 
 CREATE SCHEMA codpet;
 
-CREATE DATABASE codpet;
-
 USE codpet;
 
 CREATE TABLE codpet.user (
