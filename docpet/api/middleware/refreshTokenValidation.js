@@ -10,9 +10,9 @@ export const checkRefreshToken = (req, res, next) =>{
             next()
         }catch(error){
             console.log(error)
-            res.status(400).json({msg: "token invalido"})
+            res.status(400).json({msg: "Token invalido"})
         }
     }else{
-        return res.status(401).json({msg: 'acesso negado'})
+        return res.status(401).json({msg: 'Acesso negado'})
     }
 }
