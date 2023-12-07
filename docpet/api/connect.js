@@ -17,7 +17,7 @@ const connectToDatabase = () => {
     if (err) {
       console.error('Erro ao conectar ao MySQL:', err);
       // Lidar com o erro, por exemplo, tentar reconectar ou encerrar o aplicativo.
-      setTimeout(connectToDatabase, 2000); // Tentar reconectar após 2 segundos
+      setTimeout(connectToDatabase, 8000); // Tentar reconectar após 2 segundos
     } else {
       console.log('Conectado ao MySQL');
     }
@@ -38,3 +38,8 @@ const connectToDatabase = () => {
 
 // Chamar a função de conexão ao banco de dados
 connectToDatabase();
+
+if (!db || db.state === 'disconnected') {
+  // Reconectar ou criar uma nova conexão, dependendo da sua implementação
+  connectToDatabase();
+}

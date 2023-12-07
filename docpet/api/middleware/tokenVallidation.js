@@ -1,18 +1,22 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
-export const checkToken = (req, res, next) =>{
-    const authHeader = req.headers.cookie?.split(';')[0]
-    const token = authHeader && authHeader.split('=')[1]
+const handleTokenError = (res, error) => {
+    console.error(error);
+    res.status(400).json({ msg: "Token inválido" });
+};
 
-    if (token){
-        try{
-            jwt.verify(token, process.env.TOKEN)
-            next()
-        }catch(error){
-            console.log(error)
-            res.status(400).json({msg: "Token invalido"})
+export const checkToken = (req, res, next) => {
+    const cookieHeader = req.headers.cookie?.split(';')[0];
+    const token = cookieHeader && cookieHeader.split('=')[1];
+
+    if (token) {
+        try {
+            jwt.verify(token, process.env.TOKEN);
+            next();
+        } catch (error) {
+            handleTokenError(res, error);
         }
-    }else{
-        return res.status(401).json({msg: 'Acesso negado'})
+    } else {
+        res.status(401).json({ msg: 'Acesso negado. Token ausente' });
     }
-}
+};
