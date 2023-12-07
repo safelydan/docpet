@@ -33,26 +33,32 @@ function Share() {
         },
     })
 
-    const upload = async ()=>{
-        try {
-            const formData = new FormData
-            img && formData.append('file', img)
-            const res= await makeRequest.post('upload/', formData)
-            return res.data
-        } catch (error) {
-            console.log(error)
+    const upload = async () => {
+      try {
+        const formData = new FormData();
+        img && formData.append('file', img);
+        const res = await makeRequest.post('upload/', formData);
+        return res.data;
+      } catch (error) {
+        console.error('Erro ao fazer upload:', error);
+        throw new Error('Erro ao fazer upload');
+      }
+    };
+    
+    const sharePost = async () => {
+      try {
+        let imgUrl = '';
+        if (img) {
+          imgUrl = await upload();
         }
-    }
-
-    const sharePost = async () =>{
-        let imgUrl = ''
-        if(img){
-            imgUrl = await upload()
-        }
-        mutation.mutate({post_desc, img: imgUrl, userId: user?.id})
-        setDesc('')
-        setImg(null)
-    }
+        await mutation.mutateAsync({ post_desc, img: imgUrl, userId: user?.id });
+        setDesc('');
+        setImg(null);
+      } catch (error) {
+        console.error('Erro ao compartilhar post:', error);
+      }
+    };
+    
 
 
     return(
@@ -92,11 +98,13 @@ function Share() {
       </label>
     </div>
     <button
-      onClick={() => sharePost()}
-      className="bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600"
-    >
-      Postar
-    </button>
+  onClick={sharePost}
+  className={`bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600 ${!post_desc && !img ? 'cursor-not-allowed opacity-50' : ''}`}
+  disabled={!post_desc && !img}
+>
+  Postar
+</button>
+
   </div>
 </div>
 
