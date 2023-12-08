@@ -34,13 +34,21 @@ export const uploadController = async (req, res) => {
       transformation: [{ width: 500, height: 500, crop: 'limit' }],
     });
 
-    res.status(200).json({
-      message: 'Upload bem-sucedido',
-      filename: result.original_filename,
-      url: result.secure_url,
-    });
+
+    const imageUrl = result.secure_url;
+    // console.log('Image URL:', imageUrl);
+
+    if (!imageUrl) {
+      console.error('URL da imagem não encontrada após upload para o Cloudinary.');
+      res.status(500).json({ error: 'Erro ao obter a URL da imagem.' });
+    } else {
+      res.status(200).json(imageUrl);
+    }
+    
   } catch (error) {
-    console.error(error);
+    console.error('Erro ao fazer upload para o Cloudinary:', error);
     res.status(500).json({ error: 'Erro ao fazer upload para o Cloudinary.' });
   }
 };
+
+
