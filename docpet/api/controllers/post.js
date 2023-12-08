@@ -7,14 +7,22 @@ export const createPost = (req, res) => {
         return res.status(422).json({ msg: 'O post precisa de texto ou imagem' });
     }
 
-    db.query('INSERT INTO posts SET ?', { post_desc, img, userId }, (error) => {
+    // Extrair o nome do arquivo da URL do Cloudinary
+    const imgUrl = typeof img === 'object' ? img.url : img;
+    const fileName = imgUrl.substring(imgUrl.lastIndexOf('/') + 1);
+
+    db.query('INSERT INTO posts SET ?', { post_desc, img: fileName, userId }, (error, results) => {
         if (error) {
+            console.error(error);
             handleServerError(res, error);
         } else {
-            res.status(200).json({ msg: 'Postagem feita com sucesso' });
+            console.log('Postagem feita com sucesso. ID:', results.insertId);
+            res.status(200).json({ msg: 'Postagem feita com sucesso', postId: results.insertId });
         }
     });
 };
+
+
 
 export const getPost = (req, res) => {
     const userId = req.query.id;
