@@ -103,7 +103,7 @@ function Header() {
             className={`cursor-pointer flex items-center ${showMenu ? 'hover:text-blue-600' : ''}`}
           >
             {mutation.isLoading ? (
-              <span className="mr-2">Loading...</span>
+              <span className="mr-2">Saindo...</span>
             ) : (
               <>
                 <FaDoorOpen className="w-6 h-6 md:w-8 md:h-8 mr-2" />

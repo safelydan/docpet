@@ -6,6 +6,7 @@ import Link from "next/link";
 import { makeRequest } from "../../../../axios";
 
 function Register() {
+  // Estados para controlar os campos de username, email, senha, confirmação de senha, erro, sucesso e carregamento
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,10 +15,12 @@ function Register() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Função para lidar com o envio do formulário de registro
   const handleRegister = (e: any) => {
     e.preventDefault();
     setLoading(true); // Inicia o estado de carregamento
 
+    // Faz a requisição para a API de registro
     makeRequest
       .post("auth/register", { username, email, password, confirmPassword })
       .then((res) => {
@@ -34,6 +37,8 @@ function Register() {
         setLoading(false); // Finaliza o estado de carregamento, independentemente do resultado
       });
   };
+
+  // Componente de Registro
 
   return (
     <>

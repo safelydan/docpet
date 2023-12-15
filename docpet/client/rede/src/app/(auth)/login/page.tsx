@@ -7,36 +7,43 @@ import { makeRequest } from "../../../../axios";
 import { useRouter } from "next/navigation";
 import UserContext from "@/context/UserContext";
 
+// página de login
 function Login() {
+  // estados para controlar os campos de email, senha, erro, carregamento e contexto do usuário
   const [email, setEmail] = useState("dan@gmail.com");
   const [password, setPassword] = useState("senhateste");
   const [error, setError] = useState("");
   const { setUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
+  // hook do Next.js para manipulação da rota
   const router = useRouter();
 
+  // função para lidar com o envio do formulário de login
   const handleLogin = (e: any) => {
     e.preventDefault();
-    setLoading(true); // Inicia o estado de carregamento
+    setLoading(true); // inicia o estado de carregamento
 
+    // faz a requisição para a API de login
     makeRequest
       .post("auth/login", { email, password })
       .then((res) => {
+        // armazena o usuário no localStorage e no contexto
         localStorage.setItem("rede: user", JSON.stringify(res.data.user));
         setUser(res.data.user);
         setError("");
-        router.push("/main");
+        router.push("/main"); // redireciona para a página principal após o login
       })
       .catch((err) => {
         console.log(err);
         setError(err.response.data.msg);
       })
       .finally(() => {
-        setLoading(false); // Finaliza o estado de carregamento, independentemente do resultado
+        setLoading(false); // finaliza o estado de carregamento, independentemente do resultado
       });
   };
 
+  // componente de login
   return (
     <>
       <title>Login</title>
