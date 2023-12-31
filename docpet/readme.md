@@ -1,48 +1,46 @@
 # para rodar o projeto 
+# CodPet
 
-## lado back-end
+### Baixar o projeto:
+```bash
+git clone https://github.com/ifpi-picos/projeto-web-full-stack-mandalori.git
+```
 
-#### bibliotecas: 
-`npm install`
+### Lado do Backend
 
-### para rodar a api 
+### Acesse a pasta principal:
+```bash
+cd codpet/api
+```
+### Instalar dependencias:
+```bash
+npm install 
+```
 
-crie um arquivo `.env` com os dados do mysql da sua maquina
-existe um documento chamado ".env.example nos moldes do que vc deve adicionar nos campos" (os tokens se mantem)
+# Crie um arquivo .env com os dados do MySQL da sua máquina
+Existe um documento de exemplo do .env que deve ser criado dentro da pasta da api, lá basta apenas adicionar os dados do seu MySQL
 
+### Iniciar o projeto:
+```bash
+npm run start
+```
 
-e rode o comando: `npm run start`
+### Lado do Frontend
 
+### Acesse a pasta principal:
+```bash
+cd codpet/client/rede
+```
+### Instalar dependencias:
+```bash
+npm install 
+```
+### Iniciar o projeto:
+```bash
+npm run dev
+```
 
-## lado front-end
-
-você precisa instalar as bibliotecas uutilizadas basta apenas usar esse comando dentro da pasta rede
-
-### bibliotecas:
-
-`npm install`
-
-depois na mesma pasta rode o comando
-
-`npm run dev`
-
-# script linux
-
-## back-api
-
-`yarn add bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql --save`
-
-`yarn start`
-
-## front-client
-
-`yarn add autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment nextjs reactjs --save`
-
-`yarn dev`
-
-:: comandos para criar o banco de dados utilizado na aplicação
-
-### crie um schema com o nome "codpet"
+# Comandos para criar o banco de dados utilizado na aplicação
 
 CREATE SCHEMA codpet;
 
