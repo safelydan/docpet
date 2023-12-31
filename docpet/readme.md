@@ -1,12 +1,8 @@
-app online 
-https://codpet-front-production.up.railway.app/
-
 # para rodar o projeto 
 
 ## lado back-end
 
 #### bibliotecas: 
-
 `npm install`
 
 ### para rodar a api 
@@ -14,11 +10,13 @@ https://codpet-front-production.up.railway.app/
 crie um arquivo `.env` com os dados do mysql da sua maquina
 existe um documento chamado ".env.example nos moldes do que vc deve adicionar nos campos" (os tokens se mantem)
 
+
 e rode o comando: `npm run start`
+
 
 ## lado front-end
 
-você precisa instalar as bibliotecas utilizadas, é simples, basta apenas usar esse comando dentro da pasta rede
+você precisa instalar as bibliotecas uutilizadas basta apenas usar esse comando dentro da pasta rede
 
 ### bibliotecas:
 
@@ -28,9 +26,23 @@ depois na mesma pasta rode o comando
 
 `npm run dev`
 
-:: Comandos para criar o banco de dados utilizado na aplicação
+# script linux
 
-### Crie um schema com o nome "codpet"
+## back-api
+
+`yarn add bcrypt body-parser cookie-parser cors dotenv express jsonwebtoken multer my sql --save`
+
+`yarn start`
+
+## front-client
+
+`yarn add autoprefixer axios eslint eslint-config-next next postcss react react-dom react-icons tailwindcss typescript @tanstack/react-query moment nextjs reactjs --save`
+
+`yarn dev`
+
+:: comandos para criar o banco de dados utilizado na aplicação
+
+### crie um schema com o nome "codpet"
 
 CREATE SCHEMA codpet;
 

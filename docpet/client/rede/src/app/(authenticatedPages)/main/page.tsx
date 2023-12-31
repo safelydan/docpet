@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../../../axios";
 import FriendshipTable from "@/app/components/FriendshipTable";
 
+// Define a interface para os objetos de postagem
 interface IPost {
     id: number;
     post_desc: string;
@@ -16,10 +17,9 @@ interface IPost {
     userId: number;
 }
 
-
-
+// Componente principal
 function Main() {
-
+    // Utiliza o hook useQuery para obter os dados das postagens
     const postQuery = useQuery<IPost[] | undefined>({
         queryKey: ['posts'],
         queryFn: () => makeRequest.get('post/?id=')
@@ -28,11 +28,10 @@ function Main() {
             })
     });
 
+    // Verifica se ocorreu algum erro durante a consulta
     if (postQuery.error) {
         console.log(postQuery.error);
     }
-
-
 
     return (
     <>
