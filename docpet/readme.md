@@ -1,4 +1,4 @@
-# para rodar o projeto 
+
 # CodPet
 
 ### Baixar o projeto:
@@ -18,7 +18,7 @@ npm install
 ```
 
 # Crie um arquivo .env com os dados do MySQL da sua máquina
-Existe um documento de exemplo do .env que deve ser criado dentro da pasta da api, lá basta apenas adicionar os dados do seu MySQL
+Existe um arquivo de exemplo do .env chamado .envexample que deve ser criado dentro da pasta api, basta apenas adicionar os dados do seu MySQL nos campos.
 
 ### Iniciar o projeto:
 ```bash
@@ -40,7 +40,9 @@ npm install
 npm run dev
 ```
 
-# Comandos para criar o banco de dados utilizado na aplicação
+# Comandos para criar o banco de dados MYSQL utilizado na aplicação
+
+```bash
 
 CREATE SCHEMA codpet;
 
@@ -94,6 +96,5 @@ CREATE TABLE codpet.friendship (
   CONSTRAINT follower_id FOREIGN KEY (follower_id) REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT followed_id FOREIGN KEY (followed_id) REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) AUTO_INCREMENT=1;
-
-
+```
 
