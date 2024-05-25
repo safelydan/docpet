@@ -7,12 +7,12 @@ export const searchUser = (req, res) => {
         return res.status(422).json({ msg: 'É preciso o parâmetro' });
     }
 
-    db.query('SELECT username, userImg, id FROM user WHERE username LIKE ?', [params], (error, data) => {
+    db.query('SELECT username, "userImg", id FROM codpet.user WHERE username LIKE $1', [params], (error, data) => {
         if (error) {
             console.log(error);
             res.status(500).json({ msg: 'Erro no servidor' });
         } else {
-            return res.status(200).json(data);
+            return res.status(200).json(data.rows);
         }
     });
 };
@@ -25,14 +25,14 @@ export const searchPost = (req, res) => {
     }
 
     db.query(
-        'SELECT p.*, u.username, userImg FROM posts as p JOIN user as u ON (u.id = p.userId) WHERE p.post_desc LIKE ? OR u.username LIKE ? ORDER BY created_at DESC',
-        [params, params],
+        'SELECT p.*, u.username, u."userImg" FROM codpet.posts as p JOIN codpet.user as u ON (u.id = p.userId) WHERE p.post_desc LIKE $1 OR u.username LIKE $1 ORDER BY created_at DESC',
+        [params],
         (error, data) => {
             if (error) {
                 console.log(error);
                 res.status(500).json({ msg: 'Erro no servidor' });
             } else {
-                return res.status(200).json(data);
+                return res.status(200).json(data.rows);
             }
         }
     );

@@ -23,7 +23,8 @@
     "multer-storage-cloudinary": "^4.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.5",
-    "next-cloudinary": "^5.10.0"
+    "next-cloudinary": "^5.10.0",
+    "pg": "^8.11.5"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
