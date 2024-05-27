@@ -49,52 +49,48 @@ CREATE SCHEMA codpet;
 USE codpet;
 
 CREATE TABLE codpet.user (
-  id INT NOT NULL AUTO_INCREMENT,
+  id SERIAL PRIMARY KEY,
   username VARCHAR(45) NOT NULL,
   email VARCHAR(100) NOT NULL,
-  password VARCHAR(200) NULL,
-  userImg VARCHAR(300) NULL,
-  bgImg VARCHAR(300) NULL,
-  PRIMARY KEY (id)
-) AUTO_INCREMENT=1;
+  password VARCHAR(200),
+  "userImg" VARCHAR(300),
+  "bgImg" VARCHAR(300)
+);
 
 CREATE TABLE codpet.posts (
-  id INT NOT NULL AUTO_INCREMENT,
-  post_desc VARCHAR(200) NULL,
-  img VARCHAR(300) NULL,
-  userId INT NOT NULL,
+  id SERIAL PRIMARY KEY,
+  post_desc VARCHAR(200),
+  img VARCHAR(300),
+  "userId" INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  CONSTRAINT userId FOREIGN KEY (userId) REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE
-) AUTO_INCREMENT=1;
+  FOREIGN KEY ("userId") REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 CREATE TABLE codpet.comments (
-  id INT NOT NULL AUTO_INCREMENT,
+  id SERIAL PRIMARY KEY,
   comment_desc VARCHAR(200) NOT NULL,
-  comment_user_id INT NOT NULL,
-  post_id INT NOT NULL,
+  "comment_user_id" INT NOT NULL,
+  "post_id" INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  CONSTRAINT comment_user_id FOREIGN KEY (comment_user_id) REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT post_id FOREIGN KEY (post_id) REFERENCES codpet.posts(id) ON DELETE CASCADE ON UPDATE CASCADE
-) AUTO_INCREMENT=1;
+  FOREIGN KEY ("comment_user_id") REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY ("post_id") REFERENCES codpet.posts(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 CREATE TABLE codpet.likes (
-  id INT NOT NULL AUTO_INCREMENT,
-  likes_user_id INT NOT NULL,
-  likes_post_id INT NOT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT likes_user_id FOREIGN KEY (likes_user_id) REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT likes_post_id FOREIGN KEY (likes_post_id) REFERENCES codpet.posts(id) ON DELETE CASCADE ON UPDATE CASCADE
-) AUTO_INCREMENT=1;
+  id SERIAL PRIMARY KEY,
+  "likes_user_id" INT NOT NULL,
+  "likes_post_id" INT NOT NULL,
+  FOREIGN KEY ("likes_user_id") REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY ("likes_post_id") REFERENCES codpet.posts(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 CREATE TABLE codpet.friendship (
-  id INT NOT NULL AUTO_INCREMENT,
-  follower_id INT NOT NULL,
-  followed_id INT NOT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT follower_id FOREIGN KEY (follower_id) REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT followed_id FOREIGN KEY (followed_id) REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE
-) AUTO_INCREMENT=1;
+  id SERIAL PRIMARY KEY,
+  "follower_id" INT NOT NULL,
+  "followed_id" INT NOT NULL,
+  FOREIGN KEY ("follower_id") REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY ("followed_id") REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 ```
 
