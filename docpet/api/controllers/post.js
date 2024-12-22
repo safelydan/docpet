@@ -14,7 +14,7 @@ export const createPost = (req, res) => {
     const fileName = imgUrl.substring(imgUrl.lastIndexOf('/') + 1);
 
     // insere os dados da postagem no banco de dados
-    db.query('INSERT INTO codpet.posts (post_desc, img, userId) VALUES ($1, $2, $3)', [post_desc, fileName, userId], (error, results) => {
+    db.query('INSERT INTO codpet.posts (post_desc, img, "userId") VALUES ($1, $2, $3)', [post_desc, fileName, userId], (error, results) => {
         if (error) {
             console.error(error);
             handleServerError(res, error);
@@ -31,8 +31,8 @@ export const getPost = (req, res) => {
 
     // constrói a query SQL com ou sem filtro de usuário
     const query = userId
-        ? 'SELECT p.*, u.username, u."userImg" FROM codpet.posts as p JOIN codpet.user as u ON (u.id = p.userId) WHERE u.id = $1 ORDER BY created_at DESC'
-        : 'SELECT p.*, u.username, u."userImg" FROM codpet.posts as p JOIN codpet.user as u ON (u.id = p.userId) ORDER BY created_at DESC';
+        ? 'SELECT p.*, u.username, u."userImg" FROM codpet.posts as p JOIN codpet.user as u ON (u.id = p."userId") WHERE u.id = $1 ORDER BY created_at DESC'
+        : 'SELECT p.*, u.username, u."userImg" FROM codpet.posts as p JOIN codpet.user as u ON (u.id = p."userId") ORDER BY created_at DESC';
 
     // executa a query no banco de dados
     db.query(query, [userId], (error, data) => {

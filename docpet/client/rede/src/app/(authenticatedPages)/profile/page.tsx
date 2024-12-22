@@ -224,7 +224,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
                         username,
                         userImg,
                         bgImg,
-                        id: +searchParams.id,
+                        id: + searchParams.id,
                       });
                     }}
                   >

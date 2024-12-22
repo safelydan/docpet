@@ -44,7 +44,7 @@ function Search({searchParams}: {searchParams: {params: string}}) {
         <div className="w-full bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition duration-300" key={id}>
           <Link href={'/profile?id=' + user.id} key={id} className="flex items-center gap-2 hover:text-blue-500">
             <img
-              src={user && user.userImg ? user.userImg : 'https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png'}
+              src={user && user.userImg ? user.userImg : 'https://st3.depositphotos.com/1007566/32958/v/450/depositphotos_329584890-stock-illustration-young-man-avatar-character-icon.jpg'}
               alt="imagem do perfil"
               className="w-8 h-8 rounded-full"
             />

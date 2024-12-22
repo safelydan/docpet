@@ -3,7 +3,7 @@ import { db } from '../connect.js';
 export const addLikes = (req, res) => {
     const { likes_user_id, likes_post_id } = req.body;
 
-    pool.query('INSERT INTO codpet.likes (likes_user_id, likes_post_id) VALUES ($1, $2)', [likes_user_id, likes_post_id], (error) => {
+    db.query('INSERT INTO codpet.likes (likes_user_id, likes_post_id) VALUES ($1, $2)', [likes_user_id, likes_post_id], (error) => {
         if (error) {
             handleServerError(res, error);
         } else {
