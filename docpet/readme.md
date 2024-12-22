@@ -53,8 +53,8 @@ CREATE TABLE codpet.user (
   username VARCHAR(45) NOT NULL,
   email VARCHAR(100) NOT NULL,
   password VARCHAR(200),
-  "userImg" VARCHAR(300),
-  "bgImg" VARCHAR(300)
+  "userImg" VARCHAR(300) DEFAULT 'https://st3.depositphotos.com/1007566/32958/v/450/depositphotos_329584890-stock-illustration-young-man-avatar-character-icon.jpg',
+  "bgImg" VARCHAR(300) DEFAULT 'https://st4.depositphotos.com/4413287/40922/i/450/depositphotos_409223806-stock-photo-natural-linen-material-textile-canvas.jpg'
 );
 
 CREATE TABLE codpet.posts (
@@ -81,8 +81,10 @@ CREATE TABLE codpet.likes (
   "likes_user_id" INT NOT NULL,
   "likes_post_id" INT NOT NULL,
   FOREIGN KEY ("likes_user_id") REFERENCES codpet.user(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY ("likes_post_id") REFERENCES codpet.posts(id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY ("likes_post_id") REFERENCES codpet.posts(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT unique_user_post_like UNIQUE ("likes_user_id", "likes_post_id")
 );
+
 
 CREATE TABLE codpet.friendship (
   id SERIAL PRIMARY KEY,

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../../../axios";
@@ -23,7 +23,6 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
   const [editProfile, setEditProfile] = useState(false);
   const [editProfileError, setEditProfileError] = useState("");
   const [editProfileSuccess, setEditProfileSuccess] = useState("");
-
 
   // consulta para obter dados do perfil do usuário
   const profileQuery = useQuery({
@@ -57,16 +56,14 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
   const friendshipQuery = useQuery({
     queryKey: [`friendship`],
     queryFn: () =>
-      makeRequest
-        .get("friendship/?follower_id=" + user?.id)
-        .then((res) => {
-          res.data.data.find((e: IFriendship) => {
-            if (e.followed_id === +searchParams.id) {
-              setFollowed(true);
-            }
-          });
-          return res.data.data;
-        }),
+      makeRequest.get("friendship/?follower_id=" + user?.id).then((res) => {
+        res.data.data.find((e: IFriendship) => {
+          if (e.followed_id === +searchParams.id) {
+            setFollowed(true);
+          }
+        });
+        return res.data.data;
+      }),
   });
 
   if (friendshipQuery.error) {
@@ -140,7 +137,6 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
       queryClient.invalidateQueries({ queryKey: ["profile", searchParams.id] });
     },
   });
-  
 
   return (
     <>
@@ -152,7 +148,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
             src={
               profileQuery.data?.bgImg
                 ? profileQuery.data.bgImg
-                : "https://img.freepik.com/fotos-gratis/fundo-azul-do-gradiente-de-luxo-abstrato-liso-azul-escuro-com-vinheta-preta-studio-banner_1258-52393.jpg?w=740&t=st=1696028331~exp=1696028931~hmac=ff6d78a9446b39ef04877dee2de00952857aa4f088936de0c5b8778ce72ad8c6"
+                : "https://st4.depositphotos.com/4413287/40922/i/450/depositphotos_409223806-stock-photo-natural-linen-material-textile-canvas.jpg"
             }
             alt="capa"
           />
@@ -162,7 +158,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
               className="w-22 h-22 md:w-32 md:h-32 lg:w-38 lg:h-38 xl:w-45 xl:h-45 rounded-full border-zinc-100 border-2"
               src={
                 profileQuery.data?.userImg ||
-                "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"
+                "https://st3.depositphotos.com/1007566/32958/v/450/depositphotos_329584890-stock-illustration-young-man-avatar-character-icon.jpg"
               }
               alt="imagem do perfil"
             />
@@ -198,7 +194,6 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
             >
               Editar perfil
             </button>
-            
           )}
           {editProfile && (
             <div className="fixed top-0 bottom-0 right-0 left-0 bg-[#00000094] z-10 flex items-center justify-center">
@@ -224,7 +219,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
                         username,
                         userImg,
                         bgImg,
-                        id: + searchParams.id,
+                        id: +searchParams.id,
                       });
                     }}
                   >

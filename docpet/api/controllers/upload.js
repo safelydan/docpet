@@ -1,5 +1,5 @@
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
+import { v2 as cloudinary } from "cloudinary";
+import multer from "multer";
 
 // configura o Cloudinary com as credenciais da API provenientes de variáveis de ambiente
 cloudinary.config({
@@ -28,21 +28,21 @@ export const uploadController = async (req, res) => {
   if (!file) {
     // se nenhum arquivo, retorna uma resposta 400 Bad Request com uma mensagem de erro
     return res.status(400).json({
-      error: 'nenhum arquivo enviado ou o campo do formulário está incorreto.',
+      error: "nenhum arquivo enviado ou o campo do formulário está incorreto.",
     });
   }
 
   try {
     // faz o upload do arquivo para o Cloudinary com opções específicas
     const result = await cloudinary.uploader.upload(file.path, {
-      folder: 'codpet',
-      allowedFormats: ['jpg', 'png', 'jpeg'],
-      transformation: [{ width: 500, height: 500, crop: 'limit' }],
+      folder: "codpet",
+      allowedFormats: ["jpg", "png", "jpeg"],
+      transformation: [{ width: 500, height: 500, crop: "limit" }],
     });
 
     // responde com um status 200 OK, mensagem de sucesso, nome original do arquivo e URL do Cloudinary
     res.status(200).json({
-      message: 'upload bem-sucedido',
+      message: "upload bem-sucedido",
       filename: result.original_filename,
       url: result.secure_url,
     });
@@ -51,8 +51,8 @@ export const uploadController = async (req, res) => {
     //console.log(result.secure_url);
   } catch (error) {
     // manipula erros durante o processo de upload
-    console.error('erro ao fazer upload para o Cloudinary:', error);
+    console.error("erro ao fazer upload para o Cloudinary:", error);
     // responde com um status 500 Internal Server Error e uma mensagem de erro
-    res.status(500).json({ error: 'erro ao fazer upload para o Cloudinary.' });
+    res.status(500).json({ error: "erro ao fazer upload para o Cloudinary." });
   }
 };

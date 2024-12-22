@@ -10,7 +10,7 @@ import UserContext from "@/context/UserContext";
 // página de login
 function Login() {
   // estados para controlar os campos de email, senha, erro, carregamento e contexto do usuário
-  const [email, setEmail] = useState("safelydan@gmail.com");
+  const [email, setEmail] = useState("teste123@gmail.com");
   const [password, setPassword] = useState("teste123");
   const [error, setError] = useState("");
   const { setUser } = useContext(UserContext);

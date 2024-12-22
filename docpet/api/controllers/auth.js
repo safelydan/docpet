@@ -12,11 +12,9 @@ export const register = (req, res) => {
     return res.status(422).json({ msg: "O username é obrigatório" });
   }
   if (!/^[a-zA-Z0-9_-]{3,16}$/.test(username)) {
-    return res
-      .status(422)
-      .json({
-        msg: 'Username inválido. Use apenas letras, números, "-" e "_", com 3 a 16 caracteres.',
-      });
+    return res.status(422).json({
+      msg: 'Username inválido. Use apenas letras, números, "-" e "_", com 3 a 16 caracteres.',
+    });
   }
 
   // verificação do email
