@@ -14,7 +14,7 @@ import FriendshipTable from "@/app/components/FriendshipTable";
 function Profile() {
   const { user, setUser } = useContext(UserContext);
   const queryClient = useQueryClient();
-  const searchParams = useSearchParams(); // Use the hook to access search params
+  const searchParams = useSearchParams();
 
   const [followed, setFollowed] = useState(false);
   const [username, setUserName] = useState("");
@@ -25,6 +25,11 @@ function Profile() {
   const [editProfileSuccess, setEditProfileSuccess] = useState("");
 
   const userId = searchParams.get("id"); // Extract the 'id' from searchParams safely
+
+  // Ensure userId is not null before making API requests
+  if (!userId) {
+    return <div>User ID is missing</div>; // Show a message if userId is missing
+  }
 
   // Query to fetch profile data
   const profileQuery = useQuery({
