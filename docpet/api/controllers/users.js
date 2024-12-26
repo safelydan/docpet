@@ -22,7 +22,8 @@ export const getUser = (req, res) => {
 };
 
 export const updateUser = (req, res) => {
-  const { username, userImg, bgImg, id } = req.body;
+  const { username, userImg, bgImg } = req.body;
+  const { id } = req.query; // Extraindo o ID da URL
 
   if (!id) {
     return res.status(422).json({ msg: "É preciso o ID" });
@@ -31,8 +32,6 @@ export const updateUser = (req, res) => {
   if (!username && !userImg && !bgImg) {
     return res.status(422).json({ msg: "Sem alterações para serem feitas" });
   }
-
-  // Outras validações de entrada...
 
   const updateFields = [];
   const values = [];
