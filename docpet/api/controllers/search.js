@@ -29,7 +29,7 @@ export const searchPost = (req, res) => {
   }
 
   db.query(
-    'SELECT p.*, u.username, u."userImg" FROM codpet.posts as p JOIN codpet.user as u ON (u.id = p.userId) WHERE p.post_desc LIKE $1 OR u.username LIKE $1 ORDER BY created_at DESC',
+    'SELECT p.*, u.username, u."userImg" FROM codpet.posts as p JOIN codpet.user as u ON (u.id = p."userId") WHERE p.post_desc LIKE $1 OR u.username LIKE $1 ORDER BY created_at DESC',
     [params],
     (error, data) => {
       if (error) {

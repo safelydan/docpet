@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useContext, useState, useEffect } from "react";
 import { FaPaperPlane, FaUserFriends } from "react-icons/fa";
 import { TbPhoto } from "react-icons/tb";

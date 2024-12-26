@@ -91,67 +91,71 @@ export const register = (req, res) => {
 };
 
 // função para fazer login
-export const login = (req, res) => {
-  const { email, password } = req.body;
+export const login = async (req, res) => {
+  const { email, username, password } = req.body;
 
-  if (!email || !password) {
-    return res.status(400).json({ msg: "Digite o e-mail e a senha." });
+  // Validação inicial
+  if ((!email && !username) || !password) {
+    return res
+      .status(400)
+      .json({ msg: "Digite o e-mail ou username e a senha." });
   }
 
-  db.query(
-    "SELECT * FROM codpet.user WHERE email = $1",
-    [email],
-    async (error, data) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ msg: "Erro no servidor" });
-      }
-      if (data.rows.length === 0) {
-        return res.status(404).json({ msg: "Usuário não encontrado" });
-      } else {
-        const user = data.rows[0];
-        console.log(data.rows);
-        const checkPassword = await bcrypt.compare(password, user.password);
+  // define o campo de login (email ou username)
+  const loginField = email ? "email" : "username";
+  const loginValue = email || username;
 
-        if (!checkPassword) {
-          return res.status(422).json({ msg: "Senha incorreta" });
-        }
+  try {
+    // consulta segura ao banco de dados
+    const query = `SELECT * FROM codpet.user WHERE ${loginField} = $1`;
+    const { rows } = await db.query(query, [loginValue]);
 
-        try {
-          // gera tokens de acesso e refresh
-          const refreshToken = jwt.sign(
-            {
-              exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
-              id: user.password,
-            },
-            process.env.REFRESH,
-            { algorithm: "HS256" }
-          );
-          const token = jwt.sign(
-            {
-              exp: Math.floor(Date.now() / 1000) + 3600,
-              id: user.password,
-            },
-            process.env.TOKEN,
-            { algorithm: "HS256" }
-          );
-
-          delete user.password; // remove a senha do objeto de usuário antes de enviá-lo na resposta
-
-          // configuração de cookies e resposta ao usuário
-          res
-            .cookie("accessToken", token, { httpOnly: true })
-            .cookie("refreshToken", refreshToken, { httpOnly: true })
-            .status(200)
-            .json({ msg: "Usuário logado com sucesso", user });
-          // quando fizer o login recebe o user completo e os tokens, serve para salvar e usar depois dentro da aplicação
-        } catch (error) {
-          console.log(error);
-          return res.send(500).json({ msg: "Error" });
-        }
-      }
+    // verifica se o usuário existe
+    if (rows.length === 0) {
+      return res.status(404).json({ msg: "Usuário não encontrado." });
     }
-  );
+
+    const user = rows[0];
+
+    // verifica a senha
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(422).json({ msg: "Credenciais inválidas" });
+    }
+
+    // gera tokens de acesso e refresh
+    const refreshToken = jwt.sign(
+      { id: user.id },
+      process.env.REFRESH,
+      { algorithm: "HS256", expiresIn: "1d" } // 1 dia
+    );
+
+    const token = jwt.sign(
+      { id: user.id },
+      process.env.TOKEN,
+      { algorithm: "HS256", expiresIn: "1h" } // 1 hora
+    );
+
+    // remove a senha do objeto do usuário antes de enviá-lo
+    delete user.password;
+
+    // configuração de cookies e resposta
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // apenas HTTPS em produção
+      })
+      .cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+      })
+      .status(200)
+      .json({ msg: "Usuário logado com sucesso.", user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Erro interno do servidor." });
+  }
 };
 
 // função para atualizar tokens

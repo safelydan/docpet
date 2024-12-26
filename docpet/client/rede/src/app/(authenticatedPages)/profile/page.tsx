@@ -3,19 +3,19 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../../../axios";
 import Feed from "@/app/components/Feed";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import UserContext from "@/context/UserContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { IFriendship, IPost } from "@/interfaces";
 import { FaTimesCircle } from "react-icons/fa";
 import AuthInput from "@/app/components/AuthInput";
 import FriendshipTable from "@/app/components/FriendshipTable";
 
-function Profile({ searchParams }: { searchParams: { id: string } }) {
+function Profile() {
   const { user, setUser } = useContext(UserContext);
   const queryClient = useQueryClient();
+  const searchParams = useSearchParams(); // Use the hook to access search params
 
-  // configura o contexto e variáveis de estado
   const [followed, setFollowed] = useState(false);
   const [username, setUserName] = useState("");
   const [userImg, setUserImg] = useState("");
@@ -24,11 +24,13 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
   const [editProfileError, setEditProfileError] = useState("");
   const [editProfileSuccess, setEditProfileSuccess] = useState("");
 
-  // consulta para obter dados do perfil do usuário
+  const userId = searchParams.get("id"); // Extract the 'id' from searchParams safely
+
+  // Query to fetch profile data
   const profileQuery = useQuery({
-    queryKey: ["profile", searchParams.id],
+    queryKey: ["profile", userId],
     queryFn: () =>
-      makeRequest.get(`users/get-user?id=${searchParams.id}`).then((res) => {
+      makeRequest.get(`users/get-user?id=${userId}`).then((res) => {
         const userData = res.data[0] || {};
         setUserName(userData.username);
         setUserImg(userData.userImg);
@@ -44,7 +46,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
   const postQuery = useQuery<IPost[] | undefined>({
     queryKey: ["posts"],
     queryFn: () =>
-      makeRequest.get("post/?id=" + searchParams.id).then((res) => {
+      makeRequest.get("post/?id=" + userId).then((res) => {
         return res.data.data;
       }),
   });
@@ -58,7 +60,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
     queryFn: () =>
       makeRequest.get("friendship/?follower_id=" + user?.id).then((res) => {
         res.data.data.find((e: IFriendship) => {
-          if (e.followed_id === +searchParams.id) {
+          if (e.followed_id === +userId) {
             setFollowed(true);
           }
         });
@@ -126,7 +128,6 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
         setEditProfileError("");
         return response.data;
       } catch (error: any) {
-        // 'error' agora é do tipo 'any' para permitir acesso a 'response'
         setEditProfileError(error.response?.data.msg || "Erro desconhecido");
         setEditProfileSuccess("");
         throw error.response?.data.msg || "Erro desconhecido";
@@ -134,7 +135,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
     },
     onSuccess: () => {
       setEditProfile(false);
-      queryClient.invalidateQueries({ queryKey: ["profile", searchParams.id] });
+      queryClient.invalidateQueries({ queryKey: ["profile", userId] });
     },
   });
 
@@ -144,7 +145,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
       <div className="w-3/4 md:w-3/5 sm:w-4/4 flex flex-col items-center">
         <div className="relative">
           <img
-            className="rounded-xl w-40 h-30 sm:w-60 sm:h-30 md:w-80 md:h-40 lg:w-80 lg:h-50 xl:w-80 xl:h-40 object-cover"
+            className="rounded-xl w-full h-auto object-cover"
             src={
               profileQuery.data?.bgImg
                 ? profileQuery.data.bgImg
@@ -155,27 +156,26 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
 
           <div className="absolute left-1/2 mt-6 transform -translate-x-1/2 -translate-y-1/2 flex items-center flex-col">
             <img
-              className="w-22 h-22 md:w-32 md:h-32 lg:w-38 lg:h-38 xl:w-45 xl:h-45 rounded-full border-zinc-100 border-2"
+              className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full border-zinc-100 border-4 object-cover"
               src={
                 profileQuery.data?.userImg ||
                 "https://st3.depositphotos.com/1007566/32958/v/450/depositphotos_329584890-stock-illustration-young-man-avatar-character-icon.jpg"
               }
               alt="imagem do perfil"
             />
-
-            <span className="text-2m font-bold mt-2">
+            <span className="text-lg font-bold mt-4 text-center">
               {profileQuery.data?.username}
             </span>
           </div>
         </div>
         <div className="pt-32 w-3/5 flex flex-col items-center gap-5">
-          {user?.id !== +searchParams.id ? (
+          {user?.id !== +userId ? (
             <button
               onClick={() =>
                 user &&
                 mutation.mutate({
                   followed,
-                  followed_id: +searchParams.id,
+                  followed_id: +userId,
                   follower_id: user.id,
                 })
               }
@@ -219,7 +219,7 @@ function Profile({ searchParams }: { searchParams: { id: string } }) {
                         username,
                         userImg,
                         bgImg,
-                        id: +searchParams.id,
+                        id: +userId,
                       });
                     }}
                   >
