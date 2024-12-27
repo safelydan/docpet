@@ -107,8 +107,8 @@ function Profile() {
       };
 
       await makeRequest.put(`users/update-user?id=${userId}`, updatedProfile);
-      setEditProfile(false);  // Fecha o formulário de edição
-      profileQuery.refetch();  // Atualiza os dados do perfil
+      setEditProfile(false); // Fecha o formulário de edição
+      profileQuery.refetch(); // Atualiza os dados do perfil
     } catch (error) {
       console.error("Erro ao atualizar perfil:", error);
     }
@@ -116,7 +116,9 @@ function Profile() {
 
   return (
     <>
-      <title>{profileQuery.data?.name + ` (${profileQuery.data?.username}) / Codpet`}</title>
+      <title>
+        {profileQuery.data?.name + ` (${profileQuery.data?.username}) / Codpet`}
+      </title>
       <div className="max-w-screen-md mx-auto flex flex-col">
         {/* Capa do perfil */}
         <div className="relative w-full h-56 bg-gray-200">
@@ -182,8 +184,10 @@ function Profile() {
         {/* Formulário de edição de perfil */}
         {editProfile && (
           <div className="mt-4 px-4 py-4 bg-white shadow-md rounded-lg">
-                        <div className="mb-4">
-              <label className="block text-sm font-semibold">Nome de usuário:</label>
+            <div className="mb-4">
+              <label className="block text-sm font-semibold">
+                Nome de usuário:
+              </label>
               <input
                 type="text"
                 value={name}
@@ -192,7 +196,9 @@ function Profile() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold">Nome de usuário:</label>
+              <label className="block text-sm font-semibold">
+                Nome de usuário:
+              </label>
               <input
                 type="text"
                 value={username}
@@ -201,7 +207,9 @@ function Profile() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold">Imagem de perfil:</label>
+              <label className="block text-sm font-semibold">
+                Imagem de perfil:
+              </label>
               <input
                 type="text"
                 value={userImg}
@@ -210,7 +218,9 @@ function Profile() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold">Imagem de capa:</label>
+              <label className="block text-sm font-semibold">
+                Imagem de capa:
+              </label>
               <input
                 type="text"
                 value={bgImg}
@@ -236,7 +246,7 @@ function Profile() {
         )}
 
         {/* Posts */}
-        <div className="mt-4 px-4">
+        <div className="mt-4 px-4 ">
           <Feed post={postQuery.data} />
         </div>
       </div>

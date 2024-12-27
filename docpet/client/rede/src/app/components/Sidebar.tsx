@@ -52,7 +52,7 @@ function Sidebar() {
           className="w-6 h-6 md:w-8 md:h-8 rounded-full"
         />
         <span className="text-lg font-bold hidden md:inline">
-          {user?.name}
+          {user?.name} ({user?.username})
         </span>
       </Link>
     </nav>
