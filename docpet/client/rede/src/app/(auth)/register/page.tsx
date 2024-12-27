@@ -23,7 +23,13 @@ function Register() {
 
     // faz a requisição para a API de registro
     makeRequest
-      .post("auth/register", {name, username, email, password, confirmPassword })
+      .post("auth/register", {
+        name,
+        username,
+        email,
+        password,
+        confirmPassword,
+      })
       .then((res) => {
         console.log(res.data);
         setSuccess(res.data.msg);
@@ -44,7 +50,9 @@ function Register() {
   return (
     <>
       <title>Cadastro</title>
-      <h1 className="font-bold text-2xl text-center">Cadastre-se</h1>
+      <h1 className="font-bold text-3xl text-center text-gray-800">
+        Cadastre-se
+      </h1>
       <AuthInput label="Nome" newState={setName} />
       <AuthInput label="Username" newState={setUserName} />
       <AuthInput label="Email" newState={setEmail} />
@@ -54,9 +62,15 @@ function Register() {
         newState={setConfirmPassword}
         isPassword
       />
-      {error.length > 0 && <span className="text-red-600">* {error}</span>}
+      {error.length > 0 && (
+        <span className="text-red-600 text-sm font-semibold mt-2 block">
+          * {error}
+        </span>
+      )}
       {success.length > 0 && (
-        <span className="text-green-600">* {success}</span>
+        <span className="text-green-600 text-sm font-semibold mt-2 block">
+          * {success}
+        </span>
       )}
       <button
         className="bg-blue-800 py-3 font-bold text-white rounded-lg hover:bg-blue-600"
@@ -65,9 +79,12 @@ function Register() {
       >
         {loading ? "Carregando..." : "Cadastrar"}
       </button>
-      <Link href="/login" className="text-center underline">
-        Logar
-      </Link>
+      <div className="text-center">
+        <p className="text-gray-600 text-sm">Já possui uma conta?</p>
+        <Link href="/login" className="text-blue-600 underline font-medium">
+          <strong>Faça login</strong>
+        </Link>
+      </div>
     </>
   );
 }

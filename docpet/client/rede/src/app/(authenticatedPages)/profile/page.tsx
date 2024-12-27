@@ -121,9 +121,9 @@ function Profile() {
       </title>
       <div className="max-w-screen-md mx-auto flex flex-col">
         {/* Capa do perfil */}
-        <div className="relative w-full h-56 bg-gray-200">
+        <div className="relative w-full h-auto bg-gray-200">
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-auto max-h-[300px] object-cover"
             src={
               profileQuery.data?.bgImg ||
               "https://via.placeholder.com/800x200.png?text=Banner"

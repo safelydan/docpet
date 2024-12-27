@@ -51,24 +51,31 @@ function Login() {
   return (
     <>
       <title>Login</title>
-      <h1 className="font-bold text-2xl text-center">Login</h1>
+      <h1 className="font-bold text-3xl text-center text-gray-800">Login</h1>
       <AuthInput
         label="Email ou Username: "
         newState={setIdentifier} // Um único input para email ou username
       />
       <AuthInput label="Senha: " newState={setPassword} isPassword />
-      {error.length > 0 && <span className="text-red-600">* {error}</span>}
+      {error.length > 0 && (
+        <span className="text-red-600 text-sm font-semibold mt-2 block">* {error}</span>
+      )}
       <button
-        className="bg-blue-800 py-3 font-bold text-white rounded-lg hover:bg-blue-600"
+        className="bg-blue-800 py-3 font-semibold text-white rounded-lg w-full hover:bg-blue-600 transition duration-300 ease-in-out"
         onClick={(e) => handleLogin(e)}
         disabled={loading}
       >
         {loading ? "Entrando..." : "Entrar"}
       </button>
-      <Link href="/register" className="text-center">
-        <p className="text-center color:#0000">Ainda não possui uma conta?</p>
-        <strong>Criar uma conta</strong>
-      </Link>
+      <div className="text-center">
+        <p className="text-gray-600 text-sm">Ainda não possui uma conta?</p>
+        <Link
+          href="/register"
+          className="text-blue-600 font-semibold hover:underline transition duration-300"
+        >
+          <strong>Criar uma conta</strong>
+        </Link>
+      </div>
     </>
   );
 }

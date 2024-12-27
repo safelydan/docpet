@@ -42,7 +42,7 @@ function Header() {
   }
 
   return (
-    <header className="fixed z-10 w-full bg-white flex justify-between py-2 px-4 items-center border border-black">
+    <header className="fixed z-10 w-full bg-white flex justify-between py-2 px-4 items-center border border-gray-300">
       <Link
         href="/main"
         className="font-bold text-sky-900 text-lg flex items-center gap-2"
@@ -62,7 +62,7 @@ function Header() {
         <input
           type="text"
           placeholder="Buscar"
-          className="bg-white focus-visible:outline-none w-28 sm:w-40 border-b-2 border-gray" // Adicionado a classe border-b-2
+          className="bg-white focus-visible:outline-none w-28 sm:w-40 border-b-2 border-gray-300" // Adicionado a classe border-b-2
           onChange={(e) => setSearch(e.target.value)}
           value={search ? search : ""}
         />

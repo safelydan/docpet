@@ -70,7 +70,7 @@ function Share() {
   };
 
   return (
-    <div className="w-full sm:w-2/4 md:w-3/4 lg:w-1/2 xl:w-2/4 bg-white rounded-lg p-4 border border-black flex flex-col gap-4">
+    <div className="w-full sm:w-2/4 md:w-3/4 lg:w-1/2 xl:w-2/4 bg-white rounded-lg p-4 border border-gray-300 flex flex-col gap-4">
       {img && (
         <img
           src={postImg}
@@ -78,7 +78,7 @@ function Share() {
           className="w-full rounded-lg mb-2"
         />
       )}
-      <div className="flex flex-col sm:flex-row items-start gap-4">
+      <div className="flex items-start gap-4">
         <Link href={"/profile?id=" + user?.id}>
           <img
             src={
@@ -87,18 +87,17 @@ function Share() {
                 : "https://www.digitary.net/wp-content/uploads/2021/07/Generic-Profile-Image.png"
             }
             alt="imagem do perfil"
-            className="u-8 h-8 rounded-full mb-2 sm:mb-0"
+            className="w-10 h-10 rounded-full"
           />
         </Link>
-        <div className="flex flex-col w-full">
-          <textarea
-            placeholder={`O que está acontecendo?!`}
-            value={post_desc}
-            className="w-full focus:outline-none resize-none border-b-2 border-gray"
-            onChange={(e) => setDesc(e.target.value)}
-          />
-        </div>
+        <textarea
+          placeholder={`O que está acontecendo?!`}
+          value={post_desc}
+          className="flex-1 focus:outline-none resize-none border-b-2 border-gray w-full"
+          onChange={(e) => setDesc(e.target.value)}
+        />
       </div>
+
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <input
