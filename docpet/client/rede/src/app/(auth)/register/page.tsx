@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import AuthInput from "../../components/AuthInput";
 import { useState } from "react";
@@ -6,7 +6,8 @@ import Link from "next/link";
 import { makeRequest } from "../../../../axios";
 
 function Register() {
-  // estados para controlar os campos de username, email, senha, confirmação de senha, erro, sucesso e carregamento
+  // estados para controlar os campos de name, username, email, senha, confirmação de senha, erro, sucesso e carregamento
+  const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +23,7 @@ function Register() {
 
     // faz a requisição para a API de registro
     makeRequest
-      .post("auth/register", { username, email, password, confirmPassword })
+      .post("auth/register", {name, username, email, password, confirmPassword })
       .then((res) => {
         console.log(res.data);
         setSuccess(res.data.msg);
@@ -44,6 +45,7 @@ function Register() {
     <>
       <title>Cadastro</title>
       <h1 className="font-bold text-2xl text-center">Cadastre-se</h1>
+      <AuthInput label="Nome" newState={setName} />
       <AuthInput label="Username" newState={setUserName} />
       <AuthInput label="Email" newState={setEmail} />
       <AuthInput label="Senha" newState={setPassword} isPassword />
@@ -52,9 +54,7 @@ function Register() {
         newState={setConfirmPassword}
         isPassword
       />
-      {error.length > 0 && (
-        <span className="text-red-600">* {error}</span>
-      )}
+      {error.length > 0 && <span className="text-red-600">* {error}</span>}
       {success.length > 0 && (
         <span className="text-green-600">* {success}</span>
       )}

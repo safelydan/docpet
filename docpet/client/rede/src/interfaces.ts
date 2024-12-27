@@ -21,7 +21,8 @@ export interface IFriendship {
 // interface para representar um usuário
 export interface IUser {
   id: number; // identificador único do usuário
-  username: string; // nome de usuário
+  name: string, // nome de usuário
+  username: string; // username de usuário
   userImg: string; // URL da imagem do usuário
 }
 

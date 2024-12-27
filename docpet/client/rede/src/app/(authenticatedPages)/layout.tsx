@@ -33,7 +33,7 @@ export default function MainHome({ children }: { children: ReactNode }) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-zinc-100">
+    <main className="flex min-h-screen flex-col items-center">
       <Header />
       <div className=" w-full flex justify-start py-20">
         <Sidebar />

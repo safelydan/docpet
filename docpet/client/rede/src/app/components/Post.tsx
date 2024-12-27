@@ -125,7 +125,7 @@ function Post(props: { post: IPost }) {
   };
 
   return (
-    <div className="w-full bg-white rounded-lg p-4 shadow-md min-h-[300px]">
+    <div className="w-full bg-white rounded-lg p-4 border border-black min-h-[300px]">
       <div className="overflow-hidden">
         <header className="flex gap-2 pb-4 border-b items-center relative">
           <Link href={"/profile?id=" + userId}>

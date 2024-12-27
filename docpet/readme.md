@@ -50,6 +50,7 @@ USE codpet;
 
 CREATE TABLE codpet.user (
   id SERIAL PRIMARY KEY,
+  name VARCHAR(45) NOT NULL,
   username VARCHAR(45) NOT NULL,
   email VARCHAR(100) NOT NULL,
   password VARCHAR(200),

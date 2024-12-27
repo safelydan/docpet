@@ -5,7 +5,11 @@ import jwt from "jsonwebtoken"; // importa a biblioteca para geração e verific
 
 // função para registrar um novo usuário
 export const register = (req, res) => {
-  const { username, email, password, confirmPassword } = req.body;
+  const { name, username, email, password, confirmPassword } = req.body;
+
+  if (!name) {
+    return res.status(422).json({ msg: "O nome é obrigatório" });
+  }
 
   // verificação do username
   if (!username) {
@@ -71,8 +75,8 @@ export const register = (req, res) => {
           // tanto o email quanto o username estão disponíveis, continua com o processo de registro
           const passwordHash = await bcrypt.hash(password, 8);
           db.query(
-            "INSERT INTO codpet.user (username, email, password) VALUES ($1, $2, $3)",
-            [username, email, passwordHash],
+            "INSERT INTO codpet.user (name, username, email, password) VALUES ($1, $2, $3, $4)",
+            [name, username, email, passwordHash],
             (error) => {
               if (error) {
                 console.log(error);

@@ -42,7 +42,7 @@ function Header() {
   }
 
   return (
-    <header className="fixed z-10 w-full bg-white flex justify-between py-2 px-4 items-center shadow-md">
+    <header className="fixed z-10 w-full bg-white flex justify-between py-2 px-4 items-center border border-black">
       <Link
         href="/main"
         className="font-bold text-sky-900 text-lg flex items-center gap-2"

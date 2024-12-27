@@ -70,7 +70,7 @@ function Share() {
   };
 
   return (
-    <div className="w-full sm:w-2/4 md:w-3/4 lg:w-1/2 xl:w-2/4 bg-white rounded-lg p-4 shadow-md flex flex-col gap-4">
+    <div className="w-full sm:w-2/4 md:w-3/4 lg:w-1/2 xl:w-2/4 bg-white rounded-lg p-4 border border-black flex flex-col gap-4">
       {img && (
         <img
           src={postImg}
@@ -92,7 +92,7 @@ function Share() {
         </Link>
         <div className="flex flex-col w-full">
           <textarea
-            placeholder={`O que está acontecendo, ${user?.username}?`}
+            placeholder={`O que está acontecendo?!`}
             value={post_desc}
             className="w-full focus:outline-none resize-none border-b-2 border-gray"
             onChange={(e) => setDesc(e.target.value)}

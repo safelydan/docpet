@@ -15,6 +15,7 @@ function Profile() {
   const searchParams = useSearchParams();
 
   const [followed, setFollowed] = useState(false);
+  const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [userImg, setUserImg] = useState("");
   const [bgImg, setBgImg] = useState("");
@@ -33,6 +34,7 @@ function Profile() {
     queryFn: () =>
       makeRequest.get(`users/get-user?id=${userId}`).then((res) => {
         const userData = res.data[0] || {};
+        setName(userData.name);
         setUserName(userData.username);
         setUserImg(userData.userImg);
         setBgImg(userData.bgImg);
@@ -98,6 +100,7 @@ function Profile() {
   const handleSaveProfile = async () => {
     try {
       const updatedProfile = {
+        name,
         username,
         userImg,
         bgImg,
@@ -142,7 +145,7 @@ function Profile() {
         <div className="mt-12 px-4 flex justify-between items-center">
           <div>
             <h1 className="text-xl font-bold">
-              {profileQuery.data?.username || "Usuário"}
+              {profileQuery.data?.name || "Usuário"}
             </h1>
             <p className="text-gray-500">@{profileQuery.data?.username}</p>
           </div>
@@ -179,6 +182,15 @@ function Profile() {
         {/* Formulário de edição de perfil */}
         {editProfile && (
           <div className="mt-4 px-4 py-4 bg-white shadow-md rounded-lg">
+                        <div className="mb-4">
+              <label className="block text-sm font-semibold">Nome de usuário:</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+            </div>
             <div className="mb-4">
               <label className="block text-sm font-semibold">Nome de usuário:</label>
               <input
