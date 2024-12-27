@@ -116,7 +116,7 @@ function Profile() {
 
   return (
     <>
-      <title>{`Perfil de ` + profileQuery.data?.username}</title>
+      <title>{profileQuery.data?.name + ` (${profileQuery.data?.username}) / Codpet`}</title>
       <div className="max-w-screen-md mx-auto flex flex-col">
         {/* Capa do perfil */}
         <div className="relative w-full h-56 bg-gray-200">
